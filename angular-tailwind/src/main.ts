@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app/app-routing.module';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 import { provideZonelessChangeDetection } from '@angular/core';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 if (environment.production) {
   enableProdMode();
@@ -20,6 +21,8 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(BrowserModule, AppRoutingModule),
     provideAnimations(),
     provideZonelessChangeDetection(),
+    provideHttpClient(withInterceptorsFromDi())
+
   ],
 }).catch((err) => console.error(err));
 
