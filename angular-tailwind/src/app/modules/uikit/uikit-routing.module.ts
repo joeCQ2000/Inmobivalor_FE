@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { UikitComponent } from './uikit.component';
 import { TableComponent } from './pages/table/table.component';
 import { MetodoFrancesComponent } from './pages/table/components/metodo-frances/metodo-frances.component';
+import { TableUsuarioComponent } from './pages/table copy/table.usuario.component';
+import { RegistraeditausuarioComponent } from './pages/table copy/components/registraeditausuario/registraeditausuario.component';
 
 const routes: Routes = [
   {
@@ -11,7 +13,9 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'components', pathMatch: 'full' },
       { path: 'table', component: TableComponent },
+       { path: 'table copy', component: TableUsuarioComponent },
       { path: 'metodo_frances', component: MetodoFrancesComponent },
+      { path: 'registraeditausuario', component: RegistraeditausuarioComponent },
       { path: '**', redirectTo: 'errors/404' },
     ],
   },

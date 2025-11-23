@@ -36,9 +36,14 @@ export class Menu {
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Components',
-          route: '/components',
-          children: [{ label: 'Table', route: '/components/table' },
-          { label: 'Cronograma', route: '/components/metodo_frances' }],
+          route: '/components/metodo_frances',
+           
+        },
+        {
+          icon: 'assets/icons/heroicons/outline/cube.svg',
+          label: 'Usuario',
+          route: '/components/table copy',
+          
         },
       ],
     },

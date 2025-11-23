@@ -40,6 +40,7 @@
     "@angular/platform-browser": "^20.0.2",
     "@angular/platform-browser-dynamic": "^20.0.2",
     "@angular/router": "^20.0.2",
+    "@sweetalert2/ngx-sweetalert2": "^14.0.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/postcss": "^4.0.3",
@@ -49,6 +50,7 @@
     "ng-apexcharts": "^1.7.1",
     "ngx-sonner": "^2.0.1",
     "rxjs": "^7.8.2",
+    "sweetalert2": "^11.26.3",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
