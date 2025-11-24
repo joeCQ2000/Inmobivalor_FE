@@ -3,13 +3,13 @@ import { Component, computed, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { toast } from 'ngx-sonner';
-import { dummyData } from 'src/app/shared/dummy/user.dummy';
 import { TableActionComponent } from './components/table-action/table-action.component';
 import { TableFooterComponent } from './components/table-footer/table-footer.component';
 import { TableHeaderComponent } from './components/table-header/table-header.component';
 import { TableRowComponent } from './components/table-row/table-row.component';
 import { User } from './model/user.model';
 import { TableFilterService } from './services/table-filter.service';
+import { usuario } from '../../../../core/models/usuario.model';
 
 @Component({
   selector: 'app-table',
@@ -31,7 +31,6 @@ export class TableComponent implements OnInit {
     this.http.get<User[]>('http://localhost:8080/usuario/listar').subscribe({
       next: (data) => this.users.set(data),
       error: (error) => {
-        this.users.set(dummyData);
         this.handleRequestError(error);
       },
     });
@@ -66,33 +65,24 @@ export class TableComponent implements OnInit {
     return this.users()
       .filter(
         (user) =>
-          user.name.toLowerCase().includes(search) ||
+          user.nombres.toLowerCase().includes(search) ||
           user.username.toLowerCase().includes(search) ||
-          user.email.toLowerCase().includes(search) ||
-          user.phone.includes(search),
+          user.correo.toLowerCase().includes(search) ||
+          user.telefono.includes(search),
       )
       .filter((user) => {
         if (!status) return true;
         switch (status) {
           case '1':
-            return user.status === 1;
+            return user.id_usuario === 0;
           case '2':
-            return user.status === 2;
+            return user.id_usuario === 2;
           case '3':
-            return user.status === 3;
+            return user.id_usuario === 3;
           default:
             return true;
         }
       })
-      .sort((a, b) => {
-        const defaultNewest = !order || order === '1';
-        if (defaultNewest) {
-          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-        } else if (order === '2') {
-          return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
-        }
-        return 0;
-      });
   });
 
   ngOnInit() {}

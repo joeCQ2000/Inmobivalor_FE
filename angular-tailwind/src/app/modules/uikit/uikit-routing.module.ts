@@ -5,6 +5,8 @@ import { TableComponent } from './pages/table/table.component';
 import { MetodoFrancesComponent } from './pages/table/components/metodo-frances/metodo-frances.component';
 import { TableUsuarioComponent } from './pages/table copy/table.usuario.component';
 import { RegistraeditausuarioComponent } from './pages/table copy/components/registraeditausuario/registraeditausuario.component';
+import { CronogramaFrancesComponent } from './pages/table/components/cronograma-metodo-frances/cronograma-metodo-frances.component';
+import { IndicadoresFrancesComponent } from './pages/table/components/indicadores-metodo-frances/indicadores-metodo-frances.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,8 @@ const routes: Routes = [
        { path: 'table copy', component: TableUsuarioComponent },
       { path: 'metodo_frances', component: MetodoFrancesComponent },
       { path: 'registraeditausuario', component: RegistraeditausuarioComponent },
+       { path: 'cronograma', component: CronogramaFrancesComponent },
+      { path: 'indicadores', component: IndicadoresFrancesComponent },
       { path: '**', redirectTo: 'errors/404' },
     ],
   },
