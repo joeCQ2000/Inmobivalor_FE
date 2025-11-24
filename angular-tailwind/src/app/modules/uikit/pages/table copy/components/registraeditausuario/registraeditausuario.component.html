@@ -5,7 +5,6 @@
 <form [formGroup]="usuarioform" (ngSubmit)="registrar()" class="w-full mx-auto px-4">
   <div class="bg-transparent text-white border border-primary-background/90 rounded-2xl shadow-xl overflow-hidden">
 
-    <!-- Header de la card -->
     <div class="bg-primary text-foreground px-4 py-2.5 text-xs font-semibold">
       <div class="flex items-center justify-between">
         <div>
@@ -15,7 +14,6 @@
       </div>
     </div>
 
-    <!-- Contenido + botones, todo con p-6 -->
     <div class="text-primary p-6 space-y-6">
       <fieldset class="border-0">
         <legend class="px-2 text-lg font-semibold text-foreground mb-4">
@@ -66,9 +64,17 @@
               class="w-full p-2 bg-white border border-gray-300 rounded"
             />
           </div>
-
-          <!-- Correo a lo ancho -->
-          <div class="md:col-span-2">
+           <div>
+            <label class="text-sm text-foreground">
+              telefono
+            </label>
+            <input
+              type="text"
+              formControlName="telefono"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            />
+          </div>
+          <div>
             <label class="text-sm text-foreground">
               Correo
             </label>

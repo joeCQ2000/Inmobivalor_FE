@@ -40,11 +40,7 @@ export class TableUsuarioComponent implements OnInit {
     this.usuarioservice.Listar().subscribe({
       next: (data) => {
     this.usuario.set(
-  data.sort((a: any, b: any) => {
-    const fechaA = new Date(a.fecha_registro).getTime();
-    const fechaB = new Date(b.fecha_registro).getTime();
-    return fechaB - fechaA; 
-  })
+  data
 );
   },
       error: (error) => {

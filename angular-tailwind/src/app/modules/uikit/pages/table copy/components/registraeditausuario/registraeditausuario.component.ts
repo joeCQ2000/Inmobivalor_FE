@@ -31,6 +31,7 @@ ngOnInit(): void {
     username : ['',Validators.required],
     nombres : ['', Validators.required],
     apellidos : ['', Validators.required],
+    telefono : ['', Validators.required],
     correo : ['', Validators.required],
     dni : ['', Validators.required],
     estado : [0, Validators.required],
@@ -85,7 +86,7 @@ registrar(): void{
       color: '#ffff'
 
     })
-        this.router.navigate(['/components/table']);
+        this.router.navigate(['/components/table copy']);
       },
       error: (err) => {
         console.error('Error al actualizar', err);
@@ -121,7 +122,7 @@ registrar(): void{
       color: '#ffff'
 
     })
-        this.router.navigate(['/components/table']);
+        this.router.navigate(['/components/table copy']);
       },
       error: (err) => {
         console.error('Error al registrar', err);

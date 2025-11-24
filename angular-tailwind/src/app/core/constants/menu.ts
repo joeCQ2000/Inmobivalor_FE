@@ -35,7 +35,7 @@ export class Menu {
         },
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
-          label: 'Components',
+          label: 'Metodo-Frances',
           route: '/components/metodo_frances',
            
         },
