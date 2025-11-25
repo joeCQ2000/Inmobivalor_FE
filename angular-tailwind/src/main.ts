@@ -19,8 +19,8 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(BrowserModule, AppRoutingModule),
     provideAnimations(),
     provideZonelessChangeDetection(),
-    // ✅ AQUÍ YA USA LA FUNCIÓN REAL
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptorsFromDi())
+
   ],
 }).catch((err) => console.error(err));
 
