@@ -43,7 +43,12 @@ export class Menu {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Usuario',
           route: '/components/table copy',
-          
+        },
+                {
+          icon: 'assets/icons/heroicons/outline/cube.svg',
+          label: 'Credito Prestamo',
+          route: '/components/credito-prestamo',
+           
         },
       ],
     },

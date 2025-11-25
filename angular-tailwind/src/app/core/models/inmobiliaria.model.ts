@@ -1,4 +1,4 @@
-import { Usuario } from './usuario.model';
+import { usuario } from './usuario.model';
 
 export interface Inmobiliaria {
   id_inmobiliaria?: number;
@@ -9,5 +9,5 @@ export interface Inmobiliaria {
   descripcion: string;
   situacion_inmobiliaria: string;
   estado: boolean;
-  usuario: Usuario;
+  usuario: usuario;
 }

@@ -8,6 +8,4 @@ export interface usuario{
     dni : string,
     estado : boolean,
     telefono : string,
-    
-
 }

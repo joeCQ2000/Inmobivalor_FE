@@ -22,6 +22,8 @@ const routes: Routes = [
       { path: 'registraeditausuario', component: RegistraeditausuarioComponent },
        { path: 'cronograma', component: CronogramaFrancesComponent },
       { path: 'indicadores', component: IndicadoresFrancesComponent },
+      { path: 'credito-prestamo', component: CreditoPrestamoComponent },
+      { path: 'credito-prestamo-registrar', component: CreditoPrestamoRegistrarComponent },
       { path: '**', redirectTo: 'errors/404' },
     ],
   },

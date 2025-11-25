@@ -1,4 +1,4 @@
-import { Usuario } from "./usuario.model";
+import { usuario } from "../models/usuario.model";
 
 export interface Cliente {
   id_cliente?: number;
@@ -9,5 +9,5 @@ export interface Cliente {
   dni: string;
   es_activo: boolean;
   aplica_bono: boolean;
-  usuario: Usuario;
+  usuario: usuario;
 }
