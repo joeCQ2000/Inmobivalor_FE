@@ -23,8 +23,10 @@ getList() {
 Registrar(usuario: usuario) {
     return this.httpClient.post(`${this.url}/registrar`,usuario);
   }
-Actualizar (id_actual: number, usuario: usuario){
+Actualizar (id: number, usuario: usuario){
   return this.httpClient.put(`${this.url}/actualizar`,usuario);
 }
- 
+listId(id: number) {
+    return this.httpClient.get<usuario>(`${this.url}/${id}`);
+  }
 }
