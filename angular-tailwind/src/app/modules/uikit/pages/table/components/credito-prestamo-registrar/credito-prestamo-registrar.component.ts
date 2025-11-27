@@ -18,6 +18,7 @@ import { EntidadFinancieraService } from '../../../../../../../../src/app/core/s
 import { ClienteService } from '../../../../../../../../src/app/core/services/cliente.service';
 import { InmobiliariaService } from '../../../../../../../../src/app/core/services/inmobiliaria.service';
 import { MonedaService } from '../../../../../../../../src/app/core/services/moneda.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-credito-prestamo-registrar',
@@ -44,7 +45,8 @@ export class CreditoPrestamoRegistrarComponent implements OnInit {
     private entidadService: EntidadFinancieraService,
     private clienteService: ClienteService,
     private inmobiliariaService: InmobiliariaService,
-    private monedaService: MonedaService
+    private monedaService: MonedaService,
+    private router : Router
   ) {}
 
   ngOnInit(): void {
@@ -124,6 +126,8 @@ export class CreditoPrestamoRegistrarComponent implements OnInit {
           id_inmobiliaria: null,
           id_moneda: null,
         });
+          // Redirigir a la vista de Método Francés o Cronograma
+      this.router.navigate([`../metodo-frances`]);
       },
       error: (err) => {
         console.error(err);

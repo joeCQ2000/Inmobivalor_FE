@@ -21,6 +21,7 @@ const routes: Routes = [
        { path: 'table copy', component: TableUsuarioComponent },
       { path: 'metodo_frances', component: MetodoFrancesComponent },
       { path: 'registraeditausuario', component: RegistraeditausuarioComponent },
+      { path: 'registraeditausuario/:id', component: RegistraeditausuarioComponent },
        { path: 'cronograma', component: CronogramaFrancesComponent },
       { path: 'indicadores', component: IndicadoresFrancesComponent },
       { path: 'credito-prestamo', component: CreditoPrestamoComponent },
