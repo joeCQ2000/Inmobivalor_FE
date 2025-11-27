@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ThemeService } from '../../../../../core/services/theme.service';
 import { ClickOutsideDirective } from '../../../../../shared/directives/click-outside.directive';
@@ -10,7 +10,7 @@ import { ClickOutsideDirective } from '../../../../../shared/directives/click-ou
   selector: 'app-profile-menu',
   templateUrl: './profile-menu.component.html',
   styleUrls: ['./profile-menu.component.css'],
-  imports: [ClickOutsideDirective, NgClass, RouterLink, AngularSvgIconModule],
+  imports: [ClickOutsideDirective, NgClass, AngularSvgIconModule],
   animations: [
     trigger('openClose', [
       state(
@@ -88,7 +88,7 @@ export class ProfileMenuComponent implements OnInit {
   public themeMode = ['light', 'dark'];
   public themeDirection = ['ltr', 'rtl'];
 
-  constructor(public themeService: ThemeService) {}
+  constructor(public themeService: ThemeService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -113,5 +113,21 @@ export class ProfileMenuComponent implements OnInit {
     this.themeService.theme.update((theme) => {
       return { ...theme, direction: value };
     });
+  }
+
+  cerrar() {
+    sessionStorage.clear();
+    this.router.navigate(['/auth/sign-in']).then(() => {
+      location.reload(); // Recarga la página
+    });
+  }
+
+  public onMenuClick(item: { title: string; link: string }): void {
+    if (item.title === 'Log out') {
+      this.cerrar();
+    } else {
+      this.isOpen = false;
+      this.router.navigate([item.link]);
+    }
   }
 }

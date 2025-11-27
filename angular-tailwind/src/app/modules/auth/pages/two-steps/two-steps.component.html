@@ -1,4 +1,4 @@
-<form class="my-10 space-y-6">
+<form class="my-10 space-y-6" (ngSubmit)="onSubmitOtp()">
   <div class="text-center">
     <h2 class="text-foreground mb-1 text-3xl font-semibold">Two Step Verification</h2>
     <p class="text-muted-foreground text-sm">Enter the verification code we sent to</p>
@@ -10,13 +10,32 @@
     <input
       placeholder=""
       maxlength="1"
-      class="border-border bg-background text-muted-foreground focus:border-primary h-10 w-10 rounded-md border text-center outline-hidden sm:h-14 sm:w-14" />
+      class="border-border bg-background text-muted-foreground focus:border-primary h-10 w-10 rounded-md border text-center outline-hidden sm:h-14 sm:w-14"
+      [(ngModel)]="otpDigits[$index]"
+      name="otp{{ $index }}"
+      (input)="onInputChange($event, $index)" />
     }
   </div>
 
+    <p
+    class="mt-2 text-sm text-red-500"
+    [class.hidden]="!errorMessage"
+  >
+    {{ errorMessage }}
+  </p>
+
   <!-- Submit Button -->
   <div>
-    <app-button routerLink="/dashboard" full impact="bold" tone="primary" shape="rounded" size="medium">
+   <app-button
+      type="button"
+      full
+      impact="bold"
+      tone="primary"
+      shape="rounded"
+      size="medium"
+      [disabled]="loading"
+      (click)="onSubmitOtp()"
+    >
       Submit
     </app-button>
   </div>

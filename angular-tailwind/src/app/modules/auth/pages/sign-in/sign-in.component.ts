@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Router, RouterLink } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { LoginService } from 'src/app/modules/layout/services/login.service';
+import { JwtRequest } from 'src/app/modules/layout/models/jwtRequest';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,7 +18,11 @@ export class SignInComponent implements OnInit {
   submitted = false;
   passwordTextType!: boolean;
 
-  constructor(private readonly _formBuilder: FormBuilder, private readonly _router: Router) {}
+  constructor(
+    private readonly _formBuilder: FormBuilder,
+    private readonly _router: Router,
+    private readonly _loginService: LoginService,
+  ) {}
 
   onClick() {
     console.log('Button clicked');
@@ -24,13 +30,13 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required]],
       password: ['', Validators.required],
     });
   }
 
   get f() {
-    return this.form.controls;
+    return this.form?.controls;
   }
 
   togglePasswordTextType() {
@@ -39,12 +45,41 @@ export class SignInComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    const { email, password } = this.form.value;
 
     if (this.form.invalid) {
       return;
     }
+    const { username, password } = this.form.value;
 
-    this._router.navigate(['/']);
+    const request = new JwtRequest();
+    request.username = username;
+    request.password = password;
+
+    this._loginService.login(request).subscribe({
+      next: (data: any) => {
+        //Caso 1 backend indica q se ha enviado OTP al correo
+
+        if (data.requiresOtp) {
+          //Guarda username para usarlo en Doble verificacion
+          this._loginService.setPendingUsername(username);
+
+          //redirigir al componente donde se ingresa el codigo
+          this._router.navigate(['/auth/two-steps']); //la ruta para doble verificacion
+          return;
+        }
+
+        //Caso 2 no hay OTP y viene el token directo(flujo antiguo)
+        if (data.jwttoken) {
+          sessionStorage.setItem('token', data.jwttoken);
+          this._router.navigate(['/components/metodo_frances']);
+          return;
+        }
+
+        console.error('Respuesta inesperada del servidor');
+      },
+      error: () => {
+        console.error('Credenciales incorrectas');
+      },
+    });
   }
 }

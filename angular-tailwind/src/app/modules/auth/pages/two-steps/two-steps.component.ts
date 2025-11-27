@@ -1,17 +1,84 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { VerifyOtpRequest } from 'src/app/modules/layout/models/VerifyOtpRequest';
+import { LoginService } from 'src/app/modules/layout/services/login.service';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 
 @Component({
   selector: 'app-two-steps',
   templateUrl: './two-steps.component.html',
   styleUrls: ['./two-steps.component.css'],
-  imports: [FormsModule, RouterLink, ButtonComponent],
+  imports: [FormsModule, ButtonComponent],
 })
 export class TwoStepsComponent implements OnInit {
-  constructor() {}
+ 
   public inputs = Array(6);
+  public otpDigits: string[] = new Array(6).fill('');
+
+  public errorMessage: string = '';
+  public loading: boolean = false;
+
+   constructor(
+    private loginService: LoginService,
+    private router: Router,
+   ) {}
 
   ngOnInit(): void {}
+
+  onInputChange(event: any, index:number): void {
+    const value: string = event.target.value;
+    if(value && value.length === 1 && index <this.inputs.length -1){
+      const next = event.target.nextElementSibiling as HTMLInputElement;
+      if(next){
+        next.focus();
+      }
+    }
+  }
+
+    onSubmitOtp(): void {
+    this.errorMessage = '';
+
+    const username = this.loginService.getPendingUsername();
+    if (!username) {
+      this.errorMessage = 'No se encontró el usuario pendiente de verificación. Vuelva a iniciar sesión.';
+      return;
+    }
+
+    // Unir los 6 dígitos en un solo string
+    const otp = this.otpDigits.join('').trim();
+
+    if (otp.length !== 6) {
+      this.errorMessage = 'Ingrese los 6 dígitos del código de verificación.';
+      return;
+    }
+
+    this.loading = true;
+
+    const request: VerifyOtpRequest = {
+      username: username,
+      otp: otp,
+    };
+
+    this.loginService.verifyOtp(request).subscribe({
+      next: (res) => {
+        this.loading = false;
+
+        if (res.jwttoken) {
+          // Guardar token, limpiar username pendiente y navegar
+          sessionStorage.setItem('token', res.jwttoken);
+          this.loginService.clearPendingUsername();
+          this.router.navigate(['/components/metodo_frances']);
+        } else {
+          this.errorMessage = 'Respuesta inesperada del servidor.';
+        }
+      },
+      error: (err) => {
+        this.loading = false;
+        this.errorMessage = 'Código incorrecto o expirado.';
+        console.error(err);
+      },
+    });
+  }
+
 }

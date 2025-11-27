@@ -10,12 +10,14 @@ export class Menu {
           icon: 'assets/icons/heroicons/outline/chart-pie.svg',
           label: 'Dashboard',
           route: '/dashboard',
+          protected: true,
           children: [{ label: 'Nfts', route: '/dashboard/nfts' }],
         },
         {
           icon: 'assets/icons/heroicons/outline/lock-closed.svg',
           label: 'Auth',
           route: '/auth',
+          protected: false,
           children: [
             { label: 'Sign up', route: '/auth/sign-up' },
             { label: 'Sign in', route: '/auth/sign-in' },
@@ -28,6 +30,7 @@ export class Menu {
           icon: 'assets/icons/heroicons/outline/exclamation-triangle.svg',
           label: 'Errors',
           route: '/errors',
+          protected: false,
           children: [
             { label: '404', route: '/errors/404' },
             { label: '500', route: '/errors/500' },
@@ -37,12 +40,14 @@ export class Menu {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Metodo-Frances',
           route: '/components/metodo_frances',
+          protected: true,
            
         },
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Usuario',
           route: '/components/table copy',
+          protected: true,
           
         },
       ],
