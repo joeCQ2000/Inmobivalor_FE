@@ -37,18 +37,24 @@ export class Menu {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Metodo-Frances',
           route: '/components/metodo_frances',
-           
+
         },
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Usuario',
           route: '/components/table copy',
         },
-                {
+        {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Credito Prestamo',
           route: '/components/credito-prestamo',
-           
+
+        },
+        {
+          icon: 'assets/icons/heroicons/outline/cube.svg',
+          label: 'Clientes',
+          route: '/components/listar-clientes',
+
         },
       ],
     },

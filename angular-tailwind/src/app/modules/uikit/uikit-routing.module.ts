@@ -9,6 +9,7 @@ import { TableUsuarioComponent } from './pages/table copy/table.usuario.componen
 import { RegistraeditausuarioComponent } from './pages/table copy/components/registraeditausuario/registraeditausuario.component';
 import { CronogramaFrancesComponent } from './pages/table/components/cronograma-metodo-frances/cronograma-metodo-frances.component';
 import { IndicadoresFrancesComponent } from './pages/table/components/indicadores-metodo-frances/indicadores-metodo-frances.component';
+import { ListarClientesComponent } from './pages/table/components/listar-clientes/listar-clientes.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'indicadores', component: IndicadoresFrancesComponent },
       { path: 'credito-prestamo', component: CreditoPrestamoComponent },
       { path: 'credito-prestamo-registrar', component: CreditoPrestamoRegistrarComponent },
+      { path: 'listar-clientes', component: ListarClientesComponent },
       { path: '**', redirectTo: 'errors/404' },
     ],
   },
