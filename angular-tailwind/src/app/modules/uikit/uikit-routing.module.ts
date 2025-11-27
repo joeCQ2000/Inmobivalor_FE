@@ -7,6 +7,7 @@ import { TableUsuarioComponent } from './pages/table copy/table.usuario.componen
 import { RegistraeditausuarioComponent } from './pages/table copy/components/registraeditausuario/registraeditausuario.component';
 import { CronogramaFrancesComponent } from './pages/table/components/cronograma-metodo-frances/cronograma-metodo-frances.component';
 import { IndicadoresFrancesComponent } from './pages/table/components/indicadores-metodo-frances/indicadores-metodo-frances.component';
+import { InmobiliariaComponent } from './pages/table/components/inmobiliaria/inmobiliaria.component';
 
 const routes: Routes = [
   {
@@ -15,10 +16,11 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'components', pathMatch: 'full' },
       { path: 'table', component: TableComponent },
-       { path: 'table copy', component: TableUsuarioComponent },
+      { path: 'table copy', component: TableUsuarioComponent },
       { path: 'metodo_frances', component: MetodoFrancesComponent },
+      { path: 'inmobiliaria', component: InmobiliariaComponent },
       { path: 'registraeditausuario', component: RegistraeditausuarioComponent },
-       { path: 'cronograma', component: CronogramaFrancesComponent },
+      { path: 'cronograma', component: CronogramaFrancesComponent },
       { path: 'indicadores', component: IndicadoresFrancesComponent },
       { path: '**', redirectTo: 'errors/404' },
     ],

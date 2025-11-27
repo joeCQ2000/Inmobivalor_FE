@@ -40,7 +40,14 @@ export class Menu {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Metodo-Frances',
           route: '/components/metodo_frances',
-          protected: true,
+          protected: true, 
+           
+        },
+        {
+          icon: 'assets/icons/heroicons/outline/cube.svg',
+          label: 'Inmobiliaria',
+          route: '/components/inmobiliaria',
+          protected: true, 
            
         },
         {
