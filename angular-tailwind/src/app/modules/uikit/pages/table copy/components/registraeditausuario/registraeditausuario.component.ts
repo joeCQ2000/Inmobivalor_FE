@@ -34,7 +34,6 @@ ngOnInit(): void {
     apellidos : ['', Validators.required],
     telefono : ['', Validators.required],
     correo : ['', Validators.required],
-    telefono : ['', Validators.required],
     dni : ['', Validators.required],
     estado : [0, Validators.required],
   })
