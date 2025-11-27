@@ -26,5 +26,7 @@ Registrar(usuario: usuario) {
 Actualizar (id: number, usuario: usuario){
   return this.httpClient.put(`${this.url}/actualizar`,usuario);
 }
- 
+listid(id:number){
+return this.httpClient.get<usuario>(`${this.url}/${id}`)
+}
 }
