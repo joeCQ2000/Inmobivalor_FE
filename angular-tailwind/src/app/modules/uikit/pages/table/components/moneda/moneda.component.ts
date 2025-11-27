@@ -1,22 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MonedaService } from 'src/app/core/services/moneda.service';
 import { Moneda } from 'src/app/core/models/moneda.model';
+import { TableFooterComponent } from '../../../table copy/components/table-footer/table-footer.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-moneda',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TableFooterComponent],
   templateUrl: './moneda.component.html',
   styleUrls: ['./moneda.component.css']
 })
 export class MonedaComponent implements OnInit {
 
-  monedas: Moneda[] = [];
+  monedas = signal<Moneda[]>([]);
+  paginas = signal(1);
+  tamanioPagina = signal(10);
   loading = false;
   errorMessage = '';
 
-  constructor(private monedaService: MonedaService) {}
+  totalpaginas = computed(() => {
+    const totalItems = this.monedas().length;
+    return Math.ceil(totalItems / this.tamanioPagina());
+  });
+
+  constructor(
+    private monedaService: MonedaService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.obtenerMonedas();
@@ -28,7 +40,7 @@ export class MonedaComponent implements OnInit {
 
     this.monedaService.list().subscribe({
       next: (data) => {
-        this.monedas = data;
+        this.monedas.set(data);
         this.loading = false;
       },
       error: (err) => {
@@ -38,6 +50,12 @@ export class MonedaComponent implements OnInit {
       }
     });
   }
+
+  paginadoMonedas = computed(() => {
+    const empiezo = (this.paginas() - 1) * this.tamanioPagina();
+    const final = empiezo + this.tamanioPagina();
+    return this.monedas().slice(empiezo, final);
+  });
 
   eliminarMoneda(id: number): void {
     if (confirm('¿Está seguro de eliminar esta moneda?')) {
@@ -51,5 +69,9 @@ export class MonedaComponent implements OnInit {
         }
       });
     }
+  }
+
+  goToRegistro(): void {
+    this.router.navigate(['/components/moneda-registrar']);
   }
 }
