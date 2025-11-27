@@ -1,0 +1,86 @@
+.moneda-container {
+  padding: 1.5rem;
+  max-width: 100%;
+  color: #f1f1f1;
+}
+
+.moneda-container h2 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  color: #ffffff;
+}
+
+.estado {
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  color: #e0e0e0;
+}
+
+.estado.error {
+  color: #ff6b6b;
+}
+
+.tabla-monedas {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background-color: #1e1e1e; 
+  border: 1px solid #333;
+}
+
+.tabla-monedas th,
+.tabla-monedas td {
+  border: 1px solid #333;
+  padding: 0.5rem 0.6rem;
+  text-align: left;
+}
+
+.tabla-monedas th {
+  background-color: #2b2b2b;
+  font-weight: 600;
+  color: #f5f5f5;
+}
+
+.tabla-monedas tr:nth-child(even) {
+  background-color: #242424;
+}
+
+.tabla-monedas tr:nth-child(odd) {
+  background-color: #1e1e1e;
+}
+
+.tabla-monedas tr:hover {
+  background-color: #333333;
+}
+
+.badge {
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badge.activo {
+  background-color: #1b5e20;
+  color: #e0ffe5;
+}
+
+.badge.inactivo {
+  background-color: #b71c1c;
+  color: #ffe6e6;
+}
+
+.btn-eliminar {
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: #b71c1c;
+  color: #ffffff;
+}
+
+.btn-eliminar:hover {
+  background-color: #d32f2f;
+}
