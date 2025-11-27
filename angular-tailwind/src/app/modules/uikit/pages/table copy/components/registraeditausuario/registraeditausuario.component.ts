@@ -13,6 +13,7 @@ import { usuario } from '../../../../../../core/models/usuario.model';
   styleUrl: './registraeditausuario.component.css'
 })
 export class RegistraeditausuarioComponent implements OnInit {
+  
 usuarioform! : FormGroup;
 HttpClient : any;
 constructor(
@@ -32,13 +33,40 @@ ngOnInit(): void {
     nombres : ['', Validators.required],
     apellidos : ['', Validators.required],
     correo : ['', Validators.required],
+    telefono : ['', Validators.required],
     dni : ['', Validators.required],
     estado : [0, Validators.required],
+    
   })
     
+   const id = this.route.snapshot.paramMap.get('id');
+    if (id && !isNaN(+id)) {
+      this.modoEdicion = true;
+      this.id_actual = +id;
+      this.cargarUsuario(this.id_actual);
+    }
 }
-cargarUsuario (id: number){
 
+cargarUsuario(id: number) {
+  this.usuarioservice.listId(id).subscribe({
+    next: (data) => {
+      console.log('Datos del muestreo a editar:', data);
+      const toBool = (v: any) => v === true || v === 1;
+
+      this.usuarioform.patchValue({
+        contrasenha: data.contrasenha,
+        username: data.username,
+        nombres: data.nombres,
+        apellidos: data.apellidos,
+        correo: data.correo,
+        telefono: data.telefono,
+        dni: data.dni,
+        estado: toBool(data.estado),
+      });
+
+    },
+    error: (err) => console.error('Error al cargar el muestreo', err)
+  });
 }
 Volver():void{
   this.router.navigate(['components/table copy'])
@@ -85,7 +113,7 @@ registrar(): void{
       color: '#ffff'
 
     })
-        this.router.navigate(['/components/table']);
+        this.router.navigate(['/components/table copy']);
       },
       error: (err) => {
         console.error('Error al actualizar', err);

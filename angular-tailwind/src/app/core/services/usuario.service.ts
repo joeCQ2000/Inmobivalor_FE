@@ -8,7 +8,7 @@ const base_url = environment.base;
   providedIn: 'root',
 })
 export class UsuarioService {
-  private url = `${base_url}/usuario`;
+  private url = `${base_url}/usuarios`;
   private listaCambio = new Subject<usuario[]>();
   constructor(private httpClient: HttpClient) {}
 Listar() {
@@ -26,5 +26,7 @@ Registrar(usuario: usuario) {
 Actualizar (id_actual: number, usuario: usuario){
   return this.httpClient.put(`${this.url}/actualizar`,usuario);
 }
- 
+ listId(id: number) {
+    return this.httpClient.get<usuario>(`${this.url}/${id}`);
+  }
 }
