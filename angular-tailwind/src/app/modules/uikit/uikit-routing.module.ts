@@ -10,6 +10,10 @@ import { RegistraeditausuarioComponent } from './pages/table copy/components/reg
 import { CronogramaFrancesComponent } from './pages/table/components/cronograma-metodo-frances/cronograma-metodo-frances.component';
 import { IndicadoresFrancesComponent } from './pages/table/components/indicadores-metodo-frances/indicadores-metodo-frances.component';
 import { ListarClientesComponent } from './pages/table/components/listar-clientes/listar-clientes.component';
+import { MonedaComponent } from './pages/table/components/moneda/moneda.component';
+import { MonedaRegistrarComponent } from './pages/table/components/moneda-registrar/moneda-registrar.component';
+import { TasaInteresComponent } from './pages/table/components/tasa-interes/tasa-interes.component';
+import { TasaInteresRegistrarComponent } from './pages/table/components/tasa-interes-registrar/tasa-interes-registrar.component';
 
 const routes: Routes = [
   {
@@ -27,6 +31,10 @@ const routes: Routes = [
       { path: 'credito-prestamo', component: CreditoPrestamoComponent },
       { path: 'credito-prestamo-registrar', component: CreditoPrestamoRegistrarComponent },
       { path: 'listar-clientes', component: ListarClientesComponent },
+      { path: 'moneda', component: MonedaComponent },
+      { path: 'moneda-registrar', component: MonedaRegistrarComponent },
+      { path: 'tasa-interes', component: TasaInteresComponent },
+      { path: 'tasa-interes-registrar', component: TasaInteresRegistrarComponent },
       { path: '**', redirectTo: 'errors/404' },
     ],
   },

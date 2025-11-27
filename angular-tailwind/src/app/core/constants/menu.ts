@@ -56,6 +56,24 @@ export class Menu {
           route: '/components/listar-clientes',
 
         },
+        {
+          icon: 'assets/icons/heroicons/outline/currency-dollar.svg',
+          label: 'Moneda',
+          route: '/components/moneda',
+          children: [
+            { label: 'Listar Monedas', route: '/components/moneda' },
+            { label: 'Registrar Moneda', route: '/components/moneda-registrar' },
+          ],
+        },
+        {
+          icon: 'assets/icons/heroicons/outline/chart-bar.svg',
+          label: 'Tasa de Interés',
+          route: '/components/tasa-interes',
+          children: [
+            { label: 'Listar Tasas', route: '/components/tasa-interes' },
+            { label: 'Registrar Tasa', route: '/components/tasa-interes-registrar' },
+          ],
+        },
       ],
     },
     {
