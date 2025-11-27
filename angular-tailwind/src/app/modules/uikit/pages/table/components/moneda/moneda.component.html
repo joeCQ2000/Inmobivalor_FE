@@ -1,0 +1,42 @@
+<div class="moneda-container">
+  <h2>Listado de Monedas</h2>
+
+  @if (loading) {
+  <div class="estado">Cargando monedas...</div>
+  } @if (!loading && errorMessage) {
+  <div class="estado error">{{ errorMessage }}</div>
+  } @if (!loading && !errorMessage && monedas.length === 0) {
+  <div class="estado">No hay monedas registradas.</div>
+  } @if (!loading && !errorMessage && monedas.length > 0) {
+  <table class="tabla-monedas">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tipo de Moneda</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (m of monedas; track m.id_moneda) {
+      <tr>
+        <td>{{ m.id_moneda }}</td>
+        <td>{{ m.tipo_moneda }}</td>
+        <td>
+          <span class="badge" [class.activo]="m.estado" [class.inactivo]="!m.estado">
+            {{ m.estado ? 'Activo' : 'Inactivo' }}
+          </span>
+        </td>
+        <td>
+          <button class="btn-eliminar" (click)="eliminarMoneda(m.id_moneda!)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+
+  </table>
+  }
+</div>

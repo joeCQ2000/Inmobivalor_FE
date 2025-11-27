@@ -1,0 +1,63 @@
+<div class="tasa-form-container">
+  <h2>Registrar Tasa de Interés</h2>
+
+  @if (successMessage) {
+    <div class="alert success">{{ successMessage }}</div>
+  }
+
+  @if (errorMessage) {
+    <div class="alert error">{{ errorMessage }}</div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-grid">
+      <!-- Tipo de tasa -->
+      <div class="form-field">
+        <label>Tipo de Tasa</label>
+        <input 
+          type="text" 
+          formControlName="tipo_tasa" 
+          placeholder="Ej: Nominal, Efectiva, TEA"
+          maxlength="50"
+        />
+        @if (controlInvalid('tipo_tasa')) {
+          <small class="error-text">Ingrese el tipo de tasa (máx. 50 caracteres).</small>
+        }
+      </div>
+
+      <!-- Tasa porcentual -->
+      <div class="form-field">
+        <label>Tasa (%)</label>
+        <input 
+          type="number" 
+          formControlName="tasa_pct" 
+          placeholder="Ej: 12.5"
+          step="0.01"
+          min="0"
+        />
+        @if (controlInvalid('tasa_pct')) {
+          <small class="error-text">Ingrese un valor válido para la tasa.</small>
+        }
+      </div>
+
+      <!-- Estado -->
+      <div class="form-field">
+        <label>Estado</label>
+        <select formControlName="estado">
+          <option [ngValue]="true">Activo</option>
+          <option [ngValue]="false">Inactivo</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="submit" [disabled]="loading || form.invalid">
+        @if (loading) {
+          Guardando...
+        } @else {
+          Registrar tasa de interés
+        }
+      </button>
+    </div>
+  </form>
+</div>

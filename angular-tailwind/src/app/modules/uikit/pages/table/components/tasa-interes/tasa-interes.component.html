@@ -1,0 +1,44 @@
+<div class="tasa-container">
+  <h2>Listado de Tasas de Interés</h2>
+
+  @if (loading) {
+  <div class="estado">Cargando tasas de interés...</div>
+  } @if (!loading && errorMessage) {
+  <div class="estado error">{{ errorMessage }}</div>
+  } @if (!loading && !errorMessage && tasas.length === 0) {
+  <div class="estado">No hay tasas de interés registradas.</div>
+  } @if (!loading && !errorMessage && tasas.length > 0) {
+  <table class="tabla-tasas">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tipo de Tasa</th>
+        <th>Tasa (%)</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (t of tasas; track t.id_tasa) {
+      <tr>
+        <td>{{ t.id_tasa }}</td>
+        <td>{{ t.tipo_tasa }}</td>
+        <td>{{ t.tasa_pct }}%</td>
+        <td>
+          <span class="badge" [class.activo]="t.estado" [class.inactivo]="!t.estado">
+            {{ t.estado ? 'Activo' : 'Inactivo' }}
+          </span>
+        </td>
+        <td>
+          <button class="btn-eliminar" (click)="eliminarTasa(t.id_tasa!)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+
+  </table>
+  }
+</div>

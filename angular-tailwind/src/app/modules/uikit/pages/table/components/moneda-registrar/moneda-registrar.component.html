@@ -1,0 +1,48 @@
+<div class="moneda-form-container">
+  <h2>Registrar Moneda</h2>
+
+  @if (successMessage) {
+    <div class="alert success">{{ successMessage }}</div>
+  }
+
+  @if (errorMessage) {
+    <div class="alert error">{{ errorMessage }}</div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-grid">
+      <!-- Tipo de moneda -->
+      <div class="form-field">
+        <label>Tipo de Moneda</label>
+        <input 
+          type="text" 
+          formControlName="tipo_moneda" 
+          placeholder="Ej: USD, PEN, EUR"
+          maxlength="20"
+        />
+        @if (controlInvalid('tipo_moneda')) {
+          <small class="error-text">Ingrese el tipo de moneda (máx. 20 caracteres).</small>
+        }
+      </div>
+
+      <!-- Estado -->
+      <div class="form-field">
+        <label>Estado</label>
+        <select formControlName="estado">
+          <option [ngValue]="true">Activo</option>
+          <option [ngValue]="false">Inactivo</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="submit" [disabled]="loading || form.invalid">
+        @if (loading) {
+          Guardando...
+        } @else {
+          Registrar moneda
+        }
+      </button>
+    </div>
+  </form>
+</div>
