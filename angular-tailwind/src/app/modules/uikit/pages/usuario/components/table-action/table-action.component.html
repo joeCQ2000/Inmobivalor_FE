@@ -1,0 +1,79 @@
+
+  <div class="color-primary-foreground px-3 py-8  border-foreground/70">
+  <div class="flex items-center justify-between w-full">
+  <h3 class="text-sm text-foreground font-medium">
+    Búsqueda general
+  </h3>
+  <button
+    (click)="goToRegistro()"
+    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
+    Añadir usuario
+  </button>
+</div>
+
+ 
+  <div class="color-primary-foreground px-3 py-2 border-foreground/60">
+    <div class="flex items-center justify-between w-full">
+    </div>
+    <input
+    #searchInput
+      name="search"
+      class="pr-2 py-2 x-10 md:w-[500px] text-sm border border-foreground rounded-md bg-foreground text-gray-200 placeholder-gray-500 focus:ring-rose-600 focus:border-rose-600 "
+      placeholder="Buscar correlativo o cliente"
+      type="text"
+      (input)="onSearchChange($event)" />
+  </div>
+</div>
+
+<!--Filtros -->
+<div class="color-primary-foreground px-6 py-2 w-full border-gray-700">
+  <div class="flex items-center gap-6 flex-wrap md:flex-nowrap overflow-x-auto">
+  <!-- Nombre de Usuario -->
+  <div class="flex flex-col w-full md:w-1/4">
+    <label class="text-xs text-foreground mb-1">Nombre de Usuario</label>
+    <input #username
+      type="text"
+      class="flex items-center justify-between w-full" 
+      (change)="onUsernameChange($event)" />
+  </div>
+
+  <!-- DNI -->
+  <div class="flex flex-col w-full md:w-1/4">
+    <label class="text-xs text-foreground mb-1">DNI</label>
+    <input #dni
+      type="text"
+      class="flex items-center justify-between w-full" 
+      (change)="onDNIChange($event)" />
+  </div>
+
+  <!-- Estado -->
+  <div class="flex flex-col w-full md:w-1/4">
+    <label class="text-xs text-foreground mb-1">Estado</label>
+    <select
+      [formControl]="filtroEstado"
+      class="flex items-center justify-between w-full"
+    >
+      <option [ngValue]="null">Todos</option>
+      <option [ngValue]="true">Activo</option>
+      <option [ngValue]="false">Inactivo</option>
+    </select>
+  </div>
+
+<!-- Botón Buscar -->
+<div class="w-full flex justify-end gap-2 mt-2">
+  <button
+    class="bg-primary text-primary-foreground flex-none rounded-md px-5 py-2.5 text-xs font-semibold"
+    (click)="onSearch(username, dni)"
+  >
+    Buscar
+  </button>
+
+  <button
+    class="border border-primary text-primary flex-none rounded-md px-5 py-2.5 text-xs font-semibold"
+    (click)="resetFilters(searchInput, username, dni)"
+  >
+    Limpiar
+  </button>
+  </div>
+</div>
+  </div>

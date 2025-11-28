@@ -42,7 +42,7 @@ export class Menu {
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Usuario',
-          route: '/components/table copy',
+          route: '/components/usuario',
         },
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',

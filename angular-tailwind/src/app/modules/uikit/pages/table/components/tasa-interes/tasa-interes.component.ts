@@ -4,7 +4,7 @@ import { TasaInteresService } from 'src/app/core/services/tasa-interes.service';
 import { TasaInteres } from 'src/app/core/models/tasa-interes.model';
 import { TasaInteresFilterService } from './services/tasa-interes-filter.service';
 import { TasaInteresActionComponent } from './components/tasa-interes-action/tasa-interes-action.component';
-import { TableFooterComponent } from '../../../table copy/components/table-footer/table-footer.component';
+import { TableFooterComponent } from '../../../usuario//components/table-footer/table-footer.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @Component({

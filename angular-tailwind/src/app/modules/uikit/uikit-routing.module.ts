@@ -5,8 +5,7 @@ import { TableComponent } from './pages/table/table.component';
 import { MetodoFrancesComponent } from './pages/table/components/metodo-frances/metodo-frances.component';
 import { CreditoPrestamoComponent } from './pages/table/components/credito-prestamo/credito-prestamo.component';
 import { CreditoPrestamoRegistrarComponent } from './pages/table/components/credito-prestamo-registrar/credito-prestamo-registrar.component';
-import { TableUsuarioComponent } from './pages/table copy/table.usuario.component';
-import { RegistraeditausuarioComponent } from './pages/table copy/components/registraeditausuario/registraeditausuario.component';
+import { TableUsuarioComponent } from './pages/usuario/table.usuario.component';
 import { CronogramaFrancesComponent } from './pages/table/components/cronograma-metodo-frances/cronograma-metodo-frances.component';
 import { IndicadoresFrancesComponent } from './pages/table/components/indicadores-metodo-frances/indicadores-metodo-frances.component';
 import { ListarClientesComponent } from './pages/table/components/listar-clientes/listar-clientes.component';
@@ -14,6 +13,7 @@ import { MonedaComponent } from './pages/table/components/moneda/moneda.componen
 import { MonedaRegistrarComponent } from './pages/table/components/moneda-registrar/moneda-registrar.component';
 import { TasaInteresComponent } from './pages/table/components/tasa-interes/tasa-interes.component';
 import { TasaInteresRegistrarComponent } from './pages/table/components/tasa-interes-registrar/tasa-interes-registrar.component';
+import { RegistraeditausuarioComponent } from './pages/usuario/components/registraeditausuario/registraeditausuario.component';
 
 const routes: Routes = [
   {
@@ -22,7 +22,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'components', pathMatch: 'full' },
       { path: 'table', component: TableComponent },
-       { path: 'table copy', component: TableUsuarioComponent },
+       { path: 'usuario', component: TableUsuarioComponent },
       { path: 'metodo_frances', component: MetodoFrancesComponent },
       { path: 'registraeditausuario', component: RegistraeditausuarioComponent },
       { path: 'registraeditausuario/:id', component: RegistraeditausuarioComponent },

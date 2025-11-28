@@ -70,7 +70,7 @@ cargarUsuario(id: number) {
 }
 
 Volver():void{
-  this.router.navigate(['components/table copy'])
+  this.router.navigate(['components/usuario'])
 }
 registrar(): void{
   this.submitted = true;
@@ -114,7 +114,7 @@ registrar(): void{
       color: '#ffff'
 
     })
-        this.router.navigate(['/components/table copy']);
+        this.router.navigate(['/components/usuario']);
       },
       error: (err) => {
         console.error('Error al actualizar', err);
@@ -150,7 +150,7 @@ registrar(): void{
       color: '#ffff'
 
     })
-        this.router.navigate(['/components/table copy']);
+        this.router.navigate(['/components/usuario']);
       },
       error: (err) => {
         console.error('Error al registrar', err);

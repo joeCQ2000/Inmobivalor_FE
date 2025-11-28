@@ -2,7 +2,7 @@ import { Component, computed, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MonedaService } from 'src/app/core/services/moneda.service';
 import { Moneda } from 'src/app/core/models/moneda.model';
-import { TableFooterComponent } from '../../../table copy/components/table-footer/table-footer.component';
+import { TableFooterComponent } from '../../../usuario/components/table-footer/table-footer.component';
 import { Router } from '@angular/router';
 
 @Component({
