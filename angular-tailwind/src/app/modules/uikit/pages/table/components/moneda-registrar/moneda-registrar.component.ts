@@ -6,8 +6,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MonedaService } from 'src/app/core/services/moneda.service';
 import { Moneda } from 'src/app/core/models/moneda.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-moneda-registrar',
@@ -18,14 +20,12 @@ import { Moneda } from 'src/app/core/models/moneda.model';
 })
 export class MonedaRegistrarComponent implements OnInit {
   form!: FormGroup;
-
   loading = false;
-  successMessage = '';
-  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
-    private monedaService: MonedaService
+    private monedaService: MonedaService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -39,12 +39,25 @@ export class MonedaRegistrarComponent implements OnInit {
     });
   }
 
-  submit(): void {
-    this.successMessage = '';
-    this.errorMessage = '';
+  volver(): void {
+    this.router.navigate(['/components/moneda']);
+  }
 
+  submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      Swal.fire({
+        icon: 'error',
+        title: 'Favor de rellenar los datos faltantes',
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 2000,
+        background: '#1E293B',
+        color: '#ffff',
+      });
       return;
     }
 
@@ -58,17 +71,33 @@ export class MonedaRegistrarComponent implements OnInit {
     this.monedaService.insert(moneda).subscribe({
       next: () => {
         this.loading = false;
-        this.successMessage = 'Moneda registrada correctamente.';
-        this.form.reset({
-          tipo_moneda: '',
-          estado: true,
+        Swal.fire({
+          icon: 'success',
+          title: 'Moneda registrada correctamente',
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 2000,
+          background: '#1E293B',
+          color: '#ffff',
         });
+        this.router.navigate(['/components/moneda']);
       },
       error: (err) => {
         console.error(err);
         this.loading = false;
-        this.errorMessage =
-          'Ocurrió un error al registrar la moneda. Revisa la consola.';
+        Swal.fire({
+          icon: 'error',
+          title: 'Ocurrió un error en el registro',
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 2000,
+          background: '#1E293B',
+          color: '#ffff',
+        });
       },
     });
   }

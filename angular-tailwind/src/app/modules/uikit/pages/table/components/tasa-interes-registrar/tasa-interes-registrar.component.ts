@@ -6,8 +6,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TasaInteresService } from 'src/app/core/services/tasa-interes.service';
 import { TasaInteres } from 'src/app/core/models/tasa-interes.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tasa-interes-registrar',
@@ -18,14 +20,12 @@ import { TasaInteres } from 'src/app/core/models/tasa-interes.model';
 })
 export class TasaInteresRegistrarComponent implements OnInit {
   form!: FormGroup;
-
   loading = false;
-  successMessage = '';
-  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
-    private tasaInteresService: TasaInteresService
+    private tasaInteresService: TasaInteresService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -40,12 +40,25 @@ export class TasaInteresRegistrarComponent implements OnInit {
     });
   }
 
-  submit(): void {
-    this.successMessage = '';
-    this.errorMessage = '';
+  volver(): void {
+    this.router.navigate(['/components/tasa-interes']);
+  }
 
+  submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      Swal.fire({
+        icon: 'error',
+        title: 'Favor de rellenar los datos faltantes',
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 2000,
+        background: '#1E293B',
+        color: '#ffff',
+      });
       return;
     }
 
@@ -60,18 +73,33 @@ export class TasaInteresRegistrarComponent implements OnInit {
     this.tasaInteresService.insert(tasa).subscribe({
       next: () => {
         this.loading = false;
-        this.successMessage = 'Tasa de interés registrada correctamente.';
-        this.form.reset({
-          tipo_tasa: '',
-          tasa_pct: '',
-          estado: true,
+        Swal.fire({
+          icon: 'success',
+          title: 'Tasa de interés registrada correctamente',
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 2000,
+          background: '#1E293B',
+          color: '#ffff',
         });
+        this.router.navigate(['/components/tasa-interes']);
       },
       error: (err) => {
         console.error(err);
         this.loading = false;
-        this.errorMessage =
-          'Ocurrió un error al registrar la tasa de interés. Revisa la consola.';
+        Swal.fire({
+          icon: 'error',
+          title: 'Ocurrió un error en el registro',
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 2000,
+          background: '#1E293B',
+          color: '#ffff',
+        });
       },
     });
   }
