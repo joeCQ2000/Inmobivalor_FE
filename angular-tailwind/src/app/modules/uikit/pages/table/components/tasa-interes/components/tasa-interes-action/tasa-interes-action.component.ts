@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { TasaInteresFilterService } from '../services/tasa-interes-filter.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { TasaInteresFilterService } from '../../services/tasa-interes-filter.service';
 
 @Component({
   selector: 'app-tasa-interes-action',

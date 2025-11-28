@@ -15,6 +15,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     TasaInteresActionComponent,
     TableFooterComponent,
     AngularSvgIconModule
+    
   ],
   templateUrl: './tasa-interes.component.html',
   styleUrls: ['./tasa-interes.component.css']
