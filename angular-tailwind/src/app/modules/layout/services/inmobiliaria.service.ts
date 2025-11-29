@@ -14,4 +14,7 @@ export class InmobiliariaService {
   registrarInmobiliaria(inmobiliaria: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/registrar`, inmobiliaria);
   }
+  listarInmobiliarias(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.baseUrl}/listar`)
+  }
 }

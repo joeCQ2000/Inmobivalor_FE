@@ -8,6 +8,7 @@ import { RegistraeditausuarioComponent } from './pages/table copy/components/reg
 import { CronogramaFrancesComponent } from './pages/table/components/cronograma-metodo-frances/cronograma-metodo-frances.component';
 import { IndicadoresFrancesComponent } from './pages/table/components/indicadores-metodo-frances/indicadores-metodo-frances.component';
 import { InmobiliariaComponent } from './pages/table/components/inmobiliaria/inmobiliaria.component';
+import { ListarinmobiliariaComponent } from './pages/table/components/listarinmobiliaria/listarinmobiliaria.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'table copy', component: TableUsuarioComponent },
       { path: 'metodo_frances', component: MetodoFrancesComponent },
       { path: 'inmobiliaria', component: InmobiliariaComponent },
+      { path: 'Listarinmobiliaria', component: ListarinmobiliariaComponent },
       { path: 'registraeditausuario', component: RegistraeditausuarioComponent },
       { path: 'cronograma', component: CronogramaFrancesComponent },
       { path: 'indicadores', component: IndicadoresFrancesComponent },

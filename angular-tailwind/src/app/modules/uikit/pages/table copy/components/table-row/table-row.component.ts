@@ -19,6 +19,6 @@ export class TableRowComponent {
     console.log('Router inyectado',this.router);
   }
   editarMuestreo(id: number) {
-    this.router.navigate(['/components/login', id]);
+    this.router.navigate(['/components/login',id]);
   }
 }

@@ -50,6 +50,14 @@ export class Menu {
           protected: true, 
            
         },
+          {
+          icon: 'assets/icons/heroicons/outline/cube.svg',
+          label: 'Lista de inmobiliarias',
+          route: '/components/Listarinmobiliaria',
+          protected: true, 
+           
+        },
+        //Listarinmobiliaria
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Usuario',

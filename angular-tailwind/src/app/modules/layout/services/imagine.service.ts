@@ -19,5 +19,12 @@ export class ImagineService {
     return this.http.post<any>(`${this.baseUrl}/api/v1/img/upload`, formData, {
       headers: new HttpHeaders(),
     });
+
   }
+
+   getImage(imageId: number): Observable<Blob>{
+    return this.http.get(`${this.baseUrl}/api/v1/img/obtener/${imageId}`,{
+      responseType: 'blob'
+    });
+   }
 }
