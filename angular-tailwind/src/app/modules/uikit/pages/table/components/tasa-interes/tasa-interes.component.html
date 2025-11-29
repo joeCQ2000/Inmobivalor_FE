@@ -1,0 +1,68 @@
+<div class="border-muted/20 bg-background flex min-w-full flex-col rounded-xl border p-2">
+  <app-tasa-interes-action></app-tasa-interes-action>
+  
+  <div class="scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted grow overflow-x-auto">
+    <table class="w-full table-fixed border-collapse border-0 text-left align-middle leading-5 text-muted-foreground">
+      <thead class="border-muted/20 text-muted-foreground border text-xs">
+        <tr>
+          <th class="border-muted/20 border px-4 py-3">ID</th>
+          <th class="border-muted/20 border px-4 py-3">Tipo de Tasa</th>
+          <th class="border-muted/20 border px-4 py-3">Tasa (%)</th>
+          <th class="border-muted/20 border px-4 py-3">Estado</th>
+          <th class="border-muted/20 border px-4 py-3">Acciones</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        @if (loading) {
+          <tr>
+            <td class="py-4 text-center text-sm" colspan="5">Cargando tasas de interés...</td>
+          </tr>
+        } @else if (errorMessage) {
+          <tr>
+            <td class="py-4 text-center text-sm text-red-500" colspan="5">{{ errorMessage }}</td>
+          </tr>
+        } @else {
+          @for (t of paginadoTasas(); track t.id_tasa) {
+            <tr class="hover:bg-card/50">
+              <td class="border-muted/20 border px-4 py-3 text-sm">{{ t.id_tasa }}</td>
+              <td class="border-muted/20 border px-4 py-3 text-sm">{{ t.tipo_tasa }}</td>
+              <td class="border-muted/20 border px-4 py-3 text-sm">{{ t.tasa_pct }}%</td>
+              <td class="border-muted/20 border px-4 py-3 text-sm">
+                <span 
+                  class="rounded-full px-2 py-1 text-xs font-medium"
+                  [class.bg-green-900]="t.estado"
+                  [class.text-green-200]="t.estado"
+                  [class.bg-red-900]="!t.estado"
+                  [class.text-red-200]="!t.estado">
+                  {{ t.estado ? 'Activo' : 'Inactivo' }}
+                </span>
+              </td>
+              <td class="border-muted/20 border px-4 py-3 text-sm">
+                <button
+                  (click)="eliminarTasa(t.id_tasa!)"
+                  class="rounded-md bg-red-600 px-3 py-1 text-xs font-semibold text-white hover:bg-red-700">
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td class="py-4 text-center text-sm" colspan="5">No se encontraron tasas de interés</td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <app-table-footer
+    [paginaActual]="paginas()"
+    [totalPaginas]="totalpaginas()"
+    [totalRegistros]="filterTasas().length"
+    [tamanioPagina]="tamanioPagina()"
+    (cambiarPagina)="paginas.set($event)"
+    (cambiarTamanio)="tamanioPagina.set($event)">
+  </app-table-footer>
+</div>
+

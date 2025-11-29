@@ -13,6 +13,7 @@ import { usuario } from '../../../../../../core/models/usuario.model';
   styleUrl: './registraeditausuario.component.css'
 })
 export class RegistraeditausuarioComponent implements OnInit {
+
 usuarioform! : FormGroup;
 HttpClient : any;
 constructor(
@@ -36,13 +37,40 @@ ngOnInit(): void {
     dni : ['', Validators.required],
     estado : [0, Validators.required],
   })
+  const id = this.route.snapshot.paramMap.get('id');
+    if (id && !isNaN(+id)) {
+      this.modoEdicion = true;
+      this.id_actual = +id;
+      this.cargarUsuario(this.id_actual);
+    }
     
 }
-cargarUsuario (id: number){
+cargarUsuario(id: number) {
 
+  this.usuarioservice.listid(id).subscribe({
+    next: (data) => {
+      console.log('Datos del usuario a editar:', data);
+
+      const tobool = (u :any) => u === true || u === 1;
+
+      this.usuarioform.patchValue({
+        contrasenha: data.contrasenha,
+        username : data.username,
+        nombres : data.nombres,
+        apellidos : data.apellidos,
+        telefono : data.telefono,
+        correo : data.correo,
+        dni : data.dni,
+       estado :tobool(data.estado),
+      });
+   
+    },
+    error: (err) => console.error('Error al cargar el muestreo', err)
+  });
 }
+
 Volver():void{
-  this.router.navigate(['components/table copy'])
+  this.router.navigate(['components/usuario'])
 }
 registrar(): void{
   this.submitted = true;
@@ -86,7 +114,7 @@ registrar(): void{
       color: '#ffff'
 
     })
-        this.router.navigate(['/components/table copy']);
+        this.router.navigate(['/components/usuario']);
       },
       error: (err) => {
         console.error('Error al actualizar', err);
@@ -122,7 +150,7 @@ registrar(): void{
       color: '#ffff'
 
     })
-        this.router.navigate(['/components/table copy']);
+        this.router.navigate(['/components/usuario']);
       },
       error: (err) => {
         console.error('Error al registrar', err);

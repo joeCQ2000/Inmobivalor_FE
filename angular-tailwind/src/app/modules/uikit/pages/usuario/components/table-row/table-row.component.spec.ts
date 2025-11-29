@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MetodoFrancesComponent } from './metodo-frances.component';
+import { TableRowComponent } from './table-row.component';
 
-describe('MetodoFrancesComponent', () => {
-  let component: MetodoFrancesComponent;
-  let fixture: ComponentFixture<MetodoFrancesComponent>;
+describe('TableContentComponent', () => {
+  let component: TableRowComponent;
+  let fixture: ComponentFixture<TableRowComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MetodoFrancesComponent]
+      imports: [TableRowComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MetodoFrancesComponent);
+    fixture = TestBed.createComponent(TableRowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -21,4 +21,3 @@ describe('MetodoFrancesComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

@@ -18,7 +18,8 @@ export class TableRowComponent {
   constructor(private router: Router) {
     console.log('Router inyectado',this.router);
   }
-  editarMuestreo(id: number) {
-    this.router.navigate(['/components/login',id]);
+  editarUsuario(id: number) {
+    console.log('Navegando a editar usuario con ID:', id);
+    this.router.navigate(['/components/registraeditausuario', id])
   }
 }
