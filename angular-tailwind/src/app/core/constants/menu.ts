@@ -53,7 +53,7 @@ export class Menu {
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Clientes',
-          route: '/components/listar-clientes',
+          route: '/components/cliente',
 
         },
         {

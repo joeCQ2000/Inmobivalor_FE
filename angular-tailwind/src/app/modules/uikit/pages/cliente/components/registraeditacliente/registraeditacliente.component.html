@@ -1,0 +1,107 @@
+<h2 class="text-center text-2xl font-bold mb-6 text-foreground dark:text-white">
+  Registro de Muestreo
+</h2>
+
+<form [formGroup]="clienteForm" (ngSubmit)="registrar()" class="w-full mx-auto px-4">
+  <div class="bg-transparent text-white border border-primary-background/90 rounded-2xl shadow-xl overflow-hidden">
+
+    <div class="bg-primary text-foreground px-4 py-2.5 text-xs font-semibold">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-xs uppercase tracking-wider text-gray-100">Registro</p>
+          <h3 class="text-xl font-semibold text-white">Cliente</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-primary p-6 space-y-6">
+      <fieldset class="border-0">
+        <legend class="px-2 text-lg font-semibold text-foreground mb-4">
+          Datos de Cliente
+        </legend>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-primary">
+
+          <div>
+            <label class="text-sm text-foreground">
+              Nombres
+            </label>
+            <input
+              type="text"
+              formControlName="nombres"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            />
+          </div>
+
+          <div>
+            <label class="text-sm text-foreground">
+              Apellidos
+            </label>
+            <input
+              type="text"
+              formControlName="apellidos"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            />
+          </div>
+
+          <!-- Correo a lo ancho -->
+          <div class="md:col-span-2">
+            <label class="text-sm text-foreground">
+              Correo
+            </label>
+            <input
+              type="text"
+              formControlName="correo"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            />
+          </div>
+      <div >
+            <label class="text-sm text-foreground">
+              Telefono
+            </label>
+            <input
+              type="text"
+              formControlName="telefono"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            />
+          </div>
+          <div>
+            <label class="text-sm text-foreground">
+              DNI
+            </label>
+            <input
+              type="text"
+              formControlName="dni"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            />
+          </div>
+        
+            <label class="flex items-center gap-4 py-2">
+              <span class="text-foreground text-sm"> Estado  </span>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" formControlName="estado" class="sr-only peer" />
+                <div class="w-11 h-6 bg-gray-400 rounded-full peer peer-checked:bg-blue-600 transition-colors"></div>
+                <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
+              </label>
+            </label>
+        
+        </div>
+      </fieldset>
+
+      <div class="flex justify-center gap-4 pt-5">
+        <button
+          type="button"
+          (click)="Volver()"
+          class="bg-primary text-white px-8 py-2.5 rounded-md hover:bg-primary font-semibold border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed transition">
+          Volver
+        </button>
+        <button
+          type="submit"
+          class="bg-primary text-white px-8 py-2.5 rounded-md hover:bg-primary font-semibold border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed transition">
+          {{ modoEdicion ? 'Actualizar' : 'Registrar' }}
+        </button>
+      </div>
+    </div>
+
+  </div>
+</form>

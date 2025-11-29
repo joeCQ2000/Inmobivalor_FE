@@ -1,7 +1,7 @@
 import { usuario } from "../models/usuario.model";
 
 export interface Cliente {
-  id_cliente?: number;
+  id_cliente: number;
   nombres: string;
   apellidos: string;
   correo: string;
