@@ -30,7 +30,7 @@ export class ListarinmobiliariaComponent implements OnInit {
       this.inmobiliarias = data;  // Guardamos todos los datos de inmobiliarias
       this.totalItems = data.length;  // Total de elementos para la paginación
       this.setPagedInmobiliarias();  // Configuramos las inmobiliarias para la página actual
-      this.loadImagenes();  // Cargamos las imágenes
+     // Cargamos las imágenes
     });
   }
 
@@ -42,38 +42,13 @@ export class ListarinmobiliariaComponent implements OnInit {
   }
 
   // Cargar las imágenes de cada inmobiliaria
-  loadImagenes(): void {
-    const imagePromises = this.pagedInmobiliarias.map((inmobiliaria) => {
-      if (inmobiliaria.imagen) {
-        return this.imagenService.getImage(inmobiliaria.imagen).toPromise().then((imageBlob) => {
-          // Verificamos si el imageBlob es válido
-          if (imageBlob) {
-            const imageUrl = URL.createObjectURL(imageBlob);
-            // Guardamos la URL en el objeto de imágenes usando el id de la inmobiliaria
-            this.imagenes[inmobiliaria.id] = imageUrl;
-          } else {
-            console.warn(`No se pudo cargar la imagen para la inmobiliaria con ID: ${inmobiliaria.id}`);
-          }
-        });
-      }
-      return Promise.resolve(); // Retornamos una promesa vacía para evitar el error en el map()
-    });
 
-    // Esperar a que todas las imágenes se carguen antes de continuar
-    Promise.all(imagePromises).then(() => {
-      console.log("Todas las imágenes han sido cargadas");
-      // Forzamos la detección de cambios para que Angular actualice la vista
-      this.cdr.detectChanges();
-    }).catch((error) => {
-      console.error("Error al cargar las imágenes", error);
-    });
-  }
 
   // Cambiar de página
   onPageChange(page: number): void {
     this.currentPage = page;
     this.setPagedInmobiliarias();  // Actualizamos los datos para la nueva página
-    this.loadImagenes();  // Cargamos las imágenes para la nueva página
+     // Cargamos las imágenes para la nueva página
   }
 
   // Método para editar la inmobiliaria (puedes redirigir al formulario de edición)
