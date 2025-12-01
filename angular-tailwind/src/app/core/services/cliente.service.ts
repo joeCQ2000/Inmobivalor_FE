@@ -12,15 +12,21 @@ const base_url = environment.base;
 export class ClienteService {
   private url = `${base_url}/cliente`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   // GET /cliente/listar
   list(): Observable<Cliente[]> {
-    return this.http.get<Cliente[]>(`${this.url}/listar`);
+    return this.httpClient.get<Cliente[]>(`${this.url}/listar`);
   }
 
   // POST /cliente/registrar
   insert(cliente: Cliente): Observable<void> {
-    return this.http.post<void>(`${this.url}/registrar`, cliente);
+    return this.httpClient.post<void>(`${this.url}/registrar`, cliente);
+  }
+  Actualizar (id: number, cliente: Cliente){
+  return this.httpClient.put(`${this.url}/actualizar`,cliente);
+}
+  listid(id:number){
+  return this.httpClient.get<Cliente>(`${this.url}/${id}`)
   }
 }

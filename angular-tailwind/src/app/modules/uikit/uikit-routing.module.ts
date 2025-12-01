@@ -14,8 +14,6 @@ import { MonedaRegistrarComponent } from './pages/table/components/moneda-regist
 import { TasaInteresComponent } from './pages/table/components/tasa-interes/tasa-interes.component';
 import { TasaInteresRegistrarComponent } from './pages/table/components/tasa-interes-registrar/tasa-interes-registrar.component';
 import { RegistraeditausuarioComponent } from './pages/usuario/components/registraeditausuario/registraeditausuario.component';
-import { InmobiliariaComponent } from './pages/table/components/inmobiliaria/inmobiliaria.component';
-import { ListarinmobiliariaComponent } from './pages/table/components/listarinmobiliaria/listarinmobiliaria.component';
 
 const routes: Routes = [
   {
@@ -25,11 +23,14 @@ const routes: Routes = [
       { path: '', redirectTo: 'components', pathMatch: 'full' },
       { path: 'table', component: TableComponent },
        { path: 'usuario', component: TableUsuarioComponent },
+       { path: 'cliente', component: TableClienteComponent },
       { path: 'metodo_frances', component: MetodoFrancesComponent },
       { path: 'inmobiliaria', component: InmobiliariaComponent },
       { path: 'Listarinmobiliaria', component: ListarinmobiliariaComponent },
       { path: 'registraeditausuario', component: RegistraeditausuarioComponent },
+      { path: 'registraeditacliente', component: RegistraeditaclienteComponent },
       { path: 'registraeditausuario/:id', component: RegistraeditausuarioComponent },
+      { path: 'registraeditacliente/:id', component: RegistraeditaclienteComponent },
        { path: 'cronograma', component: CronogramaFrancesComponent },
       { path: 'indicadores', component: IndicadoresFrancesComponent },
       { path: 'credito-prestamo', component: CreditoPrestamoComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
       { path: 'moneda-registrar', component: MonedaRegistrarComponent },
       { path: 'tasa-interes', component: TasaInteresComponent },
       { path: 'tasa-interes-registrar', component: TasaInteresRegistrarComponent },
+      
       { path: '**', redirectTo: 'errors/404' },
     ],
   },
