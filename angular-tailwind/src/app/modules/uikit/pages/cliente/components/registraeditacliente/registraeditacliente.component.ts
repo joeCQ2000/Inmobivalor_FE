@@ -18,11 +18,13 @@ export class RegistraeditaclienteComponent implements OnInit {
 
 clienteForm! : FormGroup;
 HttpClient : any;
+usuarios : usuario[] = [];
 constructor(
   private fb : FormBuilder,
   private router : Router,
   private clienteservice : ClienteService,
   private route : ActivatedRoute,
+  private usuarioservice : UsuarioService
 
 ){}
 modoEdicion = false;
@@ -35,18 +37,25 @@ ngOnInit(): void {
     telefono : ['', Validators.required],
     correo : ['', Validators.required],
     dni : ['', Validators.required],
-    es_activo : [0, Validators.required],
-    usuario : [0, Validators.required],
+    es_activo : [0],
+    aplica_bono :[0],
+    usuario : ['',Validators.required],
   })
   const id = this.route.snapshot.paramMap.get('id');
     if (id && !isNaN(+id)) {
       this.modoEdicion = true;
       this.id_actual = +id;
-      this.cargarUsuario(this.id_actual);
+      this.cargarCliente(this.id_actual);
     }
-    
+    this.usuarioservice.Listar().subscribe({
+    next: (data)=>{
+      console.log('Usuarios :',data);
+      this.usuarios =data;
+
+    },
+  });
 }
-cargarUsuario(id: number) {
+cargarCliente(id: number) {
 
   this.clienteservice.listid(id).subscribe({
     next: (data) => {
@@ -60,7 +69,9 @@ cargarUsuario(id: number) {
         telefono : data.telefono,
         correo : data.correo,
         dni : data.dni,
+        usuario :data.usuario.id_usuario,
         es_activo :tobool(data.es_activo),
+        aplica_bono : tobool(data.aplica_bono)
       });
    
     },
@@ -69,7 +80,7 @@ cargarUsuario(id: number) {
 }
 
 Volver():void{
-  this.router.navigate(['components/usuario'])
+  this.router.navigate(['components/cliente'])
 }
 registrar(): void{
   this.submitted = true;
@@ -90,10 +101,21 @@ registrar(): void{
     })
     return;
   }
-  const formValue = this.clienteForm.getRawValue();
-  const cliente: Cliente ={
-    ...formValue,
-  }
+const formValue = this.clienteForm.getRawValue();
+
+const cliente: Cliente = {
+  id_cliente: this.modoEdicion && this.id_actual ? this.id_actual : 0,
+  nombres   : formValue.nombres,
+  apellidos : formValue.apellidos,
+  telefono  : formValue.telefono,
+  correo    : formValue.correo,
+  dni       : formValue.dni,
+  es_activo : formValue.es_activo,
+  aplica_bono: formValue.aplica_bono,
+  usuario: {
+    id_usuario: formValue.usuario   
+  } as usuario
+};
   if (this.modoEdicion && this.id_actual) {
     // PUT
     (cliente as any).id_cliente = this.id_actual;

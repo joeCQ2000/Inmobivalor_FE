@@ -75,11 +75,32 @@
               class="w-full p-2 bg-white border border-gray-300 rounded"
             />
           </div>
+          <div>
+              <label class="text-sm text-foreground">Usuario Registrante <span class="text-red-500">*</span></label>
+              <select formControlName="usuario"
+                      [class.border-red-500]="submitted && clienteForm.get('usuario')?.invalid"
+                      class="w-full p-2 bg-white border border-gray-300 rounded">
+                <option value="0">Seleccione un Usuario</option>
+                <option *ngFor="let usuario of usuarios" [value]="usuario.id_usuario">{{ usuario.username }}</option>
+              </select>
+              <div *ngIf="submitted && clienteForm.get('usuario')?.invalid" class="text-red-500 text-xs mt-1">
+                Este campo es obligatorio.
+              </div>
+            </div>
         
             <label class="flex items-center gap-4 py-2">
               <span class="text-foreground text-sm"> Estado  </span>
               <label class="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" formControlName="estado" class="sr-only peer" />
+                <input type="checkbox" formControlName="es_activo" class="sr-only peer" />
+                <div class="w-11 h-6 bg-gray-400 rounded-full peer peer-checked:bg-blue-600 transition-colors"></div>
+                <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
+              </label>
+
+            </label>
+            <label class="flex items-center gap-4 py-2">
+              <span class="text-foreground text-sm"> ¿Tiene bono?  </span>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" formControlName="aplica_bono" class="sr-only peer" />
                 <div class="w-11 h-6 bg-gray-400 rounded-full peer peer-checked:bg-blue-600 transition-colors"></div>
                 <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
               </label>
