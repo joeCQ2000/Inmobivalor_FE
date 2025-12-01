@@ -14,6 +14,10 @@ import { MonedaRegistrarComponent } from './pages/table/components/moneda-regist
 import { TasaInteresComponent } from './pages/table/components/tasa-interes/tasa-interes.component';
 import { TasaInteresRegistrarComponent } from './pages/table/components/tasa-interes-registrar/tasa-interes-registrar.component';
 import { RegistraeditausuarioComponent } from './pages/usuario/components/registraeditausuario/registraeditausuario.component';
+import { TableClienteComponent } from './pages/cliente/table.cliente.component';
+import { InmobiliariaComponent } from './pages/table/components/inmobiliaria/inmobiliaria.component';
+import { ListarinmobiliariaComponent } from './pages/table/components/listarinmobiliaria/listarinmobiliaria.component';
+import { RegistraeditaclienteComponent } from './pages/cliente/components/registraeditacliente/registraeditacliente.component';
 
 const routes: Routes = [
   {
