@@ -8,5 +8,5 @@ export interface EntidadFinanciera {
   telefono: string;
   correo: string;
   estado: boolean;
-  tasas?: TasaInteres[];   // ManyToMany
+  tasas?: TasaInteres[];   // ManyToMan
 }

@@ -1,0 +1,132 @@
+.entidad-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px 32px;
+  max-width: 100%;
+  color: #2b3674;
+  box-shadow: 0 12px 30px rgba(15, 35, 95, 0.08);
+  font-size: 0.9rem;
+  overflow-x: auto;
+}
+
+.entidad-container h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #15192c;
+}
+
+
+.estado {
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  color: #707eae;
+}
+
+.estado.error {
+  color: #f97373;
+}
+
+
+.tabla-entidades {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; 
+}
+
+.tabla-entidades th,
+.tabla-entidades td {
+  padding: 12px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: #2b3674;
+  border-bottom: 1px solid #f1f2ff;
+}
+
+
+.tabla-entidades th {
+  padding-top: 0;
+  padding-bottom: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #a3aed0;
+  border-bottom: 1px solid #edf0ff;
+  white-space: nowrap;
+}
+
+
+.tabla-entidades th:nth-child(1),
+.tabla-entidades td:nth-child(1) {
+  width: 10%;
+  min-width: 60px;
+}
+
+.tabla-entidades th:nth-child(2),
+.tabla-entidades td:nth-child(2) {
+  width: 35%;
+  min-width: 160px;
+}
+
+.tabla-entidades th:nth-child(3),
+.tabla-entidades td:nth-child(3) {
+  width: 35%;
+  min-width: 150px;
+}
+
+.tabla-entidades th:nth-child(4),
+.tabla-entidades td:nth-child(4) {
+  width: 20%;
+  min-width: 110px;
+}
+
+
+.col-tasa-header {
+  text-align: left;
+}
+
+.col-tasa {
+  white-space: nowrap;
+  text-align: left;
+}
+
+
+.tabla-entidades tr:nth-child(even),
+.tabla-entidades tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.tabla-entidades tr:hover {
+  background-color: #f5f7ff;
+}
+
+
+.sortable {
+  user-select: none;
+}
+
+.sort-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+
+.sort-icon {
+  font-size: 0.6rem;
+  color: #a3aed0;
+}
+
+
+.sort-icon.inactive {
+  visibility: hidden;
+}
+
+
+.estado-select {
+  height: 40px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: 1.25rem;
+  border-radius: 0.5rem;
+  min-width: 120px;
+}

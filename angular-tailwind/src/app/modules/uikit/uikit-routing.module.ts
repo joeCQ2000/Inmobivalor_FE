@@ -9,6 +9,8 @@ import { TableUsuarioComponent } from './pages/table copy/table.usuario.componen
 import { RegistraeditausuarioComponent } from './pages/table copy/components/registraeditausuario/registraeditausuario.component';
 import { CronogramaFrancesComponent } from './pages/table/components/cronograma-metodo-frances/cronograma-metodo-frances.component';
 import { IndicadoresFrancesComponent } from './pages/table/components/indicadores-metodo-frances/indicadores-metodo-frances.component';
+import { EntidadFinancieraTableComponent } from './pages/table/components/entidad-financiera-table/entidad-financiera-table.component';
+import { EntidadTasaTableComponent } from './pages/table/components/entidad-tasa-table/entidad-tasa-table.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,8 @@ const routes: Routes = [
       { path: 'indicadores', component: IndicadoresFrancesComponent },
       { path: 'credito-prestamo', component: CreditoPrestamoComponent },
       { path: 'credito-prestamo-registrar', component: CreditoPrestamoRegistrarComponent },
+      { path: 'entidad-financiera-table', component: EntidadFinancieraTableComponent },
+      { path: 'entidad-tasa-table', component: EntidadTasaTableComponent },
       { path: '**', redirectTo: 'errors/404' },
     ],
   },

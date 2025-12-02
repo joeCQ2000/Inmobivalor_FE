@@ -1,0 +1,129 @@
+/* entidad-financiera-form.component.css */
+
+.ef-form-container {
+  margin-top: 1.5rem;
+  padding: 20px 24px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(15, 35, 95, 0.06);
+}
+
+.form-title {
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #15192c;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
+}
+
+.form-row label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #707eae;
+  margin-bottom: 0.25rem;
+}
+
+.form-row input {
+  border-radius: 10px;
+  border: 1px solid #e0e5ff;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.85rem;
+  color: #2b3674;
+  outline: none;
+}
+
+.form-row input:focus {
+  border-color: #265dff;
+  box-shadow: 0 0 0 1px rgba(38, 93, 255, 0.2);
+}
+
+.form-row-inline {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #265dff;
+  color: #ffffff;
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: #f5f7ff;
+  color: #2b3674;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #e0e5ff;
+  border-radius: 34px;
+  transition: 0.2s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.switch input:checked + .slider {
+  background-color: #265dff;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(18px);
+}
+
+.input-readonly {
+  background-color: #f5f7ff;  
+  color: #9aa6d8;             
+  cursor: not-allowed;
+}

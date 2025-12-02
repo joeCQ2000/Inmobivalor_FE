@@ -1,0 +1,301 @@
+<div class="entidad-container">
+  <h2>Entidades Financieras</h2>
+
+  <div
+    class="color-primary-foreground px-6 py-8 border-foreground/70 mb-3 rounded-md"
+  >
+    <div class="flex items-center justify-between w-full">
+      <h3 class="text-sm text-foreground font-medium">
+        Búsqueda general
+      </h3>
+    </div>
+
+    <div
+      class="color-primary-foreground px-1 py-3 border-foreground/60 relative"
+    >
+      <div class="absolute left-3 top-2.5 text-gray-400"></div>
+      <input
+        #searchInput
+        name="search"
+        class="pr-2 py-2 x-10 md:w-[200px] text-sm border border-foreground rounded-md bg-foreground text-gray-200 placeholder-gray-500 focus:ring-rose-600 focus:border-rose-600"
+        placeholder="Buscar por nombre, RUC o correo"
+        type="text"
+        (input)="onSearchChange($event)"
+      />
+    </div>
+  </div>
+
+
+  <div class="color-primary-foreground px-6 py-2 border-gray-700 mb-4">
+    <div
+      class="flex items-center gap-6 flex-wrap md:flex-nowrap overflow-x-auto whitespace-nowrap"
+    >
+ 
+      <div class="flex flex-col">
+        <label class="text-xs text-foreground mb-1">Nombre</label>
+        <input
+          #nombre
+          type="text"
+          class="px-2 py-2 text-sm border border-gray-600 rounded-md bg-foreground text-gray-200 focus:ring-rose-600 focus:border-rose-600 w-full"
+          (change)="onNombreChange($event)"
+        />
+      </div>
+
+ 
+      <div class="flex flex-col">
+        <label class="text-xs text-foreground mb-1">RUC</label>
+        <input
+          #ruc
+          type="text"
+          class="px-2 py-2 text-sm border border-gray-600 rounded-md bg-foreground text-gray-200 focus:ring-rose-600 focus:border-rose-600 w-full"
+          (change)="onRucChange($event)"
+        />
+      </div>
+
+   
+      <div class="flex flex-col">
+        <label class="text-xs text-foreground mb-1">Estado</label>
+        <select
+          #selectEstado
+          class="px-2 py-2 text-sm border border-gray-600 rounded-md bg-foreground text-gray-200 focus:ring-rose-600 focus:border-rose-600 w-full estado-select"
+          (change)="onEstadoChange($event)"
+        >
+          <option value="todos">Todos</option>
+          <option value="activos">Activas</option>
+          <option value="inactivos">Inactivas</option>
+        </select>
+      </div>
+
+
+      <div class="w-full flex justify-end gap-2 mt-4">
+        <button
+          class="bg-primary text-primary-foreground flex-none rounded-md px-5 py-2.5 text-xs font-semibold"
+          (click)="onSearch(nombre, ruc, selectEstado)"
+        >
+          Buscar
+        </button>
+
+        <button
+          class="border border-primary text-primary flex-none rounded-md px-5 py-2.5 text-xs font-semibold"
+          (click)="resetFilters(searchInput, nombre, ruc, selectEstado)"
+        >
+          Limpiar
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  @if (loading() && isInitialLoad()) {
+    <div class="estado">Cargando entidades...</div>
+  }
+
+  @if (!loading() && errorMessage()) {
+    <div class="estado error">{{ errorMessage() }}</div>
+  }
+
+  @if (!loading() && !errorMessage() && totalRegistros() === 0) {
+    <div class="estado">No hay entidades registradas.</div>
+  }
+
+  @if (!loading() && !errorMessage() && totalRegistros() > 0) {
+    <table class="tabla-entidades">
+      <thead>
+        <tr>
+          <th class="sortable" (click)="ordenarPor('id_entidad')">
+            ID
+            @if (sortField() === 'id_entidad') {
+              <span class="sort-icon">
+                {{ sortDirection() === 'asc' ? '▲' : '▼' }}
+              </span>
+            }
+          </th>
+
+          <th class="sortable" (click)="ordenarPor('nombre')">
+            Nombre
+            @if (sortField() === 'nombre') {
+              <span class="sort-icon">
+                {{ sortDirection() === 'asc' ? '▲' : '▼' }}
+              </span>
+            }
+          </th>
+
+          <th class="sortable" (click)="ordenarPor('ruc')">
+            RUC
+            @if (sortField() === 'ruc') {
+              <span class="sort-icon">
+                {{ sortDirection() === 'asc' ? '▲' : '▼' }}
+              </span>
+            }
+          </th>
+
+          <th class="sortable" (click)="ordenarPor('direccion')">
+            Dirección
+            @if (sortField() === 'direccion') {
+              <span class="sort-icon">
+                {{ sortDirection() === 'asc' ? '▲' : '▼' }}
+              </span>
+            }
+          </th>
+
+          <th class="sortable" (click)="ordenarPor('telefono')">
+            Teléfono
+            @if (sortField() === 'telefono') {
+              <span class="sort-icon">
+                {{ sortDirection() === 'asc' ? '▲' : '▼' }}
+              </span>
+            }
+          </th>
+
+          <th class="sortable" (click)="ordenarPor('correo')">
+            Correo
+            @if (sortField() === 'correo') {
+              <span class="sort-icon">
+                {{ sortDirection() === 'asc' ? '▲' : '▼' }}
+              </span>
+            }
+          </th>
+
+          <th class="sortable" (click)="ordenarPor('estado')">
+            Estado
+            @if (sortField() === 'estado') {
+              <span class="sort-icon">
+                {{ sortDirection() === 'asc' ? '▲' : '▼' }}
+              </span>
+            }
+          </th>
+
+          <th class="col-opciones">Opciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (e of paginadoEntidades(); track e.id_entidad) {
+          <tr>
+            <td>{{ e.id_entidad }}</td>
+            <td [title]="e.nombre">{{ e.nombre }}</td>
+            <td>{{ e.ruc }}</td>
+            <td [title]="e.direccion">{{ e.direccion }}</td>
+            <td class="col-telefono">{{ e.telefono }}</td>
+            <td class="col-correo" [title]="e.correo">
+              {{ e.correo }}
+            </td>
+            <td>
+              <span
+                class="badge"
+                [class.activo]="e.estado"
+                [class.inactivo]="!e.estado"
+              >
+                {{ e.estado ? 'Activa' : 'Inactiva' }}
+              </span>
+            </td>
+            <td class="col-opciones">
+              <button
+                type="button"
+                class="icon-btn"
+                (click)="onEditEntidad(e)"
+                aria-label="Editar entidad"
+              >
+                <svg viewBox="0 0 24 24" class="icon-pencil" aria-hidden="true">
+                  <path
+                    d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z"
+                  />
+                </svg>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+
+    <div
+      class="text-muted-foreground flex flex-wrap items-center justify-between gap-2 py-3 px-5 text-xs"
+    >
+      <div class="order-2 flex items-center gap-2 md:order-1">
+        Mostrar
+        <select
+          class="w-16 p-2"
+          [value]="tamanioPagina()"
+          (change)="onTamanioChange($event)"
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="50">50</option>
+        </select>
+        por página
+      </div>
+
+      <div class="order-1 flex items-center gap-4 md:order-2">
+        <span>{{ inicio() }}–{{ fin() }} de {{ totalRegistros() }}</span>
+
+        <div class="inline-flex items-center gap-1">
+          <button
+            class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-sm disabled:opacity-50"
+            (click)="irPaginaAnterior()"
+            [disabled]="paginaActual() <= 1"
+            type="button"
+          >
+            <svg-icon
+              src="./assets/icons/heroicons/outline/arrow-long-left.svg"
+              [svgClass]="'h-4 w-4'"
+            ></svg-icon>
+          </button>
+
+          @for (num of paginasVisibles(); track num) {
+            <button
+              type="button"
+              (click)="irPagina(num)"
+              [ngClass]="{
+                'bg-muted-foreground/10 text-primary': num === paginaActual(),
+                'hover:bg-muted-foreground/10': num !== paginaActual()
+              }"
+              class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-sm transition"
+            >
+              {{ num }}
+            </button>
+          }
+
+          @if (showEllipsis()) {
+            <span>...</span>
+          }
+
+          <button
+            class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-sm disabled:opacity-50"
+            (click)="irPaginaSiguiente()"
+            [disabled]="paginaActual() >= totalPaginas()"
+            type="button"
+          >
+            <svg-icon
+              src="./assets/icons/heroicons/outline/arrow-long-right.svg"
+              [svgClass]="'h-4 w-4'"
+            ></svg-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (showForm() && selectedEntidad()) {
+    <div class="modal-backdrop">
+      <div class="modal-content">
+        <button
+          type="button"
+          class="modal-close"
+          (click)="onFormCancelled()"
+          aria-label="Cerrar"
+        >
+          ×
+        </button>
+
+        <app-entidad-financiera-form
+          [entidad]="selectedEntidad()!"
+          (saved)="onFormSaved($event)"
+          (cancelled)="onFormCancelled()"
+        ></app-entidad-financiera-form>
+      </div>
+    </div>
+  }
+</div>

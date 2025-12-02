@@ -50,6 +50,16 @@ export class Menu {
           route: '/components/credito-prestamo',
            
         },
+                {
+          icon: 'assets/icons/heroicons/outline/cube.svg',
+          label: 'Entidades Financieras',
+          route: '/components/entidad-financiera-table',
+        },
+                {
+          icon: 'assets/icons/heroicons/outline/cube.svg',
+          label: 'Entidad Tasa',
+          route: '/components/entidad-tasa-table', //PARA PROBAR
+        }
       ],
     },
     {
