@@ -60,7 +60,7 @@ submitted = false;
         null,
         [Validators.required, Validators.min(0), Validators.max(1)],
       ],
-      numero_anhos: [null, [Validators.required, Validators.min(1)]],
+      numero_anhos: [0],
       frecuencia_pago: [null, [Validators.required, Validators.min(1)]],
       numero_dias_por_anho: [360, [Validators.required, Validators.min(1)]],
       tipo_gracia: ['SIN', [Validators.required]],
@@ -131,7 +131,7 @@ onEntidadChange(entidadId: number): void {
     const datos: datoscronogramaDTO = {
       precio_venta_activo: v.precio_venta_activo,
       porcentaje_cuota_inicial: v.porcentaje_cuota_inicial,
-      numero_anhos: v.numero_anhos,
+      numero_anhos: 0,
       frecuencia_pago: v.frecuencia_pago,
       numero_dias_por_anho: v.numero_dias_por_anho,
       tea: v.tea,

@@ -4,7 +4,7 @@ import { EntidadFinanciera } from "./entidad-financiera.model";
 export interface datoscronogramaDTO{
   precio_venta_activo: number;
   porcentaje_cuota_inicial: number;
-  numero_anhos: number;
+  numero_anhos: 0;
   frecuencia_pago: number;
   numero_dias_por_anho: number;
 

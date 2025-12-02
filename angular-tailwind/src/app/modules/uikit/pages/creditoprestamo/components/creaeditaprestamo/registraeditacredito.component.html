@@ -127,53 +127,6 @@
             </div>
           </div>
 
-          <!-- Tipo de gracia -->
-          <div>
-            <label class="text-sm text-foreground">
-              Tipo de gracia <span class="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              formControlName="tipo_gracia"
-              [class.border-red-500]="submitted && prestamoform.get('tipo_gracia')?.invalid"
-              class="w-full p-2 bg-white border border-gray-300 rounded"
-            />
-            <div *ngIf="submitted && prestamoform.get('tipo_gracia')?.invalid" class="text-red-500 text-xs mt-1">
-              Ingrese el tipo de gracia.
-            </div>
-          </div>
-
-          <!-- Monto bono -->
-          <div>
-            <label class="text-sm text-foreground">
-              Monto bono <span class="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              formControlName="monto_bono"
-              [class.border-red-500]="submitted && prestamoform.get('monto_bono')?.invalid"
-              class="w-full p-2 bg-white border border-gray-300 rounded"
-            />
-            <div *ngIf="submitted && prestamoform.get('monto_bono')?.invalid" class="text-red-500 text-xs mt-1">
-              Ingrese un monto válido.
-            </div>
-          </div>
-
-          <!-- Meses gracia -->
-          <div>
-            <label class="text-sm text-foreground">
-              Meses de gracia <span class="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              formControlName="meses_gracia"
-              [class.border-red-500]="submitted && prestamoform.get('meses_gracia')?.invalid"
-              class="w-full p-2 bg-white border border-gray-300 rounded"
-            />
-            <div *ngIf="submitted && prestamoform.get('meses_gracia')?.invalid" class="text-red-500 text-xs mt-1">
-              Ingrese los meses de gracia.
-            </div>
-          </div>
 
           <!-- Fecha inicio -->
           <div>

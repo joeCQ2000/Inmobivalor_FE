@@ -53,7 +53,7 @@ export class MetodoFrancesComponent implements OnInit {
         null,
         [Validators.required, Validators.min(0), Validators.max(1)],
       ],
-      numero_anhos: [null, [Validators.required, Validators.min(1)]],
+      numero_anhos: [0],
       frecuencia_pago: [null, [Validators.required, Validators.min(1)]],
       numero_dias_por_anho: [360, [Validators.required, Validators.min(1)]],
       tea: [null, [Validators.required, Validators.min(0)]],
@@ -94,9 +94,9 @@ export class MetodoFrancesComponent implements OnInit {
     }
 
     const datos: datoscronogramaDTO = {
+      numero_anhos :0,
       precio_venta_activo: v.precio_venta_activo,
       porcentaje_cuota_inicial: v.porcentaje_cuota_inicial,
-      numero_anhos: v.numero_anhos,
       frecuencia_pago: v.frecuencia_pago,
       numero_dias_por_anho: v.numero_dias_por_anho,
       tea: v.tea,
@@ -123,6 +123,11 @@ export class MetodoFrancesComponent implements OnInit {
       total_seguro_riesgo: 0,
       total_comisiones_periodicas: 0,
       total_portes_y_gastos_adm: 0,
+      cuotaPrepago : v.cuotaPrepago,
+      prepago : v.prepago,
+      idCredito :v.idCredito,
+      entidadId : v.entidadId
+
     };
 
     this.cargando = true;
