@@ -6,30 +6,20 @@ export class Menu {
       group: 'Base',
       separator: false,
       items: [
-        {
-          icon: 'assets/icons/heroicons/outline/cube.svg',
-          label: 'Metodo-Frances',
-          route: '/components/metodo_frances',
-        },
+        
           {
           icon: 'assets/icons/heroicons/outline/cube.svg',
-          label: 'Inmobiliaria',
+          label: 'Inmobiliarias',
           route: '/components/Listarinmobiliaria',
           protected: true, 
            
         },
-        //Listarinmobiliaria
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Usuario',
           route: '/components/usuario',
         },
-        {
-          icon: 'assets/icons/heroicons/outline/cube.svg',
-          label: 'Credito Prestamo',
-          route: '/components/credito-prestamo',
-
-        },
+      
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Clientes',
@@ -38,7 +28,7 @@ export class Menu {
         },
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
-          label: 'Credito Prestamo',
+          label: 'Simulador Financiero',
           route: '/components/registraeditacreditoprestamo',
 
         },
