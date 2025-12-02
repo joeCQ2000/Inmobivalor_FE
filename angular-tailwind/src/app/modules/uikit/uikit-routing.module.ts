@@ -32,11 +32,7 @@ const routes: Routes = [
       { path: 'inmobiliaria', component: InmobiliariaComponent },
       { path: 'Listarinmobiliaria', component: ListarinmobiliariaComponent },
       { path: 'registraeditausuario', component: RegistraeditausuarioComponent },
-<<<<<<< HEAD
       { path: 'editarinmobiliaria/:id', component: InmobiliariaComponent },
-=======
-      { path: 'registraeditacliente', component: RegistraeditaclienteComponent },
->>>>>>> origin/master
       { path: 'registraeditausuario/:id', component: RegistraeditausuarioComponent },
       { path: 'registraeditacliente/:id', component: RegistraeditaclienteComponent },
        { path: 'cronograma', component: CronogramaFrancesComponent },
