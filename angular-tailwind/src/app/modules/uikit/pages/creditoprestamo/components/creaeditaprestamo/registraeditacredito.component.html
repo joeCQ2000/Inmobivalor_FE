@@ -1,12 +1,13 @@
-<h2 class="text-center text-2xl font-bold mb-6 text-foreground dark:text-white">
-  Registro de Crédito
-</h2>
+<div class="sticky top-0 z-50 bg-background pb-4">
+  <h2 class="text-center text-2xl font-bold mb-6 text-foreground dark:text-white">
+    Registro de Crédito
+  </h2>
 
-<form [formGroup]="prestamoform" (ngSubmit)="registrar()" class="w-full mx-auto px-4">
-  <div class="bg-transparent text-white border border-primary-background/90 rounded-2xl shadow-xl overflow-hidden">
+  <form [formGroup]="prestamoform" (ngSubmit)="registrar()" class="w-full mx-auto px-4">
+    <div class="bg-transparent text-white border border-primary-background/90 rounded-2xl shadow-xl overflow-hidden">
 
-    <!-- Encabezado -->
-    <div class="bg-primary text-foreground px-4 py-2.5 text-xs font-semibold">
+      <!-- Encabezado -->
+      <div class="bg-primary text-foreground px-4 py-2.5 text-xs font-semibold">
       <div class="flex items-center justify-between">
         <div>
           <p class="text-xs uppercase tracking-wider text-gray-100">Registro</p>
@@ -203,5 +204,6 @@
       </div>
     </div>
 
-  </div>
-</form>
+    </div>
+  </form>
+</div>
