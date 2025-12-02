@@ -1,100 +1,108 @@
-<!-- login form -->
-<form class="my-10 space-y-6" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div class="text-center">
-    <h2 class="text-foreground mb-1 text-3xl font-semibold">Hello Again <span class="text-primary">!</span></h2>
-    <p class="text-muted-foreground text-sm">Enter your credential to access your account.</p>
+<div class="bg-slate-900/70 rounded-3xl shadow-2xl px-10 py-8 text-white backdrop-blur-sm">
+  <!-- Logo circular arriba -->
+  <div class="flex justify-center mb-4">
+    <div class="h-28 w-28 rounded-full bg-white flex items-center justify-center shadow-xl">
+      <img
+        src="assets/images/Inmobivalor.png"
+        alt="Inmobivalor"
+        class="h-20 w-20 object-contain"
+      />
+    </div>
   </div>
 
-  <div routerLink="/dashboard">
-    <app-button full impact="bold" tone="light" shape="rounded" size="medium">
-      <svg-icon src="assets/icons/google-logo.svg" [svgClass]="'h-6 w-6 mr-2'"> </svg-icon>
-      Log in with Google
-    </app-button>
+  <!-- Título -->
+  <h2 class="text-2xl font-semibold text-center mb-2">Iniciar sesión</h2>
+
+  <!-- Línea decorativa con punto en medio (como en tu diseño) -->
+  <div class="flex items-center justify-center gap-2 mb-6 text-xs">
+    <span class="flex-1 h-[1px] bg-slate-300"></span>
+    <span class="h-1 w-1 rounded-full bg-slate-300"></span>
+    <span class="flex-1 h-[1px] bg-slate-300"></span>
   </div>
 
-  <div
-    class="before:border-muted after:border-muted my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t after:mt-0.5 after:flex-1 after:border-t">
-    <p class="text-muted-foreground mx-4 mb-0 text-center text-sm">or</p>
-  </div>
-
-  <div class="space-y-3 text-left">
-    <div class="form__group">
-      <div class="relative">
-        <input
-          type="text"
-          id="username"
-          [ngClass]="{ 'is__invalid-input': submitted && f['username'].errors }"
-          class="peer block"
-          placeholder=" "
-          formControlName="username" />
-        <label
-          for="username"
-          [ngClass]="{ 'peer-focus:text-destructive!': submitted && f['username'].errors }"
-          class="bg-background text-muted-foreground peer-focus:text-primary absolute top-2 z-10 origin-[0] -translate-y-4 scale-95 transform px-2 text-sm duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 ltr:left-1 rtl:right-1">
-          Email address
-        </label>
-      </div>
-      <div *ngIf="submitted && f['username'].errors" class="is__invalid-error">
-        <div *ngIf="f['username'].errors['required']">Required field</div>
-        <div *ngIf="f['username'].errors['username']">Username must be an email address valid</div>
+  <!-- FORMULARIO -->
+  <form class="space-y-4" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- Usuario -->
+    <div class="form-group">
+      <label for="username" class="block mb-1 text-sm">Usuario</label>
+      <input
+        type="text"
+        id="username"
+        [ngClass]="{ 'is__invalid-input': submitted && f['username'].errors }"
+        formControlName="username"
+        placeholder="Ingresa tu usuario"
+        class="w-full rounded-md px-3 py-2 bg-black/60 border border-slate-300 text-white text-sm outline-none"
+      />
+      <div *ngIf="submitted && f['username'].errors" class="is__invalid-error text-xs mt-1 text-red-300">
+        <div *ngIf="f['username'].errors['required']">Campo obligatorio</div>
       </div>
     </div>
 
-    <div class="form__group">
-      <div class="relative">
+    <!-- Contraseña -->
+    <div class="form-group">
+      <label for="password" class="block mb-1 text-sm">Contraseña</label>
+      <div class="flex items-center gap-2">
         <input
           [type]="passwordTextType ? 'text' : 'password'"
           id="password"
           [ngClass]="{ 'is__invalid-input': submitted && f['password'].errors }"
-          class="peer block"
-          placeholder=" "
-          formControlName="password" />
-        <label
-          for="password"
-          [ngClass]="{ 'peer-focus:text-destructive!': submitted && f['password'].errors }"
-          class="bg-background text-muted-foreground peer-focus:text-primary absolute top-2 z-10 origin-[0] -translate-y-4 scale-95 transform px-2 text-sm duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 ltr:left-1 rtl:right-1">
-          Password
-        </label>
-        <span
-          class="text-muted-foreground absolute top-2 cursor-pointer ltr:right-3 rtl:left-3"
-          (click)="togglePasswordTextType()">
+          formControlName="password"
+          placeholder="Ingresa tu contraseña"
+          class="w-full rounded-md px-3 py-2 bg-black/60 border border-slate-300 text-white text-sm outline-none"
+        />
+        <span class="cursor-pointer" (click)="togglePasswordTextType()">
           <svg-icon
             [src]="
               !passwordTextType
                 ? 'assets/icons/heroicons/outline/eye-off.svg'
                 : 'assets/icons/heroicons/outline/eye.svg'
             "
-            [svgClass]="'h-5 w-5'">
-          </svg-icon>
+            [svgClass]="'h-5 w-5'"
+          ></svg-icon>
         </span>
       </div>
-      <div *ngIf="submitted && f['password'].errors" class="is__invalid-error">
-        <div *ngIf="f['password'].errors['required']">Required field</div>
+      <div *ngIf="submitted && f['password'].errors" class="is__invalid-error text-xs mt-1 text-red-300">
+        <div *ngIf="f['password'].errors['required']">Campo obligatorio</div>
       </div>
     </div>
-  </div>
 
-  <div class="mb-2 flex items-center justify-between space-x-3">
-    <div class="flex items-center">
-      <input id="remember-me" name="remember-me" type="checkbox" />
-      <label for="remember-me" class="text-muted-foreground ml-2 block text-sm"> Remember me </label>
+    <!-- enlaces bajo inputs -->
+    <div class="flex flex-wrap justify-between items-center text-[12px] mt-2 gap-y-1">
+      <!-- Izquierda: ¿No tienes cuenta? + Registrate -->
+      <div class="flex flex-wrap gap-x-1">
+        <span>¿No tienes cuenta?</span>
+        <a
+          routerLink="/auth/sign-up"
+          class="text-blue-400 hover:underline"
+        >
+          Registrate
+        </a>
+      </div>
+
+      <!-- Derecha: ¿Ha olvidado su contraseña? -->
+      <a
+        routerLink="/auth/forgot-password"
+        class="text-blue-400 hover:underline text-right"
+      >
+        ¿Ha olvidado su contraseña?
+      </a>
     </div>
 
-    <app-button routerLink="/auth/forgot-password" impact="none" tone="primary" shape="rounded" size="small">
-      Forgot your password?
-    </app-button>
-  </div>
+    <!-- Botón principal -->
+    <button
+      type="submit"
+      class="w-full mt-4 py-2 rounded-md bg-blue-700 hover:bg-blue-800 text-white font-semibold text-sm"
+    >
+      Iniciar Sesión
+    </button>
 
-  <!-- Submit Button -->
-  <div>
-    <app-button full impact="bold" tone="primary" shape="rounded" size="medium">Sign in</app-button>
-  </div>
+    <!-- Footer pequeño -->
+    <div class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[11px] mt-4">
+      <a href="#" class="hover:underline">Términos y condiciones</a>
+      <a href="#" class="hover:underline">Sobre Nosotros</a>
+      <a href="#" class="hover:underline">Contáctanos</a>
+    </div>
 
-  <!-- Sign-up -->
-  <div class="text-muted-foreground flex items-center text-sm">
-    Not a Member yet?
-    <app-button routerLink="/auth/sign-up" impact="none" tone="primary" shape="rounded" size="small">
-      Sign up
-    </app-button>
-  </div>
-</form>
+    <p class="text-center text-[11px] mt-3">Copyright © Inmobivalor</p>
+  </form>
+</div>

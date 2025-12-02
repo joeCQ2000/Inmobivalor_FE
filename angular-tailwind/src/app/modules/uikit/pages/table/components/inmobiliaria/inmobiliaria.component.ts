@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormsModule, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ImagineService } from 'src/app/modules/layout/services/imagine.service';
 import { InmobiliariaService } from 'src/app/modules/layout/services/inmobiliaria.service';
 
@@ -18,10 +19,14 @@ export class InmobiliariaComponent implements OnInit {
   cargando = false;
   error: string | null = null;
 
+  modoEdicion = false;
+  idInmobiliaria: number | null = null;
   constructor(
     private fb: FormBuilder,
     private inmobiliariaService: InmobiliariaService,
     private imagenService: ImagineService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -33,8 +38,39 @@ export class InmobiliariaComponent implements OnInit {
       situacion_inmobiliaria: ['', Validators.required],
       estado: [true, Validators.required],
     });
+
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if(idParam){
+      this.modoEdicion = true;
+      this.idInmobiliaria = Number(idParam);
+      this.cargarInmobiliaria(this.idInmobiliaria)
+    }
   }
 
+  cargarInmobiliaria(id: number): void {
+    this.inmobiliariaService.obtenerInmobiliariaPorId(id).subscribe(
+      (data) => {
+        // Ajusta si tus nombres cambian en el DTO
+        this.inmobiliariaForm.patchValue({
+          ubicacion: data.ubicacion,
+          area: data.area,
+          precio: data.precio,
+          descripcion: data.descripcion,
+          situacion_inmobiliaria: data.situacion_inmobiliaria,
+          estado: data.estado, // debe venir como boolean
+        });
+
+        // Si el DTO trae la imagen (id)
+        if (data.imagen) {
+          this.imageId = data.imagen;
+        }
+      },
+      (error) => {
+        console.error('Error al cargar la inmobiliaria', error);
+        this.error = 'No se pudo cargar la propiedad.';
+      }
+    );
+  }
   onImageSelected(event: any): void {
     const files = event.target.files;
     if (files.length > 0) {
@@ -72,6 +108,56 @@ export class InmobiliariaComponent implements OnInit {
     }
   }
 
+  guardarInmobiliaria(): void {
+    if (!this.imageId) {
+      this.error = 'Debe cargar una imagen primero.';
+      return;
+    }
+
+    if (this.inmobiliariaForm.invalid) {
+      this.error = 'Revise los campos del formulario.';
+      return;
+    }
+
+    const payload: any = {
+      ...this.inmobiliariaForm.value,
+      imagen: this.imageId,
+    };
+
+    // Si estamos editando, enviamos también el id de la inmobiliaria
+    if (this.modoEdicion && this.idInmobiliaria != null) {
+      // ajusta el nombre del campo según tu DTO (idInmobiliaria / id_inmobiliaria / id)
+      payload.idInmobiliaria = this.idInmobiliaria;
+    }
+
+    this.cargando = true;
+    this.error = null;
+
+    const peticion = this.modoEdicion
+      ? this.inmobiliariaService.actualizarInmobiliaria(payload)
+      : this.inmobiliariaService.registrarInmobiliaria(payload);
+
+    peticion.subscribe(
+      (response) => {
+        this.cargando = false;
+        console.log(
+          this.modoEdicion
+            ? 'Propiedad actualizada con éxito'
+            : 'Propiedad registrada con éxito',
+          response
+        );
+        // Opcional: redirigir a la lista
+        // this.router.navigate(['/ruta-de-lista-inmobiliarias']);
+      },
+      (error) => {
+        this.cargando = false;
+        console.error(error);
+        this.error = this.modoEdicion
+          ? 'Error al actualizar la propiedad.'
+          : 'Error al registrar la propiedad.';
+      }
+    );
+  }
   limpiar(): void {
     this.inmobiliariaForm.reset();
     this.imageId = null;
