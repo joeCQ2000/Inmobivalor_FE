@@ -94,6 +94,7 @@ export class CreditoPrestamoRegistrarComponent implements OnInit {
     const v = this.form.value;
 
     const credito: CreditoPrestamo = {
+      id_credito : v.id_credito,
       plazo_meses: v.plazo_meses,
       tipo_gracia: v.tipo_gracia,
       monto_bono: v.monto_bono,

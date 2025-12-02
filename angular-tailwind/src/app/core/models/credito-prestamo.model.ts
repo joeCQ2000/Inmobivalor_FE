@@ -4,7 +4,7 @@ import { Inmobiliaria } from './inmobiliaria.model';
 import { Moneda } from './moneda.model';
 
 export interface CreditoPrestamo {
-  id_credito?: number;
+  id_credito: number;
   plazo_meses: string;
   tipo_gracia: string;
   monto_bono: number;

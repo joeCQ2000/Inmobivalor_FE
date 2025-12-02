@@ -74,6 +74,12 @@ export class Menu {
 
         },
         {
+          icon: 'assets/icons/heroicons/outline/cube.svg',
+          label: 'Credito Prestamo',
+          route: '/components/registraeditacreditoprestamo',
+
+        },
+        {
           icon: 'assets/icons/heroicons/outline/currency-dollar.svg',
           label: 'Moneda',
           route: '/components/moneda',

@@ -1,0 +1,254 @@
+<h2 class="text-center text-2xl font-bold mb-6 text-foreground dark:text-white">
+  Registro de Crédito
+</h2>
+
+<form [formGroup]="prestamoform" (ngSubmit)="registrar()" class="w-full mx-auto px-4">
+  <div class="bg-transparent text-white border border-primary-background/90 rounded-2xl shadow-xl overflow-hidden">
+
+    <!-- Encabezado -->
+    <div class="bg-primary text-foreground px-4 py-2.5 text-xs font-semibold">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-xs uppercase tracking-wider text-gray-100">Registro</p>
+          <h3 class="text-xl font-semibold text-white">Crédito</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-primary p-6 space-y-6">
+      <!-- Mensajes de éxito / error -->
+      <div *ngIf="successMessage" class="mb-3 px-4 py-2 rounded-md bg-emerald-600/80 text-white text-sm">
+        {{ successMessage }}
+      </div>
+
+      <div *ngIf="errorMessage" class="mb-3 px-4 py-2 rounded-md bg-red-600/80 text-white text-sm">
+        {{ errorMessage }}
+      </div>
+
+      <fieldset class="border-0">
+        <legend class="px-2 text-lg font-semibold text-foreground mb-4">
+          Datos del Crédito
+        </legend>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-primary">
+          <!-- Entidad financiera -->
+          <div>
+            <label class="text-sm text-foreground">
+              Entidad financiera <span class="text-red-500">*</span>
+            </label>
+            <select
+              formControlName="id_entidad"
+              [class.border-red-500]="submitted && prestamoform.get('id_entidad')?.invalid"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            >
+              <option [ngValue]="null">Seleccione...</option>
+              <option *ngFor="let e of entidades" [ngValue]="e.id_entidad">
+                {{ e.nombre }}
+              </option>
+            </select>
+            <div *ngIf="submitted && prestamoform.get('id_entidad')?.invalid" class="text-red-500 text-xs mt-1">
+              Seleccione una entidad.
+            </div>
+          </div>
+
+          <!-- Cliente -->
+          <div>
+            <label class="text-sm text-foreground">
+              Cliente <span class="text-red-500">*</span>
+            </label>
+            <select
+              formControlName="id_cliente"
+              [class.border-red-500]="submitted && prestamoform.get('id_cliente')?.invalid"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            >
+              <option [ngValue]="null">Seleccione...</option>
+              <option *ngFor="let c of clientes" [ngValue]="c.id_cliente">
+                {{ c.nombres }} {{ c.apellidos }}
+              </option>
+            </select>
+            <div *ngIf="submitted && prestamoform.get('id_cliente')?.invalid" class="text-red-500 text-xs mt-1">
+              Seleccione un cliente.
+            </div>
+          </div>
+
+          <!-- Inmobiliaria -->
+          <div>
+            <label class="text-sm text-foreground">
+              Inmobiliaria <span class="text-red-500">*</span>
+            </label>
+            <select
+              formControlName="id_inmobiliaria"
+              [class.border-red-500]="submitted && prestamoform.get('id_inmobiliaria')?.invalid"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            >
+              <option [ngValue]="null">Seleccione...</option>
+              <option *ngFor="let i of inmobiliarias" [ngValue]="i.id_inmobiliaria">
+                {{ i.ubicacion }} - {{ i.area }}
+              </option>
+            </select>
+            <div *ngIf="submitted && prestamoform.get('id_inmobiliaria')?.invalid" class="text-red-500 text-xs mt-1">
+              Seleccione una inmobiliaria.
+            </div>
+          </div>
+
+          <!-- Moneda -->
+          <div>
+            <label class="text-sm text-foreground">
+              Moneda <span class="text-red-500">*</span>
+            </label>
+            <select
+              formControlName="id_moneda"
+              [class.border-red-500]="submitted && prestamoform.get('id_moneda')?.invalid"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            >
+              <option [ngValue]="null">Seleccione...</option>
+              <option *ngFor="let m of monedas" [ngValue]="m.id_moneda">
+                {{ m.tipo_moneda }}
+              </option>
+            </select>
+            <div *ngIf="submitted && prestamoform.get('id_moneda')?.invalid" class="text-red-500 text-xs mt-1">
+              Seleccione una moneda.
+            </div>
+          </div>
+
+          <!-- Plazo (meses) -->
+          <div>
+            <label class="text-sm text-foreground">
+              Plazo (meses) <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              formControlName="plazo_meses"
+              [class.border-red-500]="submitted && prestamoform.get('plazo_meses')?.invalid"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            />
+            <div *ngIf="submitted && prestamoform.get('plazo_meses')?.invalid" class="text-red-500 text-xs mt-1">
+              Ingrese el plazo en meses.
+            </div>
+          </div>
+
+          <!-- Tipo de gracia -->
+          <div>
+            <label class="text-sm text-foreground">
+              Tipo de gracia <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              formControlName="tipo_gracia"
+              [class.border-red-500]="submitted && prestamoform.get('tipo_gracia')?.invalid"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            />
+            <div *ngIf="submitted && prestamoform.get('tipo_gracia')?.invalid" class="text-red-500 text-xs mt-1">
+              Ingrese el tipo de gracia.
+            </div>
+          </div>
+
+          <!-- Monto bono -->
+          <div>
+            <label class="text-sm text-foreground">
+              Monto bono <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="number"
+              formControlName="monto_bono"
+              [class.border-red-500]="submitted && prestamoform.get('monto_bono')?.invalid"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            />
+            <div *ngIf="submitted && prestamoform.get('monto_bono')?.invalid" class="text-red-500 text-xs mt-1">
+              Ingrese un monto válido.
+            </div>
+          </div>
+
+          <!-- Meses gracia -->
+          <div>
+            <label class="text-sm text-foreground">
+              Meses de gracia <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="number"
+              formControlName="meses_gracia"
+              [class.border-red-500]="submitted && prestamoform.get('meses_gracia')?.invalid"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            />
+            <div *ngIf="submitted && prestamoform.get('meses_gracia')?.invalid" class="text-red-500 text-xs mt-1">
+              Ingrese los meses de gracia.
+            </div>
+          </div>
+
+          <!-- Fecha inicio -->
+          <div>
+            <label class="text-sm text-foreground">
+              Fecha inicio <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="date"
+              formControlName="fecha_inicio"
+              [class.border-red-500]="submitted && prestamoform.get('fecha_inicio')?.invalid"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            />
+            <div *ngIf="submitted && prestamoform.get('fecha_inicio')?.invalid" class="text-red-500 text-xs mt-1">
+              Seleccione una fecha de inicio.
+            </div>
+          </div>
+
+          <!-- Fecha fin -->
+          <div>
+            <label class="text-sm text-foreground">
+              Fecha fin <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="date"
+              formControlName="fecha_fin"pattern=""
+              [class.border-red-500]="submitted && prestamoform.get('fecha_fin')?.invalid"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            />
+            <div *ngIf="submitted && prestamoform.get('fecha_fin')?.invalid" class="text-red-500 text-xs mt-1">
+              Seleccione una fecha de fin.
+            </div>
+          </div>
+
+          <!-- Capitalización -->
+          <div>
+            <label class="text-sm text-foreground">
+              Capitalización <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              formControlName="capitalizacion"
+              [class.border-red-500]="submitted && prestamoform.get('capitalizacion')?.invalid"
+              class="w-full p-2 bg-white border border-gray-300 rounded"
+            />
+            <div *ngIf="submitted && prestamoform.get('capitalizacion')?.invalid" class="text-red-500 text-xs mt-1">
+              Ingrese la capitalización.
+            </div>
+          </div>
+
+          <!-- Estado (switch como en clientes) -->
+          <div class="md:col-span-2">
+            <label class="flex items-center gap-4 py-2">
+              <span class="text-foreground text-sm">Estado</span>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" formControlName="estado" class="sr-only peer" />
+                <div class="w-11 h-6 bg-gray-400 rounded-full peer peer-checked:bg-blue-600 transition-colors"></div>
+                <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
+              </label>
+            </label>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Botones -->
+      <div class="flex justify-center gap-4 pt-5">
+        
+        <button
+          type="submit"
+          [disabled]="submitted || prestamoform.invalid"
+          class="bg-primary text-white px-8 py-2.5 rounded-md hover:bg-primary font-semibold border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed transition">
+          Registrar crédito
+        </button>
+         
+      </div>
+    </div>
+
+  </div>
+</form>

@@ -18,6 +18,8 @@ import { TableClienteComponent } from './pages/cliente/table.cliente.component';
 import { InmobiliariaComponent } from './pages/table/components/inmobiliaria/inmobiliaria.component';
 import { ListarinmobiliariaComponent } from './pages/table/components/listarinmobiliaria/listarinmobiliaria.component';
 import { RegistraeditaclienteComponent } from './pages/cliente/components/registraeditacliente/registraeditacliente.component';
+import { TablePrestamoComponent } from './pages/creditoprestamo/table.prestamo.component';
+import { RegistraeditaprestamoComponent } from './pages/creditoprestamo/components/creaeditaprestamo/registraeditacredito.component';
 
 const routes: Routes = [
   {
@@ -28,10 +30,12 @@ const routes: Routes = [
       { path: 'table', component: TableComponent },
        { path: 'usuario', component: TableUsuarioComponent },
        { path: 'cliente', component: TableClienteComponent },
+       { path: 'creditoprestamo', component: TablePrestamoComponent },
       { path: 'metodo_frances', component: MetodoFrancesComponent },
       { path: 'inmobiliaria', component: InmobiliariaComponent },
       { path: 'Listarinmobiliaria', component: ListarinmobiliariaComponent },
       { path: 'registraeditausuario', component: RegistraeditausuarioComponent },
+       { path: 'registraeditacreditoprestamo', component: RegistraeditaprestamoComponent },
       { path: 'registraeditacliente', component: RegistraeditaclienteComponent },
       { path: 'registraeditausuario/:id', component: RegistraeditausuarioComponent },
       { path: 'registraeditacliente/:id', component: RegistraeditaclienteComponent },

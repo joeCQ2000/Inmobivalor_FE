@@ -26,12 +26,11 @@ export class CronogramaFrancesComponent implements OnInit {
     console.log('SIMULACION EN STATE', this.simulacion);
 
     if (!this.simulacion) {
-      // Si alguien entra directo por URL, lo mandamos al formulario
+      
       this.router.navigate(['../metodo_frances'], { relativeTo: this.route });
       return;
     }
 
-    // === AQUÍ pegamos la misma lógica de formateo que tenías antes ===
     this.cronogramaView = (this.simulacion.cronograma ?? []).map((c) => ({
       numero_cuota: c.numero_cuota,
       periodo_gracia: c.periodo_gracia,

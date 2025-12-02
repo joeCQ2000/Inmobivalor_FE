@@ -1,0 +1,59 @@
+<div class="credito-container">
+  // Commit prueba
+  <h2>Listado de Créditos</h2>
+
+  @if (loading) {
+  <div class="estado">Cargando créditos...</div>
+  } @if (!loading && errorMessage) {
+  <div class="estado error">{{ errorMessage }}</div>
+  } @if (!loading && !errorMessage && creditos.length === 0) {
+  <div class="estado">No hay créditos registrados.</div>
+  } @if (!loading && !errorMessage && creditos.length > 0) {
+  <table class="tabla-creditos">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Entidad financiera</th>
+        <th>Cliente</th>
+        <th>Inmobiliaria</th>
+        <th>Moneda</th>
+        <th>Plazo (meses)</th>
+        <th>Tipo gracia</th>
+        <th>Monto bono</th>
+        <th>Fecha inicio</th>
+        <th>Fecha fin</th>
+        <th>Capitalización</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+
+<tbody>
+  @for (c of creditos; track c.id_credito) {
+    <tr>
+      <td>{{ c.id_credito }}</td>
+      <td>{{ c.id_entidad?.nombre || '-' }}</td>
+      <td>
+        {{ c.id_cliente?.nombres || '' }}
+        {{ c.id_cliente?.apellidos || '' }}
+      </td>
+      <td>{{ c.id_inmobiliaria?.ubicacion || '-' }}</td>
+      <td>{{ c.id_moneda?.tipo_moneda || '-' }}</td>
+      <td>{{ c.plazo_meses }}</td>
+      <td>{{ c.tipo_gracia }}</td>
+      <td>{{ c.monto_bono | number:'1.0-0' }}</td>
+      <td>{{ c.fecha_inicio }}</td>
+      <td>{{ c.fecha_fin }}</td>
+      <td>{{ c.capitalizacion }}</td>
+      <td>
+        <span class="badge" [class.activo]="c.estado" [class.inactivo]="!c.estado">
+          {{ c.estado ? 'Activo' : 'Inactivo' }}
+        </span>
+      </td>
+    </tr>
+  }
+</tbody>
+
+  </table>
+  }
+</div>
+//Comentar actualizado cambios kenneth

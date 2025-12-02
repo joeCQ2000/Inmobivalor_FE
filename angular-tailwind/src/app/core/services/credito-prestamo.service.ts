@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { CreditoPrestamo } from '../models/credito-prestamo.model';
+import { CreditoComboDTO } from '../models/CreditoComboDTO.model';
 
 const base_url = environment.base;
 
@@ -47,5 +48,8 @@ insert(credito: CreditoPrestamo): Observable<void> {
 
   getList(): Observable<CreditoPrestamo[]> {
     return this.listaCambio.asObservable();
+  }
+  listarPorEntidad(idEntidad: number): Observable<CreditoComboDTO[]> {
+    return this.http.get<CreditoComboDTO[]>(`${this.url}/por-entidad/${idEntidad}`);
   }
 }
