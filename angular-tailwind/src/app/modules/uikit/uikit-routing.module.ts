@@ -25,7 +25,7 @@ const routes: Routes = [
   {
     path: '',
     component: UikitComponent,
-    children: [
+    children: [ 
       { path: '', redirectTo: 'components', pathMatch: 'full' },
       { path: 'table', component: TableComponent },
        { path: 'usuario', component: TableUsuarioComponent },
@@ -35,7 +35,6 @@ const routes: Routes = [
       { path: 'inmobiliaria', component: InmobiliariaComponent },
       { path: 'Listarinmobiliaria', component: ListarinmobiliariaComponent },
       { path: 'registraeditausuario', component: RegistraeditausuarioComponent },
-       { path: 'registraeditacreditoprestamo', component: RegistraeditaprestamoComponent },
       { path: 'registraeditacliente', component: RegistraeditaclienteComponent },
       { path: 'registraeditausuario/:id', component: RegistraeditausuarioComponent },
       { path: 'registraeditacliente/:id', component: RegistraeditaclienteComponent },

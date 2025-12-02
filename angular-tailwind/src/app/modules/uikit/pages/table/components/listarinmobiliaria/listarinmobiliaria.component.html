@@ -1,7 +1,77 @@
-<div *ngIf="pagedInmobiliarias.length > 0">
-  <h2 class="text-center text-2xl font-bold mb-6 text-foreground dark:text-white">Lista de Inmobiliarias</h2>
+<div class="mb-6">
+  <h2 class="text-center text-2xl font-bold mb-4 text-foreground dark:text-white">
+    Búsqueda de Inmobiliarias
+  </h2>
 
-  <!-- Tabla o lista de inmobiliarias -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+    <!-- Filtro estado -->
+    <div>
+      <label class="block text-sm font-medium mb-1">Estado</label>
+      <select
+        [(ngModel)]="searchEstado"
+        class="w-full border rounded px-3 py-2"
+      >
+        <option value="">Todos</option>
+        <option value="true">Activo</option>
+        <option value="false">Inactivo</option>
+      </select>
+    </div>
+
+    <!-- Filtro situación inmobiliaria -->
+    <div>
+      <label class="block text-sm font-medium mb-1">Situación inmobiliaria</label>
+      <input
+        type="text"
+        [(ngModel)]="searchSituacion"
+        class="w-full border rounded px-3 py-2"
+        placeholder="Ej: En construcción"
+      />
+    </div>
+
+    <!-- Filtro ubicación -->
+    <div>
+      <label class="block text-sm font-medium mb-1">Ubicación</label>
+      <input
+        type="text"
+        [(ngModel)]="searchUbicacion"
+        class="w-full border rounded px-3 py-2"
+        placeholder="Ej: Lima, Miraflores"
+      />
+    </div>
+
+    <!-- Botones búsqueda/limpiar -->
+    <div class="flex gap-2">
+      <button
+        (click)="buscarInmobiliarias()"
+        class="flex-1 bg-primary text-white px-4 py-2 rounded-md font-semibold"
+      >
+        Buscar
+      </button>
+      <button
+        (click)="limpiarFiltros()"
+        class="flex-1 bg-gray-300 text-black px-4 py-2 rounded-md font-semibold"
+      >
+        Limpiar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Botón Registrar inmobiliaria -->
+<div class="flex justify-end mb-4">
+  <button
+    (click)="registrarInmobiliaria()"
+    class="bg-primary text-white px-6 py-2 rounded-md font-semibold hover:bg-primary"
+  >
+    Registrar inmobiliaria
+  </button>
+</div>
+
+<div *ngIf="pagedInmobiliarias.length > 0">
+  <h2 class="text-center text-2xl font-bold mb-6 text-foreground dark:text-white">
+    Lista de Inmobiliarias
+  </h2>
+
   <table class="table-auto w-full text-left">
     <thead>
       <tr>
@@ -9,7 +79,7 @@
         <th class="px-4 py-2">Área</th>
         <th class="px-4 py-2">Precio</th>
         <th class="px-4 py-2">Situación</th>
-        <th class="px-4 py-2">Imagen</th>
+        <th class="px-4 py-2">Estado</th>  
         <th class="px-4 py-2">Acciones</th>
       </tr>
     </thead>
@@ -20,39 +90,159 @@
         <td class="px-4 py-2">{{ inmobiliaria.precio | currency }}</td>
         <td class="px-4 py-2">{{ inmobiliaria.situacion_inmobiliaria }}</td>
         <td class="px-4 py-2">
-          <img *ngIf="imagenes[inmobiliaria.id]" 
-               [src]="imagenes[inmobiliaria.id]" 
-               alt="Imagen de la propiedad" 
-               style="width: 50px; height: 50px;">
+        {{ inmobiliaria.estado ? 'Activo' : 'Inactivo' }}  <!-- NUEVO -->
         </td>
         <td class="px-4 py-2">
-          <button (click)="editarInmobiliaria(inmobiliaria.id)" class="bg-blue-500 text-white px-4 py-2 rounded">Editar</button>
+          <div class="flex gap-2">
+            <button
+              (click)="verInmobiliaria(inmobiliaria)"
+              class="px-2 py-1 rounded border border-gray-300"
+              title="Ver"
+            >
+              👁
+            </button>
+
+            <button
+              (click)="editarInmobiliaria(inmobiliaria)"
+              class="px-2 py-1 rounded border border-blue-500 text-blue-500"
+              title="Editar"
+            >
+              ✏️
+            </button>
+
+            <button
+              class="px-2 py-1 rounded border border-red-500 text-red-500"
+              title="Eliminar"
+            >
+              🗑
+            </button>
+          </div>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <!-- Paginación -->
   <div class="flex justify-center gap-4 pt-5">
-    <button 
-      *ngIf="currentPage > 1" 
-      (click)="onPageChange(currentPage - 1)" 
+    <button
+      *ngIf="currentPage > 1"
+      (click)="onPageChange(currentPage - 1)"
       class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary font-semibold"
     >
       Anterior
     </button>
-    <button 
-      *ngIf="currentPage < totalItems / pageSize" 
-      (click)="onPageChange(currentPage + 1)" 
+    <button
+      *ngIf="currentPage < totalItems / pageSize"
+      (click)="onPageChange(currentPage + 1)"
       class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary font-semibold"
     >
       Siguiente
     </button>
   </div>
-
 </div>
 
-<!-- Si no hay inmobiliarias -->
 <div *ngIf="pagedInmobiliarias.length === 0" class="text-center text-lg">
   No hay propiedades registradas.
+</div>
+
+
+
+
+<div
+  *ngIf="showDetalleModal"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+  (click)="cerrarDetalleModal()"
+>
+  <!-- Contenedor del modal -->
+  <div
+    class="bg-white rounded-xl shadow-2xl w-full max-w-2xl mx-4 p-6 relative"
+    (click)="$event.stopPropagation()"
+  >
+    <!-- Botón cerrar -->
+    <button
+      type="button"
+      class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl"
+      (click)="cerrarDetalleModal()"
+    >
+      ×
+    </button>
+
+    <h3 class="text-xl font-semibold mb-4 text-gray-800">
+      Detalle de inmobiliaria
+    </h3>
+
+    <!-- Estado: cargando -->
+    <div *ngIf="loadingDetalle" class="py-6 text-center text-gray-500">
+      Cargando información...
+    </div>
+
+    <!-- Contenido cuando ya se cargó -->
+    <div *ngIf="!loadingDetalle && selectedInmobiliaria">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <div>
+          <p class="text-gray-500 text-xs">Ubicación</p>
+          <p class="font-semibold text-gray-800">
+            {{ selectedInmobiliaria.ubicacion }}
+          </p>
+        </div>
+
+        <div>
+          <p class="text-gray-500 text-xs">Área</p>
+          <p class="font-semibold text-gray-800">
+            {{ selectedInmobiliaria.area }} m²
+          </p>
+        </div>
+
+        <div>
+          <p class="text-gray-500 text-xs">Precio</p>
+          <p class="font-semibold text-gray-800">
+            {{ selectedInmobiliaria.precio | currency }}
+          </p>
+        </div>
+
+        <div>
+          <p class="text-gray-500 text-xs">Situación inmobiliaria</p>
+          <p class="font-semibold text-gray-800">
+            {{ selectedInmobiliaria.situacion_inmobiliaria }}
+          </p>
+        </div>
+
+        <div>
+          <p class="text-gray-500 text-xs">Estado</p>
+          <p class="font-semibold text-gray-800">
+            {{ selectedInmobiliaria.estado ? 'Activo' : 'Inactivo' }}
+          </p>
+        </div>
+
+        <!-- DESCRIPCIÓN -->
+        <div class="md:col-span-2" *ngIf="selectedInmobiliaria.descripcion">
+          <p class="text-gray-500 text-xs">Descripción</p>
+          <p class="text-gray-800">
+            {{ selectedInmobiliaria.descripcion }}
+          </p>
+        </div>
+      </div>
+
+      <!-- IMAGEN -->
+      <div
+        class="mt-6 flex justify-center"
+        *ngIf="detalleImageUrl"
+      >
+        <img
+          [src]="detalleImageUrl"
+          alt="Imagen de la inmobiliaria"
+          class="max-h-64 w-full object-cover rounded-lg border border-gray-200"
+        />
+      </div>
+
+      <div class="mt-6 flex justify-end">
+        <button
+          type="button"
+          class="px-4 py-2 rounded-md bg-primary text-white font-semibold"
+          (click)="cerrarDetalleModal()"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

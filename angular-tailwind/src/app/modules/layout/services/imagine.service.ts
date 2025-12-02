@@ -20,5 +20,9 @@ export class ImagineService {
       headers: new HttpHeaders(),
     });
   }
+
+  getImageUrl(imageId: number): string {
+    return `${this.baseUrl}/api/v1/img/obtener/${imageId}`;
+  }
 }
 //gola
