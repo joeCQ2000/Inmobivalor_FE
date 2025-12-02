@@ -1,5 +1,8 @@
+import { TasaInteres } from "./tasa-interes.model";
+
 export interface cronogramaDTO{
-  numero_cuota: number;                      // Nº
+  numero_cuota: number;  
+  tasa_intere: TasaInteres;                    // Nº
   tea: number;                               // TEA
   tasa_periodica: number;                    // i' = TEP = TEM
   ia: number;                                // IA

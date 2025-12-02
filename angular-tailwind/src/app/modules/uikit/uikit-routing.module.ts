@@ -36,6 +36,7 @@ const routes: Routes = [
       { path: 'Listarinmobiliaria', component: ListarinmobiliariaComponent },
       { path: 'registraeditausuario', component: RegistraeditausuarioComponent },
       { path: 'registraeditacliente', component: RegistraeditaclienteComponent },
+       { path: 'registraeditacreditoprestamo', component: RegistraeditaprestamoComponent },
       { path: 'registraeditausuario/:id', component: RegistraeditausuarioComponent },
       { path: 'registraeditacliente/:id', component: RegistraeditaclienteComponent },
        { path: 'cronograma', component: CronogramaFrancesComponent },

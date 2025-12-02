@@ -33,6 +33,7 @@ export class CronogramaFrancesComponent implements OnInit {
 
     this.cronogramaView = (this.simulacion.cronograma ?? []).map((c) => ({
       numero_cuota: c.numero_cuota,
+       tasa_interes: c.tasa_interes,
       periodo_gracia: c.periodo_gracia,
       saldo_inicial: this.format2(c.saldo_inicial),
       interes: this.format2(Math.abs(c.interes)),

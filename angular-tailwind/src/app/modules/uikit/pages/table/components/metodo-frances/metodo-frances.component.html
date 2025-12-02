@@ -195,9 +195,10 @@
             />
           </div>
                   <!-- Entidad -->
-          <div class="form-field">
+          <div>
             <label>Entidad financiera</label>
-            <select formControlName="entidadId">
+            <select formControlName="entidadId"
+            class="w-full p-2 bg-white text-black border border-gray-300 rounded">
               <option [ngValue]="null">Seleccione...</option>
               <option *ngFor="let e of entidades" [ngValue]="e.id_entidad">
                 {{ e.nombre }}
@@ -206,12 +207,14 @@
           </div>
 
           <!-- Créditos de esa entidad -->
-          <div class="form-field">
+          <div>
             <label>Crédito</label>
             <select formControlName="idCredito">
-              <option [ngValue]="null">Seleccione un crédito...</option>
-              <option *ngFor="let c of creditos" [ngValue]="c.id_credito">
-                {{ c.id_credito }}
+              <option [ngValue]="null">Seleccione un crédito...
+                
+              </option>
+              <option *ngFor="let c of creditos" [ngValue]="c.idCredito">
+                {{ c.idCredito }}
               </option>
             </select>
           </div>

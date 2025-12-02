@@ -36,8 +36,7 @@ import { CreditoComboDTO } from 'src/app/core/models/CreditoComboDTO.model';
 export class MetodoFrancesComponent implements OnInit {
   metodoFrancesForm!: FormGroup;
 entidades :EntidadFinanciera[] =[];
-creditos : CreditoPrestamo[] = [];
-creditodto : CreditoComboDTO[] = [];
+creditos : CreditoComboDTO[] = [];
   cargando = false;
   error?: string;
 submitted = false;
@@ -103,10 +102,9 @@ onEntidadChange(entidadId: number): void {
     return;
   }
 
-  // Llamas a tu API que trae créditos por entidad
   this.creditoservice.listarPorEntidad(entidadId).subscribe({
     next: (data) => {
-      this.creditodto = data;
+      this.creditos = data;
       this.cdr.markForCheck();
     },
     error: (err) => {
@@ -160,6 +158,10 @@ onEntidadChange(entidadId: number): void {
       total_seguro_riesgo: 0,
       total_comisiones_periodicas: 0,
       total_portes_y_gastos_adm: 0,
+      cuotaPrepago :0,
+      prepago : 0,
+      idCredito : v.idCredito,
+      entidadId : v.entidadId,
     };
 
     this.cargando = true;
