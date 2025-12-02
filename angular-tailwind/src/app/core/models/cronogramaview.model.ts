@@ -2,7 +2,6 @@ import { TasaInteres } from "./tasa-interes.model";
 
 export interface CronogramaView {
   numero_cuota: number;
-  tasa_interes : TasaInteres
   periodo_gracia: string;
   saldo_inicial: string;
   interes: string;
@@ -14,5 +13,4 @@ export interface CronogramaView {
   portes: string;
   gastos: string;
   saldo_final: string;
-  flujo: string;
 }
