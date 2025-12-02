@@ -1,42 +1,77 @@
-<form class="my-10 space-y-6" (ngSubmit)="onSubmitOtp()">
-  <div class="text-center">
-    <h2 class="text-foreground mb-1 text-3xl font-semibold">Two Step Verification</h2>
-    <p class="text-muted-foreground text-sm">Enter the verification code we sent to</p>
-    <div class="text-muted-foreground mt-2 text-lg">******2289</div>
+<!-- CARD CON FONDO TRANSPARENTE PLATEADO -->
+<div class="bg-slate-900/70 rounded-3xl shadow-2xl px-10 py-8 text-white backdrop-blur-sm max-w-xl mx-auto">
+  <!-- Logo circular arriba -->
+  <div class="flex justify-center mb-4">
+    <div class="h-28 w-28 rounded-full bg-white flex items-center justify-center shadow-xl">
+      <img
+        src="assets/images/Inmobivalor.png"
+        alt="Inmobivalor"
+        class="h-20 w-20 object-contain"
+      />
+    </div>
   </div>
 
-  <div class="grid grid-cols-6">
-    @for (item of inputs; track $index) {
-    <input
-      placeholder=""
-      maxlength="1"
-      class="border-border bg-background text-muted-foreground focus:border-primary h-10 w-10 rounded-md border text-center outline-hidden sm:h-14 sm:w-14"
-      [(ngModel)]="otpDigits[$index]"
-      name="otp{{ $index }}"
-      (input)="onInputChange($event, $index)" />
-    }
+  <!-- Título y texto -->
+  <div class="text-center mb-6">
+    <h2 class="mb-2 text-3xl font-semibold text-white">
+      Bienvenido
+    </h2>
+    <p class="text-sm text-gray-200">
+      Te enviamos a tu correo un código de verificación de 6 dígitos
+    </p>
   </div>
 
+  <!-- FORMULARIO OTP -->
+  <form class="space-y-6" (ngSubmit)="onSubmitOtp()">
+    <!-- Inputs del código -->
+    <div class="flex justify-center gap-3">
+      @for (item of inputs; track $index) {
+        <input
+          placeholder=""
+          maxlength="1"
+          class="h-12 w-12 sm:h-14 sm:w-14 rounded-md border border-gray-300 bg-transparent text-center text-xl text-white outline-none focus:ring-2 focus:ring-primary"
+          [(ngModel)]="otpDigits[$index]"
+          name="otp{{ $index }}"
+          (input)="onInputChange($event, $index)"
+        />
+      }
+    </div>
+
+    <!-- Reenviar código -->
+    <div class="mt-1 flex justify-end text-sm">
+      <a href="#" class="text-blue-400 hover:underline">
+        Reenviar Código
+      </a>
+    </div>
+
+    <!-- Mensaje de error -->
     <p
-    class="mt-2 text-sm text-red-500"
-    [class.hidden]="!errorMessage"
-  >
-    {{ errorMessage }}
-  </p>
-
-  <!-- Submit Button -->
-  <div>
-   <app-button
-      type="button"
-      full
-      impact="bold"
-      tone="primary"
-      shape="rounded"
-      size="medium"
-      [disabled]="loading"
-      (click)="onSubmitOtp()"
+      class="mt-1 text-sm text-red-500 text-center"
+      [class.hidden]="!errorMessage"
     >
-      Submit
-    </app-button>
+      {{ errorMessage }}
+    </p>
+
+    <!-- Botón Continuar -->
+    <div class="mt-2">
+      <button
+        type="submit"
+        class="w-full rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary disabled:opacity-60"
+        [disabled]="loading"
+      >
+        Continuar
+      </button>
+    </div>
+  </form>
+
+  <!-- FOOTER -->
+  <div class="mt-6 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[11px]">
+    <a href="#" class="hover:underline">Términos y condiciones</a>
+    <a href="#" class="hover:underline">Sobre Nosotros</a>
+    <a href="#" class="hover:underline">Contáctanos</a>
   </div>
-</form>
+
+  <p class="mt-2 text-center text-[11px]">
+    Copyright © Inmobivalor
+  </p>
+</div>

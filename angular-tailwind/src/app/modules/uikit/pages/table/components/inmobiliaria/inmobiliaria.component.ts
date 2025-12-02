@@ -5,7 +5,7 @@ import { Validators, FormBuilder, FormsModule, FormGroup, ReactiveFormsModule } 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ImagineService } from 'src/app/modules/layout/services/imagine.service';
 import { InmobiliariaService } from 'src/app/modules/layout/services/inmobiliaria.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-inmobiliaria',
   imports: [FormsModule, CommonModule, ReactiveFormsModule],
@@ -27,6 +27,7 @@ export class InmobiliariaComponent implements OnInit {
     private imagenService: ImagineService,
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
   ) {}
 
   ngOnInit(): void {
@@ -161,5 +162,8 @@ export class InmobiliariaComponent implements OnInit {
   limpiar(): void {
     this.inmobiliariaForm.reset();
     this.imageId = null;
+  }
+  volver(): void {
+    this.location.back(); // vuelve a la pantalla anterior (lista)
   }
 }

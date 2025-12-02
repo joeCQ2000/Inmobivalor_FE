@@ -74,7 +74,6 @@ export class TwoStepsComponent implements OnInit {
         }
       },
       error: (err) => {
-        this.loading = false;
         this.errorMessage = 'Código incorrecto o expirado.';
         console.error(err);
       },

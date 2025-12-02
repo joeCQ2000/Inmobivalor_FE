@@ -1,80 +1,214 @@
-<form class="my-10 space-y-6">
-  <div class="text-center">
-    <h2 class="text-foreground mb-1 text-3xl font-semibold">Sign Up <span class="text-primary">!</span></h2>
-    <p class="text-muted-foreground text-sm">Let's get started with your 30 day free trial</p>
+<div class="bg-slate-900/70 rounded-3xl shadow-2xl px-10 py-8 text-white backdrop-blur-sm">
+  <!-- Logo circular arriba -->
+  <div class="flex justify-center mb-4">
+    <div class="h-28 w-28 rounded-full bg-white flex items-center justify-center shadow-xl">
+      <img
+        src="assets/images/Inmobivalor.png"
+        alt="Inmobivalor"
+        class="h-20 w-20 object-contain"
+      />
+    </div>
   </div>
 
-  <div routerLink="/dashboard">
-    <app-button full impact="bold" tone="light" shape="rounded" size="medium">
-      <svg-icon src="assets/icons/google-logo.svg" [svgClass]="'h-6 w-6 mr-2'"> </svg-icon>
-      Sign Up with Google
-    </app-button>
+  <!-- Título -->
+  <h2 class="text-2xl font-semibold text-center mb-2">
+    Crear cuenta
+  </h2>
+
+  <!-- Línea decorativa con punto en medio -->
+  <div class="flex items-center justify-center gap-2 mb-6 text-xs">
+    <span class="flex-1 h-[1px] bg-slate-300"></span>
+    <span class="h-1 w-1 rounded-full bg-slate-300"></span>
+    <span class="flex-1 h-[1px] bg-slate-300"></span>
   </div>
 
-  <div
-    class="before:border-muted after:border-muted my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t after:mt-0.5 after:flex-1 after:border-t">
-    <p class="text-muted-foreground mx-4 mb-0 text-center text-sm">or</p>
-  </div>
+  <!-- FORMULARIO -->
+  <form class="space-y-4" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- Username -->
+    <div class="form-group">
+      <label for="username" class="block mb-1 text-sm">Usuario</label>
+      <input
+        type="text"
+        id="username"
+        formControlName="username"
+        [ngClass]="{ 'is__invalid-input': submitted && f['username'].errors }"
+        placeholder="Ingresa tu usuario"
+        class="w-full rounded-md px-3 py-2 bg-black/60 border border-slate-300 text-white text-sm outline-none"
+      />
+      <div *ngIf="submitted && f['username'].errors" class="is__invalid-error text-xs mt-1 text-red-300">
+        <div *ngIf="f['username'].errors['required']">Campo obligatorio</div>
+        <div *ngIf="f['username'].errors['minlength']">Mínimo 4 caracteres</div>
+      </div>
+    </div>
 
-  <div class="space-y-3 text-left">
-    <div class="relative">
-      <input type="text" id="email" class="peer block" placeholder=" " />
-      <label
-        for="email"
-        class="bg-background text-muted-foreground peer-focus:text-primary absolute top-2 z-10 origin-[0] -translate-y-4 scale-95 transform px-2 text-sm duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 ltr:left-1 rtl:right-1">
-        Email address
+    <!-- Contraseña -->
+    <div class="form-group">
+      <label for="contrasenha" class="block mb-1 text-sm">Contraseña</label>
+      <div class="flex items-center gap-2">
+        <input
+          [type]="passwordTextType ? 'text' : 'password'"
+          id="contrasenha"
+          formControlName="contrasenha"
+          [ngClass]="{ 'is__invalid-input': submitted && f['contrasenha'].errors }"
+          placeholder="Ingresa tu contraseña"
+          class="w-full rounded-md px-3 py-2 bg-black/60 border border-slate-300 text-white text-sm outline-none"
+        />
+        <span class="cursor-pointer" (click)="togglePasswordTextType()">
+          <svg-icon
+            [src]="
+              !passwordTextType
+                ? 'assets/icons/heroicons/outline/eye-off.svg'
+                : 'assets/icons/heroicons/outline/eye.svg'
+            "
+            [svgClass]="'h-5 w-5'"
+          ></svg-icon>
+        </span>
+      </div>
+      <div *ngIf="submitted && f['contrasenha'].errors" class="is__invalid-error text-xs mt-1 text-red-300">
+        <div *ngIf="f['contrasenha'].errors['required']">Campo obligatorio</div>
+        <div *ngIf="f['contrasenha'].errors['minlength']">Mínimo 6 caracteres</div>
+      </div>
+    </div>
+
+    <!-- Nombres -->
+    <div class="form-group">
+      <label for="nombres" class="block mb-1 text-sm">Nombres</label>
+      <input
+        type="text"
+        id="nombres"
+        formControlName="nombres"
+        [ngClass]="{ 'is__invalid-input': submitted && f['nombres'].errors }"
+        placeholder="Ingresa tus nombres"
+        class="w-full rounded-md px-3 py-2 bg-black/60 border border-slate-300 text-white text-sm outline-none"
+      />
+      <div *ngIf="submitted && f['nombres'].errors" class="is__invalid-error text-xs mt-1 text-red-300">
+        <div *ngIf="f['nombres'].errors['required']">Campo obligatorio</div>
+      </div>
+    </div>
+
+    <!-- Apellidos -->
+    <div class="form-group">
+      <label for="apellidos" class="block mb-1 text-sm">Apellidos</label>
+      <input
+        type="text"
+        id="apellidos"
+        formControlName="apellidos"
+        [ngClass]="{ 'is__invalid-input': submitted && f['apellidos'].errors }"
+        placeholder="Ingresa tus apellidos"
+        class="w-full rounded-md px-3 py-2 bg-black/60 border border-slate-300 text-white text-sm outline-none"
+      />
+      <div *ngIf="submitted && f['apellidos'].errors" class="is__invalid-error text-xs mt-1 text-red-300">
+        <div *ngIf="f['apellidos'].errors['required']">Campo obligatorio</div>
+      </div>
+    </div>
+
+    <!-- Correo -->
+    <div class="form-group">
+      <label for="correo" class="block mb-1 text-sm">Correo electrónico</label>
+      <input
+        type="email"
+        id="correo"
+        formControlName="correo"
+        [ngClass]="{ 'is__invalid-input': submitted && f['correo'].errors }"
+        placeholder="Ingresa tu correo"
+        class="w-full rounded-md px-3 py-2 bg-black/60 border border-slate-300 text-white text-sm outline-none"
+      />
+      <div *ngIf="submitted && f['correo'].errors" class="is__invalid-error text-xs mt-1 text-red-300">
+        <div *ngIf="f['correo'].errors['required']">Campo obligatorio</div>
+        <div *ngIf="f['correo'].errors['email']">Correo no válido</div>
+      </div>
+    </div>
+
+    <!-- DNI -->
+    <div class="form-group">
+      <label for="dni" class="block mb-1 text-sm">DNI</label>
+      <input
+        type="text"
+        id="dni"
+        formControlName="dni"
+        [ngClass]="{ 'is__invalid-input': submitted && f['dni'].errors }"
+        placeholder="Ingresa tu DNI"
+        class="w-full rounded-md px-3 py-2 bg-black/60 border border-slate-300 text-white text-sm outline-none"
+      />
+      <div *ngIf="submitted && f['dni'].errors" class="is__invalid-error text-xs mt-1 text-red-300">
+        <div *ngIf="f['dni'].errors['required']">Campo obligatorio</div>
+        <div *ngIf="f['dni'].errors['minlength'] || f['dni'].errors['maxlength']">
+          Debe tener 8 dígitos
+        </div>
+      </div>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="form-group">
+      <label for="telefono" class="block mb-1 text-sm">Teléfono</label>
+      <input
+        type="text"
+        id="telefono"
+        formControlName="telefono"
+        [ngClass]="{ 'is__invalid-input': submitted && f['telefono'].errors }"
+        placeholder="Ingresa tu teléfono"
+        class="w-full rounded-md px-3 py-2 bg-black/60 border border-slate-300 text-white text-sm outline-none"
+      />
+      <div *ngIf="submitted && f['telefono'].errors" class="is__invalid-error text-xs mt-1 text-red-300">
+        <div *ngIf="f['telefono'].errors['required']">Campo obligatorio</div>
+        <div *ngIf="f['telefono'].errors['minlength'] || f['telefono'].errors['maxlength']">
+          Debe tener 9 dígitos
+        </div>
+      </div>
+    </div>
+
+    <!-- Estado -->
+    <div class="form-group">
+      <label for="estado" class="block mb-1 text-sm">Estado</label>
+      <select
+        id="estado"
+        formControlName="estado"
+        class="w-full rounded-md px-3 py-2 bg-black/60 border border-slate-300 text-white text-sm outline-none"
+      >
+        <option [ngValue]="true">Activo</option>
+        <option [ngValue]="false">Inactivo</option>
+      </select>
+    </div>
+
+    <!-- OTP requerido -->
+    <div class="form-group flex items-center gap-2">
+      <input
+        type="checkbox"
+        id="otpRequired"
+        formControlName="otpRequired"
+        class="h-4 w-4"
+      />
+      <label for="otpRequired" class="text-sm">
+        Requerir doble autenticación (OTP)
       </label>
     </div>
-    <div class="relative">
-      <input type="password" id="password" class="peer block" placeholder=" " />
-      <label
-        for="password"
-        class="bg-background text-muted-foreground peer-focus:text-primary absolute top-2 z-10 origin-[0] -translate-y-4 scale-95 transform px-2 text-sm duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 ltr:left-1 rtl:right-1">
-        Password
-      </label>
-      <span class="text-muted-foreground absolute top-2 cursor-pointer ltr:right-3 rtl:left-3">
-        <svg-icon src="assets/icons/heroicons/outline/eye-off.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
-        <svg-icon src="assets/icons/heroicons/outline/eye.svg" [svgClass]="'h-5 w-5 hidden'"> </svg-icon>
-      </span>
-    </div>
-    <!-- Password Meeter -->
-    <div class="grid grid-cols-4 gap-2">
-      <div class="rounded-xs bg-muted h-1"></div>
-      <div class="rounded-xs bg-muted h-1"></div>
-      <div class="rounded-xs bg-muted h-1"></div>
-      <div class="rounded-xs bg-muted h-1"></div>
-    </div>
-    <span class="text-muted-foreground text-xs">
-      Use 8 or more characters with a mix of letters, numbers & symbols.
-    </span>
-    <div class="relative">
-      <input type="password" id="confirm-password" class="peer block" placeholder=" " />
-      <label
-        for="confirm-password"
-        class="bg-background text-muted-foreground peer-focus:text-primary absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform px-2 text-sm duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2">
-        Confirm Password
-      </label>
-    </div>
-  </div>
 
-  <div class="flex items-center justify-between space-x-3">
-    <div class="flex items-center gap-1">
-      <input id="accept-term" name="accept-term" type="checkbox" />
-      <label for="accept-term" class="text-muted-foreground ml-2 block text-sm"> I Accept the </label>
-      <app-button impact="none" tone="primary" shape="rounded" size="small"> Terms </app-button>
+    <!-- Mensaje de error general -->
+    <p
+      class="mt-1 text-sm text-red-500 text-center"
+      *ngIf="errorMessage"
+    >
+      {{ errorMessage }}
+    </p>
+
+    <!-- Botón principal -->
+    <button
+      type="submit"
+      class="w-full mt-2 py-2 rounded-md bg-blue-700 hover:bg-blue-800 text-white font-semibold text-sm disabled:opacity-60"
+      [disabled]="loading"
+    >
+      {{ loading ? 'Registrando...' : 'Crear cuenta' }}
+    </button>
+
+    <!-- Footer pequeño -->
+    <div class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[11px] mt-4">
+      <a href="#" class="hover:underline">Términos y condiciones</a>
+      <a href="#" class="hover:underline">Sobre Nosotros</a>
+      <a href="#" class="hover:underline">Contáctanos</a>
     </div>
-  </div>
 
-  <!-- Submit Button -->
-  <div>
-    <app-button full impact="bold" tone="primary" shape="rounded" size="medium">Sign up</app-button>
-  </div>
-
-  <!-- Sign-up -->
-  <div class="text-muted-foreground flex items-center text-sm">
-    Already have an Account?
-    <app-button routerLink="/auth/sign-in" impact="none" tone="primary" shape="rounded" size="small">
-      Sign in
-    </app-button>
-  </div>
-</form>
+    <p class="text-center text-[11px] mt-3">
+      Copyright © Inmobivalor
+    </p>
+  </form>
+</div>
