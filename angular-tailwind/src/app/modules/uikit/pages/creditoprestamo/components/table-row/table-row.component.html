@@ -1,0 +1,46 @@
+<ng-container>
+  <!-- Información principal -->
+  <td>
+    <div class="flex items-center gap-2.5">
+      <img
+        alt="usuario icon"
+        class="h-9 w-9 shrink-0 rounded-full"
+        src="https://ui-avatars.com/api/?name={{ prestamo.id_credito }}&background=random" />
+      <div class="flex flex-col items-start">
+        <a class="text-foreground hover:text-primary text-sm font-semibold" href="#">
+          {{ prestamo.fecha_inicio }}
+        </a>
+        
+      </div>
+    </div>
+  </td>
+   <td>{{ prestamo.capitalizacion }}</td>
+  <td>{{ prestamo.meses_gracia }}</td>
+
+
+  <td>
+    <span class="rounded-[30px] bg-yellow-500/10 px-2 py-0.5 text-xs font-medium text-yellow-800">
+      {{ prestamo.plazo_meses}}
+    </span>
+  </td>
+
+
+
+
+  <td class="text-center">
+  <div class="flex items-center justify-center gap-2 ">
+    <!-- Botón editar -->
+    <button
+      class="hover:bg-card text-blue-500 hover:text-primary flex h-8 w-8 items-center justify-center rounded-md transition"
+      title="Editar préstamo"
+      (click)="editarprestamo(prestamo.id_credito)"
+    >
+      <svg-icon
+        src="./assets/icons/heroicons/outline/pencil.svg"
+        [svgClass]="'h-5 w-5 text-foreground'"
+      ></svg-icon>
+    </button>
+
+  </div>
+</td>
+</ng-container>

@@ -1,7 +1,10 @@
+import { CreditoPrestamo } from "./credito-prestamo.model";
+import { EntidadFinanciera } from "./entidad-financiera.model";
+
 export interface datoscronogramaDTO{
   precio_venta_activo: number;
   porcentaje_cuota_inicial: number;
-  numero_anhos: number;
+  numero_anhos: 0;
   frecuencia_pago: number;
   numero_dias_por_anho: number;
 
@@ -35,4 +38,8 @@ export interface datoscronogramaDTO{
   total_seguro_riesgo: number;
   total_comisiones_periodicas: number;
   total_portes_y_gastos_adm: number;
+  cuotaPrepago :number,
+  prepago : number,
+  idCredito : CreditoPrestamo,
+  entidadId : EntidadFinanciera
 }

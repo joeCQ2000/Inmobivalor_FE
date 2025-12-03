@@ -1,0 +1,78 @@
+<div class="border-muted/20 bg-background flex min-w-full flex-col rounded-xl border p-2">
+  <!-- Header con botón añadir -->
+  <div class="color-primary-foreground px-6 py-8 border-foreground/70">
+    <div class="flex items-center justify-between w-full">
+      <h3 class="text-sm text-foreground font-medium">
+        Gestión de Monedas
+      </h3>
+      <button
+        (click)="goToRegistro()"
+        class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
+        Añadir moneda
+      </button>
+    </div>
+  </div>
+
+  <div class="scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted grow overflow-x-auto">
+    <table class="w-full table-fixed border-collapse border-0 text-left align-middle leading-5 text-muted-foreground">
+      <thead class="border-muted/20 text-muted-foreground border text-xs">
+        <tr>
+          <th class="border-muted/20 border px-4 py-3">ID</th>
+          <th class="border-muted/20 border px-4 py-3">Tipo de Moneda</th>
+          <th class="border-muted/20 border px-4 py-3">Estado</th>
+          <th class="border-muted/20 border px-4 py-3">Acciones</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        @if (loading) {
+          <tr>
+            <td class="py-4 text-center text-sm" colspan="4">Cargando monedas...</td>
+          </tr>
+        } @else if (errorMessage) {
+          <tr>
+            <td class="py-4 text-center text-sm text-red-500" colspan="4">{{ errorMessage }}</td>
+          </tr>
+        } @else {
+          @for (m of paginadoMonedas(); track m.id_moneda) {
+            <tr class="hover:bg-card/50">
+              <td class="border-muted/20 border px-4 py-3 text-sm">{{ m.id_moneda }}</td>
+              <td class="border-muted/20 border px-4 py-3 text-sm">{{ m.tipo_moneda }}</td>
+              <td class="border-muted/20 border px-4 py-3 text-sm">
+                <span 
+                  class="rounded-full px-2 py-1 text-xs font-medium"
+                  [class.bg-green-900]="m.estado"
+                  [class.text-green-200]="m.estado"
+                  [class.bg-red-900]="!m.estado"
+                  [class.text-red-200]="!m.estado">
+                  {{ m.estado ? 'Activo' : 'Inactivo' }}
+                </span>
+              </td>
+              <td class="border-muted/20 border px-4 py-3 text-sm">
+                <button
+                  (click)="eliminarMoneda(m.id_moneda!)"
+                  class="rounded-md bg-red-600 px-3 py-1 text-xs font-semibold text-white hover:bg-red-700">
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td class="py-4 text-center text-sm" colspan="4">No se encontraron monedas</td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <app-table-footer
+    [paginaActual]="paginas()"
+    [totalPaginas]="totalpaginas()"
+    [totalRegistros]="monedas().length"
+    [tamanioPagina]="tamanioPagina()"
+    (cambiarPagina)="paginas.set($event)"
+    (cambiarTamanio)="tamanioPagina.set($event)">
+  </app-table-footer>
+</div>
+

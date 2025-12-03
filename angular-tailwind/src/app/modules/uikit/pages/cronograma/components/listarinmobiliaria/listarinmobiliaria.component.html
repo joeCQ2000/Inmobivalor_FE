@@ -1,0 +1,58 @@
+<div *ngIf="pagedInmobiliarias.length > 0">
+  <h2 class="text-center text-2xl font-bold mb-6 text-foreground dark:text-white">Lista de Inmobiliarias</h2>
+
+  <!-- Tabla o lista de inmobiliarias -->
+  <table class="table-auto w-full text-left">
+    <thead>
+      <tr>
+        <th class="px-4 py-2">Ubicación</th>
+        <th class="px-4 py-2">Área</th>
+        <th class="px-4 py-2">Precio</th>
+        <th class="px-4 py-2">Situación</th>
+        <th class="px-4 py-2">Imagen</th>
+        <th class="px-4 py-2">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inmobiliaria of pagedInmobiliarias">
+        <td class="px-4 py-2">{{ inmobiliaria.ubicacion }}</td>
+        <td class="px-4 py-2">{{ inmobiliaria.area }} m²</td>
+        <td class="px-4 py-2">{{ inmobiliaria.precio | currency }}</td>
+        <td class="px-4 py-2">{{ inmobiliaria.situacion_inmobiliaria }}</td>
+        <td class="px-4 py-2">
+          <img *ngIf="imagenes[inmobiliaria.id]" 
+               [src]="imagenes[inmobiliaria.id]" 
+               alt="Imagen de la propiedad" 
+               style="width: 50px; height: 50px;">
+        </td>
+        <td class="px-4 py-2">
+          <button (click)="editarInmobiliaria(inmobiliaria.id)" class="bg-blue-500 text-white px-4 py-2 rounded">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Paginación -->
+  <div class="flex justify-center gap-4 pt-5">
+    <button 
+      *ngIf="currentPage > 1" 
+      (click)="onPageChange(currentPage - 1)" 
+      class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary font-semibold"
+    >
+      Anterior
+    </button>
+    <button 
+      *ngIf="currentPage < totalItems / pageSize" 
+      (click)="onPageChange(currentPage + 1)" 
+      class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary font-semibold"
+    >
+      Siguiente
+    </button>
+  </div>
+
+</div>
+
+<!-- Si no hay inmobiliarias -->
+<div *ngIf="pagedInmobiliarias.length === 0" class="text-center text-lg">
+  No hay propiedades registradas.
+</div>

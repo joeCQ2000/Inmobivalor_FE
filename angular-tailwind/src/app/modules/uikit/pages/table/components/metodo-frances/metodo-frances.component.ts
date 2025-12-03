@@ -19,6 +19,11 @@ import { SimuladorFinancieroService } from 'src/app/core/services/simuladorfinan
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SimuladorEstadoService } from 'src/app/core/models/simulador-estado.service';
+import { EntidadFinancieraService } from 'src/app/core/services/entidad-financiera.service';
+import { EntidadFinanciera } from 'src/app/core/models/entidad-financiera.model';
+import { CreditoPrestamo } from 'src/app/core/models/credito-prestamo.model';
+import { CreditoPrestamoService } from 'src/app/core/services/credito-prestamo.service';
+import { CreditoComboDTO } from 'src/app/core/models/CreditoComboDTO.model';
 
 @Component({
   selector: 'app-metodo-frances',
@@ -30,10 +35,11 @@ import { SimuladorEstadoService } from 'src/app/core/models/simulador-estado.ser
 })
 export class MetodoFrancesComponent implements OnInit {
   metodoFrancesForm!: FormGroup;
-
+entidades :EntidadFinanciera[] =[];
+creditos : CreditoComboDTO[] = [];
   cargando = false;
   error?: string;
-
+submitted = false;
   private readonly maxCuotasUI = 600;
 
   constructor(
@@ -42,21 +48,21 @@ export class MetodoFrancesComponent implements OnInit {
     private simuladorState: SimuladorEstadoService,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private entidadservice : EntidadFinancieraService,
+    private creditoservice : CreditoPrestamoService
   ) {}
 
   ngOnInit(): void {
     this.metodoFrancesForm = this.fb.group({
-      // (exactamente tus controles actuales)
       precio_venta_activo: [null, [Validators.required, Validators.min(1)]],
       porcentaje_cuota_inicial: [
         null,
         [Validators.required, Validators.min(0), Validators.max(1)],
       ],
-      numero_anhos: [null, [Validators.required, Validators.min(1)]],
+      numero_anhos: [0],
       frecuencia_pago: [null, [Validators.required, Validators.min(1)]],
       numero_dias_por_anho: [360, [Validators.required, Validators.min(1)]],
-      tea: [null, [Validators.required, Validators.min(0)]],
       tipo_gracia: ['SIN', [Validators.required]],
       meses_gracia: [0, [Validators.required, Validators.min(0)]],
       costes_notariales: [null, [Validators.min(0)]],
@@ -76,9 +82,38 @@ export class MetodoFrancesComponent implements OnInit {
         [Validators.required, Validators.min(0)],
       ],
       tasa_descuento: [null, [Validators.required, Validators.min(0)]],
+      prepago : [0, [Validators.min(0)]],
+      cuotaPrepago :[0, [Validators.min(0)]],
+      entidadId : [0, Validators.required],
+     idCredito : [0, Validators.required],
     });
+    this.entidadservice.list().subscribe((data) => (this.entidades = data));
+     this.metodoFrancesForm.get('entidadId')?.valueChanges.subscribe((entidadId) => {
+    this.onEntidadChange(entidadId);
+  });
+
+  }
+onEntidadChange(entidadId: number): void {
+  // Limpiar lista y selección de crédito
+  this.creditos = [];
+  this.metodoFrancesForm.patchValue({ id_credito: null }, { emitEvent: false });
+
+  if (!entidadId) {
+    return;
   }
 
+  this.creditoservice.listarPorEntidad(entidadId).subscribe({
+    next: (data) => {
+      this.creditos = data;
+      this.cdr.markForCheck();
+    },
+    error: (err) => {
+      console.error('Error cargando créditos por entidad', err);
+      this.creditos = [];
+      this.cdr.markForCheck();
+    },
+  });
+}
   simular(): void {
     if (this.metodoFrancesForm.invalid) {
       this.metodoFrancesForm.markAllAsTouched();
@@ -96,7 +131,7 @@ export class MetodoFrancesComponent implements OnInit {
     const datos: datoscronogramaDTO = {
       precio_venta_activo: v.precio_venta_activo,
       porcentaje_cuota_inicial: v.porcentaje_cuota_inicial,
-      numero_anhos: v.numero_anhos,
+      numero_anhos: 0,
       frecuencia_pago: v.frecuencia_pago,
       numero_dias_por_anho: v.numero_dias_por_anho,
       tea: v.tea,
@@ -123,6 +158,10 @@ export class MetodoFrancesComponent implements OnInit {
       total_seguro_riesgo: 0,
       total_comisiones_periodicas: 0,
       total_portes_y_gastos_adm: 0,
+      cuotaPrepago :0,
+      prepago : 0,
+      idCredito : v.idCredito,
+      entidadId : v.entidadId,
     };
 
     this.cargando = true;

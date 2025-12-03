@@ -18,7 +18,6 @@ export class Menu {
           protected: true, 
            
         },
-        //Listarinmobiliaria
         {
           icon: 'assets/icons/heroicons/outline/user.svg',
           label: 'Usuario',
@@ -49,12 +48,18 @@ export class Menu {
           icon: 'assets/icons/heroicons/outline/tasa1.svg',
           label: 'Tasa de Interés',
           route: '/components/tasa-interes',
-          children: [
-            { label: 'Listar Tasas', route: '/components/tasa-interes' },
-            { label: 'Registrar Tasa', route: '/components/tasa-interes-registrar' },
-          ],
+        },
+                {
+          icon: 'assets/icons/heroicons/outline/cube.svg',
+          label: 'Entidades Financieras',
+          route: '/components/entidad-financiera-table',
+        },        {
+          icon: 'assets/icons/heroicons/outline/cube.svg',
+          label: 'Entidad Tasa',
+          route: '/components/entidad-tasa-table',
         },
       ],
     },
+    
   ];
 }

@@ -19,6 +19,7 @@ export class RegistraeditaclienteComponent implements OnInit {
 clienteForm! : FormGroup;
 HttpClient : any;
 usuarios : usuario[] = [];
+
 constructor(
   private fb : FormBuilder,
   private router : Router,
@@ -30,6 +31,7 @@ constructor(
 modoEdicion = false;
 submitted = false;
 id_actual : number| null = null;
+
 ngOnInit(): void {
   this.clienteForm = this.fb.group({
     nombres : ['', Validators.required],

@@ -1,0 +1,59 @@
+
+<div class="ef-form-container">
+  <h3 class="form-title">Editar Entidad Financiera</h3>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+<div class="form-row">
+  <label>Nombre</label>
+  <input
+    type="text"
+    formControlName="nombre"
+    readonly
+    class="input-readonly"
+  />
+</div>
+
+    
+
+    <div class="form-row">
+      <label>RUC</label>
+      <input type="text" formControlName="ruc" />
+    </div>
+
+    <div class="form-row">
+      <label>Dirección</label>
+      <input type="text" formControlName="direccion" />
+    </div>
+
+    <div class="form-row">
+      <label>Teléfono</label>
+      <input type="text" formControlName="telefono" />
+    </div>
+
+    <div class="form-row">
+      <label>Correo</label>
+      <input type="email" formControlName="correo" />
+    </div>
+
+    <div class="form-row form-row-inline">
+      <label>Estado</label>
+      <label class="switch">
+        <input type="checkbox" formControlName="estado" />
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-secondary" (click)="onCancel()">
+        Cancelar
+      </button>
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="loading || form.invalid"
+      >
+        {{ loading ? 'Guardando...' : 'Guardar cambios' }}
+      </button>
+    </div>
+  </form>
+</div>
