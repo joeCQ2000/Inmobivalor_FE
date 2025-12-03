@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { ImagineService } from 'src/app/modules/layout/services/imagine.service';
 import { InmobiliariaService } from 'src/app/modules/layout/services/inmobiliaria.service';
-import { Location } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
   selector: 'app-listarinmobiliaria',
   imports: [CommonModule, FormsModule],
@@ -13,7 +14,7 @@ import { Location } from '@angular/common';
   styleUrl: './listarinmobiliaria.component.css',
 })
 export class ListarinmobiliariaComponent implements OnInit {
-    inmobiliarias: any[] = [];
+  inmobiliarias: any[] = [];
   pagedInmobiliarias: any[] = [];
 
   // estados
@@ -67,7 +68,6 @@ export class ListarinmobiliariaComponent implements OnInit {
         this.currentPage = 1;
         this.setPagedInmobiliarias();
         this.loading = false;
-
         this.cdr.detectChanges();
       },
       error: (err) => {
@@ -109,14 +109,11 @@ export class ListarinmobiliariaComponent implements OnInit {
         if (imageId != null) {
           this.detalleImageUrl = this.imagenService.getImageUrl(imageId);
         }
-
         this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Error al obtener detalle de inmobiliaria', err);
         this.loadingDetalle = false;
-
-        this.cdr.detectChanges();
       },
     });
   }
@@ -234,6 +231,7 @@ export class ListarinmobiliariaComponent implements OnInit {
     this.searchSituacion = '';
     this.searchUbicacion = '';
     this.loadInmobiliarias();
+    this.cdr.detectChanges();
   }
 
   registrarInmobiliaria(): void {
@@ -261,7 +259,7 @@ export class ListarinmobiliariaComponent implements OnInit {
 
     this.loading = true;
     this.errorMessage = '';
-
+    this.cdr.detectChanges();
     this.inmobiliariaService.buscarInmobiliarias(filtro).subscribe({
       next: (data) => {
         this.inmobiliarias = data || [];
@@ -276,7 +274,6 @@ export class ListarinmobiliariaComponent implements OnInit {
         this.errorMessage =
           'Ocurrió un error al buscar inmobiliarias con los filtros.';
         this.loading = false;
-
         this.cdr.detectChanges();
       },
     });

@@ -1,4 +1,5 @@
 <div class="form-container">
+
   <h2 class="form-title">
     {{ modoEdicion ? 'Edición de Propiedad Inmobiliaria' : 'Registro de Propiedad Inmobiliaria' }}
   </h2>
@@ -9,68 +10,90 @@
   </div>
 
   <form [formGroup]="inmobiliariaForm" (ngSubmit)="guardarInmobiliaria()">
+
     <!-- CARD -->
     <div class="card">
+
       <div class="card-header">
-        <p class="card-subtitle">{{ modoEdicion ? 'Editar' : 'Registrar' }} Inmobiliaria</p>
+        <p class="card-subtitle">
+          {{ modoEdicion ? 'Editar' : 'Registrar' }} Inmobiliaria
+        </p>
         <h3 class="card-title">Datos de la propiedad</h3>
       </div>
 
       <div class="card-body">
+
         <!-- GRID -->
         <div class="form-grid">
+
           <!-- Ubicación -->
           <div class="form-control">
             <label>Ubicación</label>
             <input type="text" formControlName="ubicacion" placeholder="Ej: Calle Ficticia 123" />
-            <span class="input-error" *ngIf="submitted && inmobiliariaForm.get('ubicacion')?.invalid">
-              Este campo es obligatorio.
-            </span>
+              <span class="input-error" *ngIf="inmobiliariaForm.get('ubicacion')?.invalid && inmobiliariaForm.get('ubicacion')?.touched">
+    Este campo es obligatorio.
+  </span>
           </div>
 
           <!-- Área -->
           <div class="form-control">
             <label>Área</label>
             <input type="text" formControlName="area" placeholder="Ej: 150 m²" />
-                        <span class="input-error" *ngIf="submitted && inmobiliariaForm.get('ubicacion')?.invalid">
-              Este campo es obligatorio.
-            </span>
+              <span class="input-error" *ngIf="inmobiliariaForm.get('ubicacion')?.invalid && inmobiliariaForm.get('ubicacion')?.touched">
+    Este campo es obligatorio.
+  </span>
           </div>
 
           <!-- Precio -->
           <div class="form-control">
             <label>Precio</label>
             <input type="number" formControlName="precio" placeholder="Ej: 350000" />
-                        <span class="input-error" *ngIf="submitted && inmobiliariaForm.get('ubicacion')?.invalid">
-              Este campo es obligatorio.
-            </span>
+              <span class="input-error" *ngIf="inmobiliariaForm.get('ubicacion')?.invalid && inmobiliariaForm.get('ubicacion')?.touched">
+    Este campo es obligatorio.
+  </span>
           </div>
 
           <!-- Descripción -->
           <div class="form-control form-full">
             <label>Descripción</label>
             <textarea formControlName="descripcion" placeholder="Descripción de la propiedad"></textarea>
-                        <span class="input-error" *ngIf="submitted && inmobiliariaForm.get('ubicacion')?.invalid">
-              Este campo es obligatorio.
-            </span>
+              <span class="input-error" *ngIf="inmobiliariaForm.get('ubicacion')?.invalid && inmobiliariaForm.get('ubicacion')?.touched">
+    Este campo es obligatorio.
+  </span>
           </div>
 
           <!-- Situación -->
           <div class="form-control">
             <label>Situación inmobiliaria</label>
             <input type="text" formControlName="situacion_inmobiliaria" placeholder="Ej: En venta" />
-                        <span class="input-error" *ngIf="submitted && inmobiliariaForm.get('ubicacion')?.invalid">
-              Este campo es obligatorio.
-            </span>
+              <span class="input-error" *ngIf="inmobiliariaForm.get('ubicacion')?.invalid && inmobiliariaForm.get('ubicacion')?.touched">
+    Este campo es obligatorio.
+  </span>
+          </div>
+
+          <!-- Estado -->
+          <div class="form-control">
+            <label>Estado</label>
+            <select formControlName="estado">
+              <option [ngValue]="true">Disponible</option>
+              <option [ngValue]="false">No disponible</option>
+                <span class="input-error" *ngIf="inmobiliariaForm.get('ubicacion')?.invalid && inmobiliariaForm.get('ubicacion')?.touched">
+    Este campo es obligatorio.
+  </span>
+            </select>
           </div>
 
           <!-- Imagen -->
           <div class="form-control form-full">
             <label>Subir imagen</label>
             <input type="file" (change)="onImageSelected($event)" />
-            <div *ngIf="imageId" class="imagen-ok">Imagen cargada correctamente (ID: {{ imageId }})</div>
+            <div *ngIf="imageId" class="imagen-ok">
+              Imagen cargada correctamente (ID: {{ imageId }})
+            </div>
           </div>
+
         </div>
+
       </div>
 
       <!-- Footer acciones -->
@@ -79,15 +102,12 @@
         <button type="submit" class="btn-primario" [disabled]="cargando">
           {{
             cargando
-              ? modoEdicion
-                ? 'Actualizado...'
-                : 'Registrando...'
-              : modoEdicion
-              ? 'Actualizar Propiedad'
-              : 'Registrar Propiedad'
+              ? (modoEdicion ? 'Actualizado...' : 'Registrando...')
+              : (modoEdicion ? 'Actualizar Propiedad' : 'Registrar Propiedad')
           }}
         </button>
       </div>
+
     </div>
   </form>
 </div>

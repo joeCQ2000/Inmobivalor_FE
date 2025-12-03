@@ -174,7 +174,7 @@ export class InmobiliariaComponent implements OnInit {
           color: '#ffff',
         });
 
-        this.router.navigate(['../Listarinmobiliaria'], { relativeTo: this.route });
+        this.router.navigate(['/components/Listarinmobiliaria']);
       },
       error: (err) => {
         this.cargando = false;
@@ -193,12 +193,13 @@ export class InmobiliariaComponent implements OnInit {
       },
     });
   }
+
   limpiar(): void {
     this.inmobiliariaForm.reset();
     this.imageId = null;
   }
 
   volver(): void {
-    this.router.navigate(['components/Listarinmobiliaria']);
+    this.router.navigate(['/components/Listarinmobiliaria']);
   }
 }

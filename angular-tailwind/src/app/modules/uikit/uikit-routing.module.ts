@@ -10,17 +10,17 @@ import { CronogramaFrancesComponent } from './pages/table/components/cronograma-
 import { IndicadoresFrancesComponent } from './pages/table/components/indicadores-metodo-frances/indicadores-metodo-frances.component';
 import { TableClienteComponent } from './pages/cliente/table.cliente.component';
 import { TablePrestamoComponent } from './pages/creditoprestamo/table.prestamo.component';
-import { InmobiliariaComponent } from './pages/cronograma/components/inmobiliaria/inmobiliaria.component';
-import { ListarinmobiliariaComponent } from './pages/cronograma/components/listarinmobiliaria/listarinmobiliaria.component';
 import { RegistraeditausuarioComponent } from './pages/rol/components/registraeditausuario/registraeditausuario.component';
 import { RegistraeditaclienteComponent } from './pages/cliente/components/registraeditacliente/registraeditacliente.component';
 import { RegistraeditaprestamoComponent } from './pages/creditoprestamo/components/creaeditaprestamo/registraeditacredito.component';
-import { MonedaComponent } from './pages/cronograma/components/moneda/moneda.component';
-import { MonedaRegistrarComponent } from './pages/cronograma/components/moneda-registrar/moneda-registrar.component';
-import { TasaInteresComponent } from './pages/cronograma/components/tasa-interes/tasa-interes.component';
-import { TasaInteresRegistrarComponent } from './pages/cronograma/components/tasa-interes-registrar/tasa-interes-registrar.component';
 import { EntidadFinancieraTableComponent } from './pages/table/components/entidad-financiera-table/entidad-financiera-table.component';
 import { EntidadTasaTableComponent } from './pages/table/components/entidad-tasa-table/entidad-tasa-table.component';
+import { InmobiliariaComponent } from './pages/table/components/inmobiliaria/inmobiliaria.component';
+import { ListarinmobiliariaComponent } from './pages/table/components/listarinmobiliaria/listarinmobiliaria.component';
+import { MonedaComponent } from './pages/table/components/moneda/moneda.component';
+import { MonedaRegistrarComponent } from './pages/table/components/moneda-registrar/moneda-registrar.component';
+import { TasaInteresComponent } from './pages/table/components/tasa-interes/tasa-interes.component';
+import { TasaInteresRegistrarComponent } from './pages/table/components/tasa-interes-registrar/tasa-interes-registrar.component';
 
 const routes: Routes = [
   {
@@ -40,6 +40,7 @@ const routes: Routes = [
       { path: 'entidad-tasa-table', component: EntidadTasaTableComponent },
       { path: 'metodo_frances', component: MetodoFrancesComponent },
       { path: 'inmobiliaria', component: InmobiliariaComponent },
+      { path: 'editarinmobiliaria/:id', component: InmobiliariaComponent },
       { path: 'Listarinmobiliaria', component: ListarinmobiliariaComponent },
       { path: 'registraeditausuario', component: RegistraeditausuarioComponent },
       { path: 'registraeditacliente', component: RegistraeditaclienteComponent },
