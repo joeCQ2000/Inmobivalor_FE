@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -27,7 +28,7 @@ export class SignUpComponent implements OnInit {
   loading = false;
   errorMessage = '';
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private router: Router) {}
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private router: Router,private cdr: ChangeDetectorRef,) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -54,6 +55,7 @@ export class SignUpComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     this.errorMessage = '';
+    this.cdr.detectChanges();
 
     if (this.form.invalid) {
       return;
@@ -80,11 +82,13 @@ export class SignUpComponent implements OnInit {
         this.loading = false;
         // redirige al login
         this.router.navigate(['/auth/login']);
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Error al registrar usuario', err);
         this.loading = false;
         this.errorMessage = 'Ocurrió un error al registrar el usuario. Inténtalo nuevamente.';
+        this.cdr.detectChanges();
       },
     });
   }

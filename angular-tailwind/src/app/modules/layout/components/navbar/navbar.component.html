@@ -1,4 +1,4 @@
-<div class="bg-background relative">
+<div class="relative bg-[#00049E]">
   <div class="mx-auto px-5">
     <div class="flex items-center justify-between py-3.5 md:justify-start">
       <!-- Mobile Navigation Menu Button-->
@@ -6,20 +6,18 @@
         <button
           (click)="toggleMobileMenu()"
           type="button"
-          class="bg-muted text-muted-foreground focus:ring-primary hover:bg-muted-foreground hover:text-muted inline-flex items-center justify-center rounded-md p-2 focus:outline-hidden focus:ring-2 focus:ring-inset"
+          class="inline-flex items-center justify-center rounded-md bg-white/10 p-2 text-white/80 hover:bg-white/20 hover:text-white focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-white/70"
           aria-expanded="false">
           <span class="sr-only">Open menu</span>
-          <!-- Heroicon name: outline/menu -->
-          <svg-icon src="assets/icons/heroicons/outline/menu.svg" [svgClass]="'h-6 w-6'"> </svg-icon>
+          <svg-icon src="assets/icons/heroicons/outline/menu.svg" [svgClass]="'h-6 w-6'"></svg-icon>
         </button>
       </div>
 
       <!-- Logo -->
       <div class="flex items-center justify-start gap-3 sm:order-2 ltr:md:mr-10 rtl:md:ml-10 lg:hidden">
-        <a class="bg-primary flex items-center justify-center rounded-sm p-2 focus:outline-hidden focus:ring-1">
-          <svg-icon src="assets/icons/logo.svg"></svg-icon>
-        </a>
-        <b class="text-foreground hidden text-sm font-bold sm:block"> Angular Tailwind </b>
+        <b class="hidden text-lg font-bold sm:block">
+          <span class="text-white">Inmobi</span><span style="color: #7d93ff">valor</span>
+        </b>
       </div>
 
       <!-- Desktop Menu -->
@@ -33,6 +31,7 @@
       </div>
     </div>
   </div>
+
   <!-- Mobile menu -->
   <app-navbar-mobile></app-navbar-mobile>
 </div>

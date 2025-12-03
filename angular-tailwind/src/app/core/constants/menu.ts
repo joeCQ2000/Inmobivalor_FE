@@ -7,12 +7,12 @@ export class Menu {
       separator: false,
       items: [
         {
-          icon: 'assets/icons/heroicons/outline/cube.svg',
+          icon: 'assets/icons/heroicons/outline/calculator1.svg',
           label: 'Metodo-Frances',
           route: '/components/metodo_frances',
         },
           {
-          icon: 'assets/icons/heroicons/outline/cube.svg',
+          icon: 'assets/icons/heroicons/outline/inmobiliaria.svg',
           label: 'Inmobiliaria',
           route: '/components/Listarinmobiliaria',
           protected: true, 
@@ -20,24 +20,24 @@ export class Menu {
         },
         //Listarinmobiliaria
         {
-          icon: 'assets/icons/heroicons/outline/cube.svg',
+          icon: 'assets/icons/heroicons/outline/user.svg',
           label: 'Usuario',
           route: '/components/usuario',
         },
         {
-          icon: 'assets/icons/heroicons/outline/cube.svg',
+          icon: 'assets/icons/heroicons/outline/prestamo1.svg',
           label: 'Credito Prestamo',
           route: '/components/credito-prestamo',
 
         },
         {
-          icon: 'assets/icons/heroicons/outline/cube.svg',
+          icon: 'assets/icons/heroicons/outline/cliente.svg',
           label: 'Clientes',
           route: '/components/cliente',
 
         },
         {
-          icon: 'assets/icons/heroicons/outline/currency-dollar.svg',
+          icon: 'assets/icons/heroicons/outline/moneda.svg',
           label: 'Moneda',
           route: '/components/moneda',
           children: [
@@ -46,7 +46,7 @@ export class Menu {
           ],
         },
         {
-          icon: 'assets/icons/heroicons/outline/chart-bar.svg',
+          icon: 'assets/icons/heroicons/outline/tasa1.svg',
           label: 'Tasa de Interés',
           route: '/components/tasa-interes',
           children: [

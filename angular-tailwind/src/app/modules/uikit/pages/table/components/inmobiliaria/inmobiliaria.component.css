@@ -1,0 +1,150 @@
+/* CONTENEDOR */
+.form-container {
+  max-width: 900px;
+  margin: 0 auto;
+  color: #2b3674;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #15192c;
+}
+
+/* ESTADO */
+.estado {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #707eae;
+}
+.input-error {
+  color: #e63946;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+.estado.error {
+  color: #f97373;
+}
+
+/* CARD */
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(15, 35, 95, 0.08);
+  overflow: hidden;
+}
+
+.card-header {
+  background-color: #4c6fff;
+  padding: 16px 20px;
+  color: #ffffff;
+}
+
+.card-subtitle {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.card-body {
+  padding: 24px;
+}
+
+/* GRID */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.form-full {
+  grid-column: 1 / -1;
+}
+
+/* CAMPOS */
+.form-control {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-control label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4b5675;
+}
+
+.form-control input,
+.form-control select,
+.form-control textarea {
+  padding: 8px 10px;
+  border: 1px solid #dfe4f2;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  outline: none;
+  background-color: #ffffff;
+}
+
+.form-control input:focus,
+.form-control select:focus,
+.form-control textarea:focus {
+  border-color: #4c6fff;
+  box-shadow: 0 0 0 1px rgba(76, 111, 255, 0.15);
+}
+
+textarea {
+  min-height: 80px;
+}
+
+.imagen-ok {
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: #0d9244;
+}
+
+/* FOOTER */
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 1px solid #edf0ff;
+}
+
+/* BOTONES */
+.btn-primario {
+  background-color: #4c6fff;
+  color: #ffffff;
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primario:hover {
+  background-color: #3f59d3;
+}
+
+.btn-secundario {
+  background-color: #edf0ff;
+  color: #2b3674;
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn-secundario:hover {
+  background-color: #dbe1ff;
+}

@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -22,6 +23,7 @@ export class TwoStepsComponent implements OnInit {
    constructor(
     private loginService: LoginService,
     private router: Router,
+    private cdr: ChangeDetectorRef,
    ) {}
 
   ngOnInit(): void {}
@@ -42,6 +44,7 @@ export class TwoStepsComponent implements OnInit {
     const username = this.loginService.getPendingUsername();
     if (!username) {
       this.errorMessage = 'No se encontró el usuario pendiente de verificación. Vuelva a iniciar sesión.';
+      this.cdr.detectChanges();
       return;
     }
 
@@ -50,6 +53,7 @@ export class TwoStepsComponent implements OnInit {
 
     if (otp.length !== 6) {
       this.errorMessage = 'Ingrese los 6 dígitos del código de verificación.';
+      this.cdr.detectChanges();
       return;
     }
 
@@ -69,13 +73,16 @@ export class TwoStepsComponent implements OnInit {
           sessionStorage.setItem('token', res.jwttoken);
           this.loginService.clearPendingUsername();
           this.router.navigate(['/components/metodo_frances']);
+          this.cdr.detectChanges();
         } else {
           this.errorMessage = 'Respuesta inesperada del servidor.';
+          this.cdr.detectChanges();
         }
       },
       error: (err) => {
         this.errorMessage = 'Código incorrecto o expirado.';
         console.error(err);
+        this.cdr.detectChanges();
       },
     });
   }
