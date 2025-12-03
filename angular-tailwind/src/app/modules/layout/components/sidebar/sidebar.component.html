@@ -1,54 +1,53 @@
 <nav
   [ngClass]="menuService.showSideBar ? 'w-[210px] xl:w-[280px]' : 'w-[70px]'"
-  class="bg-background hidden h-full flex-col justify-between pt-3 transition-all duration-300 lg:flex">
+  class="hidden h-full flex-col justify-between bg-[#00049E] pt-3 transition-all duration-300 lg:flex">
   <div class="overflow-hidden">
-    <!-- Logo -->
+    <!-- Logo + botón -->
     <div
       [ngClass]="menuService.showSideBar ? 'justify-between' : 'justify-center'"
       class="mx-4 mb-2 flex h-9 items-center">
-      <div class="flex items-center" *ngIf="menuService.showSideBar">
-        <a
-          (click)="toggleSidebar()"
-          class="bg-primary flex cursor-pointer items-center justify-center rounded-sm p-2 focus:outline-hidden focus:ring-1">
-          <svg-icon src="assets/icons/logo.svg"> </svg-icon>
-        </a>
-        <b class="text-foreground ps-2 ml-1 grow text-sm font-bold">
-          {{ appJson.displayName }}
-        </b>
-      </div>
+<div
+  [ngClass]="menuService.showSideBar ? 'justify-center' : 'justify-center'"
+  class="mx-4 mb-2 flex h-9 items-center"
+>
+  <div class="flex w-full items-center justify-center" *ngIf="menuService.showSideBar">
+    <b class="ml-1 text-lg font-bold text-center">
+      <span class="text-white">Inmobi</span
+      ><span style="color: #7d93ff">valor</span>
+    </b>
+  </div>
+</div>
+
+
       <button
         (click)="toggleSidebar()"
-        class="text-muted-foreground/50 hover:text-muted-foreground flex items-center justify-center rounded-md p-2 transition-all duration-200 focus:outline-hidden"
+        class="flex items-center justify-center rounded-md p-2 text-white/70 transition-all duration-200 hover:text-white focus:outline-hidden"
         [ngClass]="{ 'rotate-180': !menuService.showSideBar }">
-        <svg-icon src="assets/icons/heroicons/solid/chevron-double-left.svg"> </svg-icon>
+        <svg-icon src="assets/icons/heroicons/solid/chevron-double-left.svg"></svg-icon>
       </button>
     </div>
 
     <!-- Menu Items -->
     <div
-      class="scrollbar-thumb--sm scrollbar-track-rounded scrollbar-thin scrollbar-track-transparent scrollbar-thumb-card h-full overflow-auto px-4">
+      class="scrollbar-thumb--sm scrollbar-track-rounded scrollbar-thin scrollbar-track-transparent scrollbar-thumb-card h-full overflow-auto bg-[#00049E] px-4">
       <app-sidebar-menu></app-sidebar-menu>
     </div>
   </div>
 
+  <!-- Versión -->
   <div class="mx-4 my-4 space-y-1">
-    <!-- Version -->
     <a
       target="_blank"
       href="https://github.com/luciano-work/angular-tailwind"
-      class="-sm hover:bg-card group flex h-9 cursor-pointer items-center justify-start p-2">
-      <svg-icon
-        src="assets/icons/heroicons/outline/information-circle.svg"
-        [svgClass]="'h-5 w-5 text-muted-foreground/50'">
-      </svg-icon>
-
+      class="group flex h-9 cursor-pointer items-center justify-start rounded-md bg-[#00049E] p-2 hover:bg-[#0003c0]">
       <div class="ml-3 truncate text-[10px] font-semibold tracking-wide focus:outline-hidden">
-        <span class="bg-primary/10 text-primary px-2 font-semibold">v{{ appJson.version }}</span>
+        <span class="px-2 font-semibold text-white"> v{{ appJson.version }} </span>
       </div>
 
+      <!-- Tooltip cuando el sidebar está colapsado -->
       <div class="fixed w-full" *ngIf="!menuService.showSideBar">
         <span
-          class="z-1 bg-foreground text-background absolute left-12 -top-4 w-auto min-w-max origin-left scale-0 p-2 text-xs font-bold shadow-md transition-all duration-200 group-hover:scale-100">
+          class="z-1 absolute left-12 -top-4 w-auto min-w-max origin-left scale-0 bg-white p-2 text-xs font-bold text-[#00049E] shadow-md transition-all duration-200 group-hover:scale-100">
           v{{ appJson.version }}
         </span>
       </div>

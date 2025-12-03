@@ -6,24 +6,20 @@ export class Menu {
       group: 'Base',
       separator: false,
       items: [
-        
+
           {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Inmobiliarias',
           route: '/components/Listarinmobiliaria',
           protected: true, 
-           
+
         },
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Usuario',
           route: '/components/usuario',
         },
-                {
-          icon: 'assets/icons/heroicons/outline/cube.svg',
-          label: 'Credito Prestamo',
-          route: '/components/credito-prestamo',          
-        },
+
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Clientes',
@@ -57,6 +53,6 @@ export class Menu {
         },
       ],
     },
-    
+
   ];
 }
