@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-   base: 'https://inmobivalor-be.onrender.com'
+   base_local: 'http://localhost:8081'
 };
 
 

@@ -5,7 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { VerifyOtpRequest } from '../models/VerifyOtpRequest';
 import { JwtResponse } from '../models/jwtResponse';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 const base_url = environment.base;
 @Injectable({
   providedIn: 'root'
