@@ -19,11 +19,7 @@ export class Menu {
           label: 'Usuario',
           route: '/components/usuario',
         },
-                {
-          icon: 'assets/icons/heroicons/outline/cube.svg',
-          label: 'Credito Prestamo',
-          route: '/components/credito-prestamo',          
-        },
+               
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Clientes',
