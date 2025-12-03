@@ -17,8 +17,8 @@ type RangoTasa = 'todos' | 'baja' | 'media' | 'alta';
   selector: 'app-entidad-tasa-table',
   standalone: true,
   imports: [CommonModule, AngularSvgIconModule],
-  templateUrl: './entidad-tasa-table.component.html',
-  styleUrls: ['./entidad-tasa-table.component.css'],
+   templateUrl: './entidad-tasa-table.component.html',
+  styleUrl: './entidad-tasa-table.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EntidadTasaTableComponent implements OnInit {

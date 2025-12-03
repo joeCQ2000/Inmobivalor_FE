@@ -13,12 +13,9 @@ import { ButtonComponent } from 'src/app/shared/components/button/button.compone
   styleUrls: ['./sign-up.component.css'],
   imports: [
     FormsModule,
-    RouterLink,
     AngularSvgIconModule,
-    ButtonComponent,
     CommonModule,
     ReactiveFormsModule,
-    RouterLink,
   ],
 })
 export class SignUpComponent implements OnInit {

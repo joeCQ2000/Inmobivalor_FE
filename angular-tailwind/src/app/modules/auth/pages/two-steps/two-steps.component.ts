@@ -10,7 +10,7 @@ import { ButtonComponent } from 'src/app/shared/components/button/button.compone
   selector: 'app-two-steps',
   templateUrl: './two-steps.component.html',
   styleUrls: ['./two-steps.component.css'],
-  imports: [FormsModule, ButtonComponent],
+  imports: [FormsModule],
 })
 export class TwoStepsComponent implements OnInit {
  

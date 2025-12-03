@@ -3,16 +3,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { LoginService } from 'src/app/modules/layout/services/login.service';
 import { JwtRequest } from 'src/app/modules/layout/models/jwtRequest';
 import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css'],
-  imports: [FormsModule, ReactiveFormsModule, RouterLink, AngularSvgIconModule, NgIf, ButtonComponent, NgClass],
+ templateUrl: './sign-in.component.html',
+  styleUrl: './sign-in.component.css',
+  standalone: true,
+  imports: [FormsModule, ReactiveFormsModule, RouterLink, AngularSvgIconModule, NgClass, NgIf],
 })
 export class SignInComponent implements OnInit {
   form!: FormGroup;

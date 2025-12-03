@@ -31,13 +31,13 @@
   @for (c of creditos; track c.id_credito) {
     <tr>
       <td>{{ c.id_credito }}</td>
-      <td>{{ c.id_entidad?.nombre || '-' }}</td>
+      <td>{{ c.id_entidad.nombre || '-' }}</td>
       <td>
-        {{ c.id_cliente?.nombres || '' }}
-        {{ c.id_cliente?.apellidos || '' }}
+        {{ c.id_cliente.nombres || '' }}
+        {{ c.id_cliente.apellidos || '' }}
       </td>
-      <td>{{ c.id_inmobiliaria?.ubicacion || '-' }}</td>
-      <td>{{ c.id_moneda?.tipo_moneda || '-' }}</td>
+      <td>{{ c.id_inmobiliaria.ubicacion || '-' }}</td>
+      <td>{{ c.id_moneda.tipo_moneda || '-' }}</td>
       <td>{{ c.plazo_meses }}</td>
       <td>{{ c.tipo_gracia }}</td>
       <td>{{ c.monto_bono | number:'1.0-0' }}</td>

@@ -179,11 +179,11 @@
         @for (et of paginadoEntidadTasa(); track et.id_entidad_tasa) {
           <tr>
             <td>{{ et.id_entidad_tasa }}</td>
-            <td>{{ et.entidad?.nombre }}</td>
-            <td>{{ et.tasa?.tipo_tasa }}</td>
+            <td>{{ et.entidad.nombre }}</td>
+            <td>{{ et.tasa.tipo_tasa }}</td>
             <td class="col-tasa">
               {{
-                (et.tasa?.tasa_pct || 0) * 100
+                (et.tasa.tasa_pct || 0) * 100
                   | number : '1.2-2'
               }}%
             </td>
