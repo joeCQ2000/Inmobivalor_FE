@@ -23,4 +23,12 @@ export class EntidadFinancieraService {
   insert(entidad: EntidadFinanciera): Observable<void> {
     return this.http.post<void>(`${this.url}/registrar`, entidad);
   }
+
+    // PUT /entidad_financiera/actualizar/{id}
+  update(entidad: EntidadFinanciera): Observable<void> {
+    return this.http.put<void>(
+      `${this.url}/actualizar/${entidad.id_entidad}`,
+      entidad
+    );
+  }
 }

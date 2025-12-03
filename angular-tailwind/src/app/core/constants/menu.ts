@@ -17,9 +17,30 @@ export class Menu {
         {
           icon: 'assets/icons/heroicons/outline/user-group.svg',
           label: 'Usuario',
-          route: '/components/usuario',
+          route: '/components/table copy',
         },
-      
+                {
+          icon: 'assets/icons/heroicons/outline/cube.svg',
+          label: 'Credito Prestamo',
+          route: '/components/credito-prestamo',
+           
+        },
+      ],
+    },
+    {
+      group: 'Collaboration',
+      separator: true,
+      items: [
+        {
+          icon: 'assets/icons/heroicons/outline/download.svg',
+          label: 'Download',
+          route: '/download',
+        },
+        {
+          icon: 'assets/icons/heroicons/outline/gift.svg',
+          label: 'Gift Card',
+          route: '/gift',
+        },
         {
           icon: 'assets/icons/heroicons/outline/users.svg',
           label: 'Clientes',

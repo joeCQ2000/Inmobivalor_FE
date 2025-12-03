@@ -1,0 +1,266 @@
+<div class="entidad-container">
+  <h2>Entidad - Tasa</h2>
+
+
+  <div
+    class="color-primary-foreground px-6 py-8 border-foreground/70 mb-3 rounded-md"
+  >
+    <div class="flex items-center justify-between w-full">
+      <h3 class="text-sm text-foreground font-medium">
+        Búsqueda general
+      </h3>
+    </div>
+
+    <div
+      class="color-primary-foreground px-1 py-3 border-foreground/60 relative"
+    >
+      <div class="absolute left-3 top-2.5 text-gray-400"></div>
+      <input
+        #searchInput
+        name="search"
+        class="pr-2 py-2 x-10 md:w-[260px] text-sm border border-foreground rounded-md bg-foreground text-gray-200 placeholder-gray-500 focus:ring-rose-600 focus:border-rose-600"
+        placeholder="Buscar por entidad, tipo de tasa o tasa (%)"
+        type="text"
+        (input)="onSearchChange($event)"
+      />
+    </div>
+  </div>
+
+
+  <div class="color-primary-foreground px-6 py-2 border-gray-700 mb-4">
+    <div
+      class="flex items-center gap-6 flex-wrap md:flex-nowrap overflow-x-auto whitespace-nowrap"
+    >
+
+      <div class="flex flex-col">
+        <label class="text-xs text-foreground mb-1">Entidad</label>
+        <input
+          #entidadInput
+          type="text"
+          class="px-2 py-2 text-sm border border-gray-600 rounded-md bg-foreground text-gray-200 focus:ring-rose-600 focus:border-rose-600 w-full"
+          (change)="onEntidadChange($event)"
+        />
+      </div>
+
+
+      <div class="flex flex-col">
+        <label class="text-xs text-foreground mb-1">Tipo de tasa</label>
+        <input
+          #tipoTasaInput
+          type="text"
+          class="px-2 py-2 text-sm border border-gray-600 rounded-md bg-foreground text-gray-200 focus:ring-rose-600 focus:border-rose-600 w-full"
+          (change)="onTipoTasaChange($event)"
+        />
+      </div>
+
+
+      <div class="flex flex-col">
+        <label class="text-xs text-foreground mb-1">Rango de tasa</label>
+        <select
+          #selectRango
+          class="px-2 py-2 text-sm border border-gray-600 rounded-md bg-foreground text-gray-200 focus:ring-rose-600 focus:border-rose-600 w-full estado-select"
+          (change)="onRangoTasaChange($event)"
+        >
+          <option value="todos">Todos</option>
+          <option value="baja">&lt; 8%</option>
+          <option value="media">8% – 12%</option>
+          <option value="alta">&gt; 12%</option>
+        </select>
+      </div>
+
+
+      <div class="w-full flex justify-end gap-2 mt-4">
+        <button
+          class="bg-primary text-primary-foreground flex-none rounded-md px-5 py-2.5 text-xs font-semibold"
+          (click)="onSearch(entidadInput, tipoTasaInput, selectRango)"
+        >
+          Buscar
+        </button>
+
+        <button
+          class="border border-primary text-primary flex-none rounded-md px-5 py-2.5 text-xs font-semibold"
+          (click)="resetFilters(searchInput, entidadInput, tipoTasaInput, selectRango)"
+        >
+          Limpiar
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  @if (!loading() && errorMessage()) {
+    <div class="estado error">{{ errorMessage() }}</div>
+  }
+
+
+  @if (!loading() && !errorMessage() && totalRegistros() === 0) {
+    <div class="estado">No hay registros disponibles.</div>
+  }
+
+
+  @if (!loading() && !errorMessage() && totalRegistros() > 0) {
+    <table class="tabla-entidades">
+      <thead>
+        <tr>
+
+          <th class="sortable" (click)="ordenarPor('id')">
+            <span class="sort-label">
+              ID
+              <span
+                class="sort-icon"
+                [class.inactive]="sortField() !== 'id'"
+              >
+                {{
+                  sortField() === 'id'
+                    ? (sortDirection() === 'asc' ? '▲' : '▼')
+                    : '▲'
+                }}
+              </span>
+            </span>
+          </th>
+
+
+          <th class="sortable" (click)="ordenarPor('entidad')">
+            <span class="sort-label">
+              Entidad
+              <span
+                class="sort-icon"
+                [class.inactive]="sortField() !== 'entidad'"
+              >
+                {{
+                  sortField() === 'entidad'
+                    ? (sortDirection() === 'asc' ? '▲' : '▼')
+                    : '▲'
+                }}
+              </span>
+            </span>
+          </th>
+
+
+          <th class="sortable" (click)="ordenarPor('tipoTasa')">
+            <span class="sort-label">
+              Tipo de Tasa
+              <span
+                class="sort-icon"
+                [class.inactive]="sortField() !== 'tipoTasa'"
+              >
+                {{
+                  sortField() === 'tipoTasa'
+                    ? (sortDirection() === 'asc' ? '▲' : '▼')
+                    : '▲'
+                }}
+              </span>
+            </span>
+          </th>
+
+
+          <th
+            class="sortable col-tasa-header"
+            (click)="ordenarPor('tasaPct')"
+          >
+            <span class="sort-label">
+              Tasa (%)
+              <span
+                class="sort-icon"
+                [class.inactive]="sortField() !== 'tasaPct'"
+              >
+                {{
+                  sortField() === 'tasaPct'
+                    ? (sortDirection() === 'asc' ? '▲' : '▼')
+                    : '▲'
+                }}
+              </span>
+            </span>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (et of paginadoEntidadTasa(); track et.id_entidad_tasa) {
+          <tr>
+            <td>{{ et.id_entidad_tasa }}</td>
+            <td>{{ et.entidad?.nombre }}</td>
+            <td>{{ et.tasa?.tipo_tasa }}</td>
+            <td class="col-tasa">
+              {{
+                (et.tasa?.tasa_pct || 0) * 100
+                  | number : '1.2-2'
+              }}%
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+
+    <div
+      class="text-muted-foreground flex flex-wrap items-center justify-between gap-2 py-3 px-5 text-xs"
+    >
+
+      <div class="order-2 flex items-center gap-2 md:order-1">
+        Mostrar
+        <select
+          class="w-16 p-2"
+          [value]="tamanioPagina()"
+          (change)="onTamanioChange($event)"
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="50">50</option>
+        </select>
+        por página
+      </div>
+
+
+      <div class="order-1 flex items-center gap-4 md:order-2">
+        <span>{{ inicio() }}–{{ fin() }} de {{ totalRegistros() }}</span>
+
+        <div class="inline-flex items-center gap-1">
+          <button
+            class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-sm disabled:opacity-50"
+            (click)="irPaginaAnterior()"
+            [disabled]="paginaActual() <= 1"
+            type="button"
+          >
+            <svg-icon
+              src="./assets/icons/heroicons/outline/arrow-long-left.svg"
+              [svgClass]="'h-4 w-4'"
+            ></svg-icon>
+          </button>
+
+          @for (num of paginasVisibles(); track num) {
+            <button
+              type="button"
+              (click)="irPagina(num)"
+              [ngClass]="{
+                'bg-muted-foreground/10 text-primary': num === paginaActual(),
+                'hover:bg-muted-foreground/10': num !== paginaActual()
+              }"
+              class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-sm transition"
+            >
+              {{ num }}
+            </button>
+          }
+
+          @if (showEllipsis()) {
+            <span>...</span>
+          }
+
+          <button
+            class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-sm disabled:opacity-50"
+            (click)="irPaginaSiguiente()"
+            [disabled]="paginaActual() >= totalPaginas()"
+            type="button"
+          >
+            <svg-icon
+              src="./assets/icons/heroicons/outline/arrow-long-right.svg"
+              [svgClass]="'h-4 w-4'"
+            ></svg-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>
