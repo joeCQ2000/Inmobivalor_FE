@@ -6,6 +6,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { LoginService } from 'src/app/modules/layout/services/login.service';
 import { JwtRequest } from 'src/app/modules/layout/models/jwtRequest';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-sign-in',
@@ -22,6 +23,7 @@ export class SignInComponent implements OnInit {
     private readonly _formBuilder: FormBuilder,
     private readonly _router: Router,
     private readonly _loginService: LoginService,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   onClick() {
@@ -65,6 +67,7 @@ export class SignInComponent implements OnInit {
 
           //redirigir al componente donde se ingresa el codigo
           this._router.navigate(['/auth/two-steps']); //la ruta para doble verificacion
+          this.cdr.detectChanges();
           return;
         }
 
@@ -72,6 +75,7 @@ export class SignInComponent implements OnInit {
         if (data.jwttoken) {
           sessionStorage.setItem('token', data.jwttoken);
           this._router.navigate(['/components/metodo_frances']);
+          this.cdr.detectChanges();
           return;
         }
 
@@ -79,6 +83,7 @@ export class SignInComponent implements OnInit {
       },
       error: () => {
         console.error('Credenciales incorrectas');
+        this.cdr.detectChanges();
       },
     });
   }

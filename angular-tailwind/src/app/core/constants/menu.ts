@@ -6,20 +6,20 @@ export class Menu {
       group: 'Base',
       separator: false,
       items: [
-        
+//all
           {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Inmobiliarias',
           route: '/components/Listarinmobiliaria',
           protected: true, 
-           
+
         },
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Usuario',
           route: '/components/usuario',
         },
-               
+
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Clientes',
@@ -53,6 +53,6 @@ export class Menu {
         },
       ],
     },
-    
+
   ];
 }
