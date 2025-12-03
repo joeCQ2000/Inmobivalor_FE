@@ -158,8 +158,8 @@ onEntidadChange(entidadId: number): void {
       total_seguro_riesgo: 0,
       total_comisiones_periodicas: 0,
       total_portes_y_gastos_adm: 0,
-      cuotaPrepago :0,
-      prepago : 0,
+      cuotaPrepago :v.cuotaPrepago,
+      prepago : v.prepago,
       idCredito : v.idCredito,
       entidadId : v.entidadId,
     };

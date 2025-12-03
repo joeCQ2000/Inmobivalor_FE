@@ -15,6 +15,7 @@ export interface cronogramaDTO{
   cuota_incluye_seguro_desgravamen: number;  // Cuota (inc Seg Des)
   amortizacion: number;
   prepago: number;
+  cuotaPrepago: number
   seguro_desgravamen: number;
   seguro_riesgo: number;
   comision: number;

@@ -64,6 +64,7 @@ export interface cronogramaDTO {
   interes: number;
   cuota_incluye_seguro_desgravamen: number;
   amortizacion: number;
+  cuotaPrepago : number;
   prepago: number;
   seguro_desgravamen: number;
   seguro_riesgo: number;
