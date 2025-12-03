@@ -2,19 +2,20 @@ import { HttpParams } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import { environment } from 'src/environments/environment';
+const base_url = environment.base;
 @Injectable({
   providedIn: 'root',
 })
 export class InmobiliariaService {
-  private baseUrl = 'http://localhost:8080/inmobiliaria';
+  private url = `${base_url}/inmobiliari`;
   constructor(private http: HttpClient) {}
 
   registrarInmobiliaria(inmobiliaria: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/registrar`, inmobiliaria);
+    return this.http.post<any>(`${this.url}/registrar`, inmobiliaria);
   }
   listarInmobiliarias(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/listar`);
+    return this.http.get<any[]>(`${this.url}/listar`);
   }
 
   buscarInmobiliarias(filtro: {
@@ -37,15 +38,15 @@ export class InmobiliariaService {
       params = params.set('ubicacion', filtro.ubicacion);
     }
 
-    return this.http.get<any[]>(`${this.baseUrl}/buscar`, { params });
+    return this.http.get<any[]>(`${this.url}/buscar`, { params });
   }
 
   obtenerInmobiliariaPorId(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${id}`);
+    return this.http.get<any>(`${this.url}/${id}`);
   }
   // ===== NUEVO: ACTUALIZAR =====
   actualizarInmobiliaria(inmobiliaria: any): Observable<any> {
     const id = inmobiliaria.idInmobiliaria || inmobiliaria.id_inmobiliaria || inmobiliaria.id;
-    return this.http.put<any>(`${this.baseUrl}/actualizar/${id}`, inmobiliaria);
+    return this.http.put<any>(`${this.url}/actualizar/${id}`, inmobiliaria);
   }
 }

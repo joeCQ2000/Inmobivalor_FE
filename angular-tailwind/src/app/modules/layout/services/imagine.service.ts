@@ -2,12 +2,13 @@ import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import { environment } from 'src/environments/environment';
+const base_url = environment.base;
 @Injectable({
   providedIn: 'root',
 })
 export class ImagineService {
-  private baseUrl = 'http://localhost:8080';
+  private url = `${base_url}api/v1/img`;
   constructor(private http: HttpClient) {}
 
   uploadImages(files: File[]): Observable<any> {
@@ -16,13 +17,12 @@ export class ImagineService {
       formData.append('files', file, file.name);
     });
 
-    return this.http.post<any>(`${this.baseUrl}/api/v1/img/upload`, formData, {
+    return this.http.post<any>(`${this.url}/upload`, formData, {
       headers: new HttpHeaders(),
     });
   }
 
   getImageUrl(imageId: number): string {
-    return `${this.baseUrl}/api/v1/img/obtener/${imageId}`;
+    return `${this.url}/obtener/${imageId}`;
   }
 }
-//gola

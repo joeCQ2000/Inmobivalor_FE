@@ -5,21 +5,22 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { VerifyOtpRequest } from '../models/VerifyOtpRequest';
 import { JwtResponse } from '../models/jwtResponse';
-
+import { environment } from 'src/environments/environment';
+const base_url = environment.base;
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private baseUrl = 'http://localhost:8080';
+  private url = `${base_url}`;
   constructor(private http:HttpClient) { }
 
   login(request:JwtRequest){
-    return this.http.post(`${this.baseUrl}/login`, request);
+    return this.http.post(`${this.url}/login`, request);
   };
 
   verifyOtp(request: VerifyOtpRequest): Observable<JwtResponse> {
-    return this.http.post<JwtResponse>(`${this.baseUrl}/login/verify-otp`, request);
+    return this.http.post<JwtResponse>(`${this.url}/login/verify-otp`, request);
   }
 
 

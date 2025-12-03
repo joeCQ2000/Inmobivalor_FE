@@ -28,7 +28,7 @@ export class TableComponent implements OnInit {
   users = signal<User[]>([]);
 
   constructor(private http: HttpClient, private filterService: TableFilterService) {
-    this.http.get<User[]>('http://localhost:8080/usuario/listar').subscribe({
+    this.http.get<User[]>('http://localhost:8081/usuario/listar').subscribe({
       next: (data) => this.users.set(data),
       error: (error) => {
         this.handleRequestError(error);
