@@ -6,46 +6,39 @@ export class Menu {
       group: 'Base',
       separator: false,
       items: [
-        {
-          icon: 'assets/icons/heroicons/outline/calculator1.svg',
-          label: 'Metodo-Frances',
-          route: '/components/metodo_frances',
-        },
+
           {
-          icon: 'assets/icons/heroicons/outline/inmobiliaria.svg',
-          label: 'Inmobiliaria',
+          icon: 'assets/icons/heroicons/outline/cube.svg',
+          label: 'Inmobiliarias',
           route: '/components/Listarinmobiliaria',
           protected: true, 
-           
-        },
-        {
-          icon: 'assets/icons/heroicons/outline/user.svg',
-          label: 'Usuario',
-          route: '/components/usuario',
-        },
-        {
-          icon: 'assets/icons/heroicons/outline/prestamo1.svg',
-          label: 'Credito Prestamo',
-          route: '/components/credito-prestamo',
 
         },
         {
-          icon: 'assets/icons/heroicons/outline/cliente.svg',
+          icon: 'assets/icons/heroicons/outline/cube.svg',
+          label: 'Usuario',
+          route: '/components/usuario',
+        },
+
+        {
+          icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Clientes',
           route: '/components/cliente',
 
         },
         {
-          icon: 'assets/icons/heroicons/outline/moneda.svg',
-          label: 'Moneda',
-          route: '/components/moneda',
-          children: [
-            { label: 'Listar Monedas', route: '/components/moneda' },
-            { label: 'Registrar Moneda', route: '/components/moneda-registrar' },
-          ],
+          icon: 'assets/icons/heroicons/outline/cube.svg',
+          label: 'Simulador Financiero',
+          route: '/components/registraeditacreditoprestamo',
+
         },
         {
-          icon: 'assets/icons/heroicons/outline/tasa1.svg',
+          icon: 'assets/icons/heroicons/outline/cube.svg',
+          label: 'Moneda',
+          route: '/components/moneda',
+        },
+        {
+          icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Tasa de Interés',
           route: '/components/tasa-interes',
         },
@@ -60,6 +53,6 @@ export class Menu {
         },
       ],
     },
-    
+
   ];
 }
