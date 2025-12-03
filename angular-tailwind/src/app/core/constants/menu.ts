@@ -6,7 +6,7 @@ export class Menu {
       group: 'Base',
       separator: false,
       items: [
-
+//all
           {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Inmobiliarias',
