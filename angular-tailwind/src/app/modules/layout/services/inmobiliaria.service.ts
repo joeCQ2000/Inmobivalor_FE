@@ -8,7 +8,7 @@ const base_url = environment.base;
   providedIn: 'root',
 })
 export class InmobiliariaService {
-  private url = `${base_url}/inmobiliari`;
+  private url = `${base_url}/inmobiliaria`;
   constructor(private http: HttpClient) {}
 
   registrarInmobiliaria(inmobiliaria: any): Observable<any> {
